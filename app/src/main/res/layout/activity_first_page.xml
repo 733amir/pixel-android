@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:onClick="onLogin"
-        android:text="@string/button_login"
+        android:text="@string/firstpage_b_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:onClick="onSignup"
-        android:text="@string/button_signup"
+        android:text="@string/firstpage_b_signup"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_login" />

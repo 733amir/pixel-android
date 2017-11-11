@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">پیکسل</string>
+
+    <string name="firstpage_b_login">ورود</string>
+    <string name="firstpage_b_signup">ثبت نام</string>
+
+    <string name="login_tv_username">نام کاربری</string>
+    <string name="login_tv_password">رمز عبور</string>
+    <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
+    <string name="login_b_login">ورود</string>
+</resources>
