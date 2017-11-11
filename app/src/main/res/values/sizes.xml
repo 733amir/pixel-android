@@ -2,4 +2,8 @@
 <resources>
     <dimen name="pages_left_margin">16dp</dimen>
     <dimen name="pages_right_margin">16dp</dimen>
+    <dimen name="pages_top_margin">16dp</dimen>
+    <dimen name="pages_down_margin">16dp</dimen>
+
+    <dimen name="pages_top_to_top_margin">8dp</dimen>
 </resources>

@@ -2,11 +2,21 @@
 <resources>
     <string name="app_name">پیکسل</string>
 
+    <!-- First Page -->
     <string name="firstpage_b_login">ورود</string>
     <string name="firstpage_b_signup">ثبت نام</string>
 
+    <!-- Login Page -->
     <string name="login_tv_username">نام کاربری</string>
     <string name="login_tv_password">رمز عبور</string>
     <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
     <string name="login_b_login">ورود</string>
+
+    <!-- Sign up Page -->
+    <string name="signup_tv_username">نام کاربری</string>
+    <string name="signup_tv_fullname">نام و نام خانوادگی</string>
+    <string name="signup_tv_email">ایمیل</string>
+    <string name="signup_tv_password">رمز عبور</string>
+    <string name="signup_tv_repeat_password">تکرار رمز عبور</string>
+    <string name="signup_tv_signup">ثبت نام</string>
 </resources>

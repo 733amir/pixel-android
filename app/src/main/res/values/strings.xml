@@ -13,10 +13,10 @@
     <string name="login_b_login">Login</string>
 
     <!-- Sign up Page -->
-    <string name="username">Username</string>
-    <string name="fullname">Full Name</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="repeat_password">Repeat Password</string>
-    <string name="signup">Sign Up</string>
+    <string name="signup_tv_username">Username</string>
+    <string name="signup_tv_fullname">Full Name</string>
+    <string name="signup_tv_email">Email</string>
+    <string name="signup_tv_password">Password</string>
+    <string name="signup_tv_repeat_password">Repeat Password</string>
+    <string name="signup_tv_signup">Sign Up</string>
 </resources>

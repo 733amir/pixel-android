@@ -7,65 +7,120 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/username"/>
+        android:layout_marginTop="@dimen/pages_top_margin"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:text="@string/signup_tv_username"/>
 
     <EditText
         android:id="@+id/signup_et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
         android:inputType="textPersonName" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fullname"/>
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:text="@string/signup_tv_fullname"/>
 
     <EditText
         android:id="@+id/signup_et_fullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
         android:inputType="textPersonName" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"/>
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:text="@string/signup_tv_email"/>
 
 
     <EditText
         android:id="@+id/signup_et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
         android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password"/>
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:text="@string/signup_tv_password"/>
 
 
     <EditText
         android:id="@+id/signup_et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
         android:inputType="textPassword" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/repeat_password"/>
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:text="@string/signup_tv_repeat_password"/>
 
     <EditText
         android:id="@+id/signup_et_repeat_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/signup_b_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signup" />
+        android:layout_marginLeft="@dimen/pages_left_margin"
+        android:layout_marginRight="@dimen/pages_right_margin"
+        android:layout_marginStart="@dimen/pages_left_margin"
+        android:layout_marginEnd="@dimen/pages_right_margin"
+        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:text="@string/signup_tv_signup" />
 
 
 </LinearLayout>
