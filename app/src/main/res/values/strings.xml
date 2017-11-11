@@ -2,11 +2,21 @@
 <resources>
     <string name="app_name">Pixel</string>
 
+    <!-- First Page -->
     <string name="firstpage_b_login">Login</string>
     <string name="firstpage_b_signup">Sign Up</string>
 
+    <!-- Login Page -->
     <string name="login_tv_username">Username</string>
     <string name="login_tv_password">Password</string>
     <string name="login_tv_forgetpassword">Did you forgot your password?</string>
     <string name="login_b_login">Login</string>
+
+    <!-- Sign up Page -->
+    <string name="username">Username</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="signup">Sign Up</string>
 </resources>
