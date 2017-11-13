@@ -15,16 +15,21 @@ import android.support.design.widget.BottomNavigationView;
 
 public class FirstPage extends FragmentActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
         ViewPager viewPager = findViewById(R.id.first_page_container);
-        FirstPageFragmentAdapter firstPageFragmentAdapter = new FirstPageFragmentAdapter(this, getSupportFragmentManager());
-        viewPager.setAdapter(firstPageFragmentAdapter);
         TabLayout tabLayout = findViewById(R.id.first_page_tab);
+        FirstPageFragmentAdapter firstPageFragmentAdapter = new FirstPageFragmentAdapter(this, getSupportFragmentManager());
+
+        viewPager.setAdapter(firstPageFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(1).select();
     }
 
     public void onLogin(View view) {

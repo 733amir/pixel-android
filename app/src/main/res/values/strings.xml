@@ -5,6 +5,7 @@
     <!-- First Page -->
     <string name="firstpage_b_login">Login</string>
     <string name="firstpage_b_signup">Sign Up</string>
+    <string name="firstpage_b_forget_password">Forget Password</string>
 
     <!-- Login Page -->
     <string name="login_tv_username">Username</string>
@@ -19,4 +20,8 @@
     <string name="signup_tv_password">Password</string>
     <string name="signup_tv_repeat_password">Repeat Password</string>
     <string name="signup_tv_signup">Sign Up</string>
+
+    <!-- Forget Password Page -->
+    <string name="forget_password_tv">Enter your email to get password recovery code.</string>
+    <string name="forget_passowrd_button">Send</string>
 </resources>

@@ -11,44 +11,48 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FirstPageFragmentAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
 
     public FirstPageFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+
+        addFragment(new ForgetPasswordFragment(), mContext.getString(R.string.firstpage_b_forget_password));
+        addFragment(new LoginFragment(), mContext.getString(R.string.firstpage_b_login));
+        addFragment(new SignUpFragment(), mContext.getString(R.string.firstpage_b_signup));
     }
 
-    // This determines the fragment for each tab
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return new LoginFragment();
-        } else {
-            return new SignUpFragment();
-        }
+        return mFragmentList.get(position);
     }
 
-    // This determines the number of tabs
     @Override
     public int getCount() {
-        return 2;
+        return mFragmentList.size();
     }
 
-    // This determines the title for each tab
     @Override
     public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        switch (position) {
-            case 0:
-                return mContext.getString(R.string.firstpage_b_login);
-            case 1:
-                return mContext.getString(R.string.firstpage_b_signup);
-            default:
-                return null;
-        }
+        return mFragmentTitleList.get(position);
     }
 
+    public void addFragment(Fragment fragment, String title) {
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
+    }
+
+    public void removeFragment(String title) {
+        int fragmentIndex = mFragmentTitleList.indexOf(title);
+        mFragmentList.remove(fragmentIndex);
+        mFragmentTitleList.remove(fragmentIndex);
+    }
 }

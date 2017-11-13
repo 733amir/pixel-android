@@ -19,4 +19,8 @@
     <string name="signup_tv_password">رمز عبور</string>
     <string name="signup_tv_repeat_password">تکرار رمز عبور</string>
     <string name="signup_tv_signup">ثبت نام</string>
+
+    <!-- Forget Password Page -->
+    <string name="forget_password_tv">برای بازیابی رمز عبور ایمیل خود را وارد کنید.</string>
+    <string name="forget_passowrd_button">ارسال</string>
 </resources>
