@@ -10,6 +10,7 @@
         android:id="@+id/first_page_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         app:layout_constraintTop_toTopOf="parent"
         app:tabMode="fixed" />
 
