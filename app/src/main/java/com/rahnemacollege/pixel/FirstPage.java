@@ -13,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.support.design.widget.BottomNavigationView;
 
-public class FirstPage extends FragmentActivity {
-
-
+public class FirstPage extends FragmentActivity implements LoginFragment.OnForgetPasswordClicked  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +28,11 @@ public class FirstPage extends FragmentActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.getTabAt(1).select();
+    }
+
+    public void onClick() {
+        TabLayout tabLayout = findViewById(R.id.first_page_tab);
+        tabLayout.getTabAt(0).select();
     }
 
     public void onLogin(View view) {

@@ -5,6 +5,7 @@
     <!-- First Page -->
     <string name="firstpage_b_login">ورود</string>
     <string name="firstpage_b_signup">ثبت نام</string>
+    <string name="firstpage_b_forget_password">بازیابی رمز عبور</string>
 
     <!-- Login Page -->
     <string name="login_tv_username">نام کاربری</string>
