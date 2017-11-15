@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 public class LoginFragment extends Fragment {
     OnForgetPasswordClicked mCallback;
@@ -18,12 +19,22 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        final View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         view.findViewById(R.id.login_tv_forgetpassword).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.onClick();
+                mCallback.forgetPasswordClicked();
+            }
+        });
+
+        view.findViewById(R.id.login_b_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText username = view.findViewById(R.id.login_et_username);
+                EditText password = view.findViewById(R.id.login_et_password);
+
+                mCallback.loginClicked(username.getText().toString(), password.getText().toString());
             }
         });
 
@@ -32,7 +43,8 @@ public class LoginFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface OnForgetPasswordClicked {
-        public void onClick();
+        public void forgetPasswordClicked();
+        public void loginClicked(String username, String password);
     }
 
     @Override
@@ -45,7 +57,7 @@ public class LoginFragment extends Fragment {
             mCallback = (OnForgetPasswordClicked) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnForgetPasswordClicked.onClick interface.");
+                    + " must implement OnForgetPasswordClicked.forgetPasswordClicked interface.");
         }
     }
 }

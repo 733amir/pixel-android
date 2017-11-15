@@ -18,10 +18,18 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".FirstPage"></activity>
+            android:parentActivityName=".FirstPage" />
         <activity
             android:name=".SignupActivity"
-            android:parentActivityName=".FirstPage"></activity>
+            android:parentActivityName=".FirstPage" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:parentActivityName=".FirstPage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahnemacollege.pixel.FirstPage" />
+        </activity>
     </application>
 
 </manifest>

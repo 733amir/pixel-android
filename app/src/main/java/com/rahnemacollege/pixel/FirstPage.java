@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.design.widget.BottomNavigationView;
+import android.widget.Toast;
 
 public class FirstPage extends FragmentActivity implements LoginFragment.OnForgetPasswordClicked  {
 
@@ -30,9 +31,17 @@ public class FirstPage extends FragmentActivity implements LoginFragment.OnForge
         tabLayout.getTabAt(1).select();
     }
 
-    public void onClick() {
+    public void forgetPasswordClicked() {
         TabLayout tabLayout = findViewById(R.id.first_page_tab);
         tabLayout.getTabAt(0).select();
+    }
+
+    public void loginClicked(String username, String password) {
+        // TODO Connect to server and check username and password.
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
     }
 
     public void onLogin(View view) {

@@ -24,4 +24,8 @@
     <!-- Forget Password Page -->
     <string name="forget_password_tv">Enter your email to get password recovery code.</string>
     <string name="forget_passowrd_button">Send</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
