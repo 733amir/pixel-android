@@ -18,14 +18,14 @@ public class HomeActivity extends FragmentActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                case R.id.home_nav_home:
+                    mTextMessage.setText(R.string.home_nav_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.home_nav_search:
+                    mTextMessage.setText(R.string.home_nav_search);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.home_nav_me:
+                    mTextMessage.setText(R.string.home_nav_me);
                     return true;
             }
             return false;
