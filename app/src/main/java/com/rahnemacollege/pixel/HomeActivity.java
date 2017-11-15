@@ -24,6 +24,12 @@ public class HomeActivity extends FragmentActivity {
                 case R.id.home_nav_search:
                     mTextMessage.setText(R.string.home_nav_search);
                     return true;
+                case R.id.home_nav_upload:
+                    mTextMessage.setText(R.string.home_nav_notification);
+                    return true;
+                case R.id.home_nav_notification:
+                    mTextMessage.setText(R.string.home_nav_notification);
+                    return true;
                 case R.id.home_nav_me:
                     mTextMessage.setText(R.string.home_nav_me);
                     return true;
