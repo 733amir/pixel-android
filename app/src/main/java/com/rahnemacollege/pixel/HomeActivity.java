@@ -4,37 +4,51 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class HomeActivity extends FragmentActivity {
 
-    private TextView mTextMessage;
+    ExploreFragment exploreFragment;
+    SearchFragment searchFragment;
+    UploadFragment uploadFragment;
+    NotificationFragment notificationFragment;
+    ProfileFragment profileFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            boolean status = false;
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.home_nav_home:
-                    mTextMessage.setText(R.string.home_nav_home);
-                    return true;
+                    transaction.replace(R.id.home_container, exploreFragment);
+                    status = true;
+                    break;
                 case R.id.home_nav_search:
-                    mTextMessage.setText(R.string.home_nav_search);
-                    return true;
+                    transaction.replace(R.id.home_container, searchFragment);
+                    status = true;
+                    break;
                 case R.id.home_nav_upload:
-                    mTextMessage.setText(R.string.home_nav_notification);
-                    return true;
+                    transaction.replace(R.id.home_container, uploadFragment);
+                    status = true;
+                    break;
                 case R.id.home_nav_notification:
-                    mTextMessage.setText(R.string.home_nav_notification);
-                    return true;
+                    transaction.replace(R.id.home_container, notificationFragment);
+                    status = true;
+                    break;
                 case R.id.home_nav_me:
-                    mTextMessage.setText(R.string.home_nav_me);
-                    return true;
+                    transaction.replace(R.id.home_container, profileFragment);
+                    status = true;
+                    break;
             }
-            return false;
+            transaction.addToBackStack(null);
+            transaction.commit();
+            return status;
         }
     };
 
@@ -43,9 +57,18 @@ public class HomeActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mTextMessage = findViewById(R.id.message);
+        exploreFragment = new ExploreFragment();
+        searchFragment = new SearchFragment();
+        uploadFragment = new UploadFragment();
+        notificationFragment = new NotificationFragment();
+        profileFragment = new ProfileFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.home_container, exploreFragment).commit();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.home_nav_me);
     }
 
     @Override
