@@ -25,7 +25,7 @@ public class HomeActivity extends FragmentActivity {
             boolean status = false;
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
-                case R.id.home_nav_home:
+                case R.id.home_nav_explore:
                     transaction.replace(R.id.home_container, exploreFragment);
                     status = true;
                     break;

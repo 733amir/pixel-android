@@ -27,7 +27,7 @@
 
     <!-- Home page navigation -->
     <string name="title_activity_home">صفحه خانه</string>
-    <string name="home_nav_home">خانه</string>
+    <string name="home_nav_explore">خانه</string>
     <string name="home_nav_search">جست‌وجو</string>
     <string name="home_nav_upload">ارسال</string>
     <string name="home_nav_notification">اخبار</string>

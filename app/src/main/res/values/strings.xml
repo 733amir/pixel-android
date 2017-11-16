@@ -27,7 +27,7 @@
 
     <!-- Home page navigation -->
     <string name="title_activity_home">HomeActivity</string>
-    <string name="home_nav_home">Home</string>
+    <string name="home_nav_explore">Home</string>
     <string name="home_nav_search">Search</string>
     <string name="home_nav_upload">Upload</string>
     <string name="home_nav_notification">Notification</string>
