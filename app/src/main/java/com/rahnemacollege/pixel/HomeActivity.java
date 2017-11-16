@@ -76,4 +76,9 @@ public class HomeActivity extends FragmentActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_from_up, R.anim.slide_to_down);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
