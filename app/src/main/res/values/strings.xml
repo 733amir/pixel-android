@@ -24,9 +24,9 @@
     <!-- Forget Password Page -->
     <string name="forget_password_tv">Enter your email to get password recovery code.</string>
     <string name="forget_passowrd_button">Send</string>
-    <string name="title_activity_home">HomeActivity</string>
 
     <!-- Home page navigation -->
+    <string name="title_activity_home">HomeActivity</string>
     <string name="home_nav_home">Home</string>
     <string name="home_nav_search">Search</string>
     <string name="home_nav_upload">Upload</string>
