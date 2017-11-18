@@ -28,7 +28,15 @@
 
     <!-- Forget Password Page -->
     <string name="forget_password_tv">Enter your email to get password recovery code.</string>
-    <string name="forget_passowrd_button">Send</string>
+    <string name="forget_password_send">Send</string>
+    <string name="forget_password_code">Enter Code</string>
+    <string name="forget_password_password">New Password</string>
+    <string name="forget_password_password_repeat">Repeat Password</string>
+    <string name="forget_password_reset">Reset</string>
+    <string name="forget_password_change_email">Change Email</string>
+    <string name="forget_password_empty">Is empty!</string>
+    <string name="forget_password_email_notvalid">Email is not valid!</string>
+    <string name="forget_password_password_not_matched">Passwords don\'t match!</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">HomeActivity</string>

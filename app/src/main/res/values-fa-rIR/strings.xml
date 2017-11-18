@@ -28,7 +28,7 @@
 
     <!-- Forget Password Page -->
     <string name="forget_password_tv">برای بازیابی رمز عبور ایمیل خود را وارد کنید.</string>
-    <string name="forget_passowrd_button">ارسال</string>
+    <string name="forget_password_send">ارسال</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">صفحه خانه</string>
