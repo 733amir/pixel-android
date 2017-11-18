@@ -1,115 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_margin"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
-        android:text="@string/signup_tv_username"/>
+        android:text="@string/signup_tv_username" />
 
     <EditText
         android:id="@+id/signup_et_username"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:inputType="textPersonName" />
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPersonName"
+        android:paddingLeft="@dimen/edit_text_left_padding"
+        android:paddingRight="@dimen/edit_text_right_padding" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/signup_tv_fullname"/>
+        android:text="@string/signup_tv_fullname" />
 
     <EditText
         android:id="@+id/signup_et_fullname"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:inputType="textPersonName" />
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPersonName"
+        android:paddingLeft="@dimen/edit_text_left_padding"
+        android:paddingRight="@dimen/edit_text_right_padding" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/signup_tv_email"/>
+        android:text="@string/signup_tv_email" />
 
 
     <EditText
         android:id="@+id/signup_et_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:inputType="textEmailAddress" />
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="@dimen/edit_text_left_padding"
+        android:paddingRight="@dimen/edit_text_right_padding" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/signup_tv_password"/>
+        android:text="@string/signup_tv_password" />
 
 
     <EditText
         android:id="@+id/signup_et_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:inputType="textPassword" />
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/edit_text_left_padding"
+        android:paddingRight="@dimen/edit_text_right_padding" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/signup_tv_repeat_password"/>
+        android:text="@string/signup_tv_repeat_password" />
 
     <EditText
         android:id="@+id/signup_et_repeat_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
         android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
         android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:inputType="textPassword" />
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/edit_text_left_padding"
+        android:paddingRight="@dimen/edit_text_right_padding" />
 
     <Button
         android:id="@+id/signup_b_signup"
@@ -117,10 +114,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/pages_left_margin"
         android:layout_marginRight="@dimen/pages_right_margin"
-        android:layout_marginStart="@dimen/pages_left_margin"
-        android:layout_marginEnd="@dimen/pages_right_margin"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_buttons"
         android:text="@string/signup_tv_signup" />
-
 
 </LinearLayout>

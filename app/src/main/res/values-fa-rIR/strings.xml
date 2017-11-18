@@ -11,7 +11,7 @@
     <string name="login_tv_username">نام کاربری</string>
     <string name="login_tv_password">رمز عبور</string>
     <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
-    <string name="login_b_login">ورود</string>
+    <string name="login_b_login">ورود به برنامه</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">نام کاربری</string>
@@ -27,8 +27,8 @@
     <string name="signup_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
 
     <!-- Forget Password Page -->
-    <string name="forget_password_tv">برای بازیابی رمز عبور ایمیل خود را وارد کنید.</string>
-    <string name="forget_password_send">ارسال</string>
+    <string name="forget_password_tv">برای بازیابی رمز عبور ایمیل خود را وارد کنید</string>
+    <string name="forget_password_send">ارسال لینک تغییر رمز عبور</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">صفحه خانه</string>

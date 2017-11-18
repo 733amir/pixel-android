@@ -10,7 +10,7 @@
     <!-- Login Page -->
     <string name="login_tv_username">Username</string>
     <string name="login_tv_password">Password</string>
-    <string name="login_tv_forgetpassword">Did you forgot your password?</string>
+    <string name="login_tv_forgetpassword">Did you forget your password?</string>
     <string name="login_b_login">Login</string>
     <string name="login_empty">Is empty!</string>
 
@@ -28,7 +28,7 @@
     <string name="signup_password_not_matched">Passwords don\'t match!</string>
 
     <!-- Forget Password Page -->
-    <string name="forget_password_tv">Enter your email to get password recovery code.</string>
+    <string name="forget_password_tv">Enter your email to reset your password</string>
     <string name="forget_password_send">Send</string>
     <string name="forget_password_code">Enter Code</string>
     <string name="forget_password_password">New Password</string>
