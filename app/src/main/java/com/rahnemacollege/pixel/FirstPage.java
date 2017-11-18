@@ -21,6 +21,7 @@ public class FirstPage extends FragmentActivity
         setContentView(R.layout.activity_first_page);
 
         viewPager = findViewById(R.id.first_page_container);
+        viewPager.setOffscreenPageLimit(2);
         tabLayout = findViewById(R.id.first_page_tab);
         firstPageFragmentAdapter = new FirstPageFragmentAdapter(this, getSupportFragmentManager());
 
