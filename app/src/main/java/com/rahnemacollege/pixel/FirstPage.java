@@ -45,7 +45,7 @@ public class FirstPage extends FragmentActivity
 
     public void signUpClicked(String fullname, String username, String password, String email) {
         tabLayout.getTabAt(1).select();
-        ((LoginFragment)firstPageFragmentAdapter.getItem(1)).fillUsernamePassword(username, password);
+        ((LoginFragment) firstPageFragmentAdapter.getItem(1)).fillUsernamePassword(username, password);
     }
 
     public void onLogin(View view) {

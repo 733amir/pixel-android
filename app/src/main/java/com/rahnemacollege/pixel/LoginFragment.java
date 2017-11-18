@@ -13,6 +13,7 @@ public class LoginFragment extends Fragment {
 
     public interface LoginFragmentClickHandler {
         public void forgetPasswordClicked();
+
         public void loginClicked(String username, String password);
     }
 
@@ -20,12 +21,13 @@ public class LoginFragment extends Fragment {
     View view;
     EditText username, password;
 
-    public LoginFragment() {}
+    public LoginFragment() {
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        clickHandler = ((LoginFragmentClickHandler)getActivity());
+        clickHandler = ((LoginFragmentClickHandler) getActivity());
     }
 
     @Override

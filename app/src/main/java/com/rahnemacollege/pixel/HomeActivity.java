@@ -33,14 +33,6 @@ public class HomeActivity extends FragmentActivity {
                     transaction.replace(R.id.home_container, searchFragment);
                     status = true;
                     break;
-                case R.id.home_nav_upload:
-                    transaction.replace(R.id.home_container, uploadFragment);
-                    status = true;
-                    break;
-                case R.id.home_nav_notification:
-                    transaction.replace(R.id.home_container, notificationFragment);
-                    status = true;
-                    break;
                 case R.id.home_nav_me:
                     transaction.replace(R.id.home_container, profileFragment);
                     status = true;
