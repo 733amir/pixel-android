@@ -1,29 +1,28 @@
 package com.rahnemacollege.pixel;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.support.design.widget.BottomNavigationView;
-import android.widget.Toast;
 
-public class FirstPage extends FragmentActivity implements LoginFragment.OnForgetPasswordClicked  {
+public class FirstPage extends FragmentActivity
+        implements LoginFragment.LoginFragmentClickHandler,
+        SignUpFragment.SignUpFragmentClickHandler {
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    FirstPageFragmentAdapter firstPageFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
-        ViewPager viewPager = findViewById(R.id.first_page_container);
-        TabLayout tabLayout = findViewById(R.id.first_page_tab);
-        FirstPageFragmentAdapter firstPageFragmentAdapter = new FirstPageFragmentAdapter(this, getSupportFragmentManager());
+        viewPager = findViewById(R.id.first_page_container);
+        tabLayout = findViewById(R.id.first_page_tab);
+        firstPageFragmentAdapter = new FirstPageFragmentAdapter(this, getSupportFragmentManager());
 
         viewPager.setAdapter(firstPageFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -32,7 +31,6 @@ public class FirstPage extends FragmentActivity implements LoginFragment.OnForge
     }
 
     public void forgetPasswordClicked() {
-        TabLayout tabLayout = findViewById(R.id.first_page_tab);
         tabLayout.getTabAt(0).select();
     }
 
@@ -42,6 +40,11 @@ public class FirstPage extends FragmentActivity implements LoginFragment.OnForge
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
+    }
+
+    public void signUpClicked(String fullname, String username, String password, String email) {
+        tabLayout.getTabAt(1).select();
+        ((LoginFragment)firstPageFragmentAdapter.getItem(1)).fillUsernamePassword(username, password);
     }
 
     public void onLogin(View view) {
