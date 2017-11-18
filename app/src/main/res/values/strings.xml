@@ -12,6 +12,7 @@
     <string name="login_tv_password">Password</string>
     <string name="login_tv_forgetpassword">Did you forgot your password?</string>
     <string name="login_b_login">Login</string>
+    <string name="login_empty">Is empty!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">Username</string>

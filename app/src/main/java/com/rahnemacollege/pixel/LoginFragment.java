@@ -45,7 +45,31 @@ public class LoginFragment extends Fragment {
         view.findViewById(R.id.login_b_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickHandler.loginClicked(username.getText().toString(), password.getText().toString());
+                String unstr = username.getText().toString(), pwstr = password.getText().toString();
+                boolean unstat = false, pwstat = false;
+
+                // Username field checks
+                if (unstr.isEmpty()) {
+                    username.setError(getString(R.string.signup_empty));
+                } else if (unstr.length() < 5) {
+                    username.setError(getString(R.string.signup_short_username));
+                } else if (!unstr.matches("[A-Za-z0-9]*")) {
+                    username.setError(getString(R.string.signup_username_alphanumeric));
+                } // TODO check username with server.
+                else {
+                    unstat = true;
+                }
+
+                // Password field checks
+                if (pwstr.isEmpty()) {
+                    password.setError(getString(R.string.login_empty));
+                } else {
+                    pwstat = true;
+                }
+
+                if (unstat && pwstat) {
+                    clickHandler.loginClicked(username.getText().toString(), password.getText().toString());
+                }
             }
         });
 
