@@ -29,7 +29,7 @@ public class FirstPage extends AppCompatActivity
         viewPager.setAdapter(firstPageFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(1).select();
+        tabLayout.getTabAt(0).select();
     }
 
     public void forgetPasswordClicked() {
@@ -46,7 +46,7 @@ public class FirstPage extends AppCompatActivity
     }
 
     public void signUpClicked(String fullname, String username, String password, String email) {
-        tabLayout.getTabAt(1).select();
-        ((LoginFragment) firstPageFragmentAdapter.getItem(1)).fillUsernamePassword(username, password);
+        tabLayout.getTabAt(0).select();
+        ((LoginFragment) firstPageFragmentAdapter.getItem(0)).fillUsernamePassword(username, password);
     }
 }
