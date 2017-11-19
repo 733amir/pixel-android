@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".ResetPasswordActivity"
-            android:parentActivityName=".FirstPage">
+            android:parentActivityName=".FirstPage"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPage" />
