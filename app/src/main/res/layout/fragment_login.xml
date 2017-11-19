@@ -28,7 +28,8 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:layoutDirection="ltr" />
 
         <TextView
             android:layout_width="match_parent"
@@ -42,7 +43,8 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
 
         <TextView
             android:id="@+id/login_tv_forgetpassword"
