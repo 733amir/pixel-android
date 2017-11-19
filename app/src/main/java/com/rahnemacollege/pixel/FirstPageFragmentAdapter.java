@@ -25,7 +25,6 @@ public class FirstPageFragmentAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
 
-//        addFragment(new ForgetPasswordFragment(), mContext.getString(R.string.firstpage_b_forget_password));
         addFragment(new LoginFragment(), mContext.getString(R.string.firstpage_b_login));
         addFragment(new SignUpFragment(), mContext.getString(R.string.firstpage_b_signup));
     }

@@ -21,13 +21,14 @@ public class SignUpFragment extends Fragment {
     View view;
     EditText fullname, username, password_1, password_2, email;
 
-    public SignUpFragment() {}
+    public SignUpFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        clickHandler = ((SignUpFragmentClickHandler)getActivity());
+        clickHandler = ((SignUpFragmentClickHandler) getActivity());
     }
 
     @Override
