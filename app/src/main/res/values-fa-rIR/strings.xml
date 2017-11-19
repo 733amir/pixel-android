@@ -12,6 +12,7 @@
     <string name="login_tv_password">رمز عبور</string>
     <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
     <string name="login_b_login">ورود به برنامه</string>
+    <string name="login_empty">خالی است!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">نام کاربری</string>
@@ -27,12 +28,20 @@
     <string name="signup_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
 
     <!-- Forget Password Page -->
-    <string name="forget_password_tv">برای بازیابی رمز عبور ایمیل خود را وارد کنید</string>
+    <string name="forget_password_tv">آدرس ایمیل</string>
     <string name="forget_password_send">ارسال لینک تغییر رمز عبور</string>
+    <string name="forget_password_code">کد دریافتی</string>
+    <string name="forget_password_password">رمزعبور جدید</string>
+    <string name="forget_password_password_repeat">تکرار رمزعبور</string>
+    <string name="forget_password_reset">تغییر رمزعبور</string>
+    <string name="forget_password_change_email">تغییر ایمیل</string>
+    <string name="forget_password_empty">خالی است!</string>
+    <string name="forget_password_email_notvalid">ایمیل معبتر نیست!</string>
+    <string name="forget_password_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">صفحه خانه</string>
-    <string name="home_nav_explore">خانه</string>
+    <string name="home_nav_explore">کاوش</string>
     <string name="home_nav_search">جست‌وجو</string>
     <string name="home_nav_upload">ارسال</string>
     <string name="home_nav_notification">اخبار</string>
