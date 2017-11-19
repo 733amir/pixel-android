@@ -7,13 +7,19 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingEnd="@dimen/pages_right_margin"
         android:paddingLeft="@dimen/pages_left_margin"
         android:paddingRight="@dimen/pages_right_margin"
         android:paddingStart="@dimen/pages_left_margin"
-        android:paddingTop="@dimen/pages_top_to_top_margin"
-        android:gravity="center_vertical">
+        android:paddingTop="@dimen/pages_top_to_top_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_username" />
 
         <EditText
             android:id="@+id/signup_et_username"
@@ -21,8 +27,13 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:hint="@string/signup_tv_username"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_fullname" />
 
         <EditText
             android:id="@+id/signup_et_fullname"
@@ -30,8 +41,13 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:hint="@string/signup_tv_fullname"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_email" />
 
         <EditText
             android:id="@+id/signup_et_email"
@@ -39,8 +55,13 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:hint="@string/signup_tv_email"
             android:inputType="textEmailAddress" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_password" />
 
         <EditText
             android:id="@+id/signup_et_password"
@@ -48,8 +69,13 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:hint="@string/signup_tv_password"
             android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_repeat_password" />
 
         <EditText
             android:id="@+id/signup_et_repeat_password"
@@ -57,7 +83,6 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
-            android:hint="@string/signup_tv_repeat_password"
             android:inputType="textPassword" />
 
         <Button
