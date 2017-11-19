@@ -65,7 +65,7 @@ public class ForgetPasswordFragment extends Fragment {
 
                     send_change.setText(R.string.forget_password_send);
 
-                    view.findViewById(R.id.forget_password_container_inner).setVisibility(View.INVISIBLE);
+                    view.findViewById(R.id.forget_password_container_inner).setVisibility(View.GONE);
                 }
             }
         });

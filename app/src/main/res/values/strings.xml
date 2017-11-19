@@ -28,7 +28,7 @@
     <string name="signup_password_not_matched">Passwords don\'t match!</string>
 
     <!-- Forget Password Page -->
-    <string name="forget_password_tv">Enter your email to reset your password</string>
+    <string name="forget_password_tv">Email Address</string>
     <string name="forget_password_send">Send</string>
     <string name="forget_password_code">Enter Code</string>
     <string name="forget_password_password">New Password</string>

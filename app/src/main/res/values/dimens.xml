@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="first_page_spacing">56dp</dimen>
     <dimen name="pages_left_margin">16dp</dimen>
     <dimen name="pages_right_margin">16dp</dimen>
     <dimen name="pages_top_margin">16dp</dimen>
@@ -10,7 +11,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="rounded_corners_radius">12dp</dimen>
+    <dimen name="rounded_corners_radius">8dp</dimen>
     <dimen name="edit_text_height">48dp</dimen>
 
     <dimen name="edit_text_left_padding">16dp</dimen>

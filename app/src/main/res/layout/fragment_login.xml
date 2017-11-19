@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:paddingStart="@dimen/pages_left_margin"
-    android:paddingEnd="@dimen/pages_right_margin"
-    android:paddingLeft="@dimen/pages_left_margin"
-    android:paddingRight="@dimen/pages_right_margin"
-    tools:context="com.rahnemacollege.pixel.LoginActivity">
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/login_tv_username"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:text="@string/login_tv_username" />
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/pages_right_margin"
+        android:paddingLeft="@dimen/pages_left_margin"
+        android:paddingRight="@dimen/pages_right_margin"
+        android:paddingStart="@dimen/pages_left_margin"
+        tools:context="com.rahnemacollege.pixel.LoginActivity">
 
-    <EditText
-        android:id="@+id/login_et_username"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/login_et_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/login_tv_username"
+            android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/login_tv_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/login_tv_password" />
+        <EditText
+            android:id="@+id/login_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/login_tv_password"
+            android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/login_et_password"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/login_tv_forgetpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pages_top_to_top_margin"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:paddingBottom="@dimen/pages_top_to_top_margin"
+            android:paddingTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/login_tv_forgetpassword"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/login_tv_forgetpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/login_tv_forgetpassword"
-        android:textAlignment="center" />
+        <Button
+            android:id="@+id/login_b_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/login_b_login" />
 
-    <Button
-        android:id="@+id/login_b_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_buttons"
-        android:text="@string/login_b_login" />
-</LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/first_page_spacing" />
+
+    </LinearLayout>
+
+</ScrollView>
