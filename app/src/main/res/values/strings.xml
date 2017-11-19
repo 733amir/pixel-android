@@ -38,6 +38,7 @@
     <string name="forget_password_empty">Is empty!</string>
     <string name="forget_password_email_notvalid">Email is not valid!</string>
     <string name="forget_password_password_not_matched">Passwords don\'t match!</string>
+    <string name="forget_password_password_recovery">Password Recovery</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">HomeActivity</string>

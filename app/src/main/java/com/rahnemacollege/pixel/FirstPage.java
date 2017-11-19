@@ -29,11 +29,14 @@ public class FirstPage extends AppCompatActivity
         viewPager.setAdapter(firstPageFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(1).select();
+        tabLayout.getTabAt(0).select();
     }
 
     public void forgetPasswordClicked() {
-        tabLayout.getTabAt(0).select();
+//        tabLayout.getTabAt(0).select();
+
+        Intent intent = new Intent(this, ResetPasswordActivity.class);
+        startActivity(intent);
     }
 
     public void loginClicked(String username, String password) {

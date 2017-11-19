@@ -38,6 +38,7 @@
     <string name="forget_password_empty">خالی است!</string>
     <string name="forget_password_email_notvalid">ایمیل معبتر نیست!</string>
     <string name="forget_password_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
+    <string name="forget_password_password_recovery">بازیابی رمزعبور</string>
 
     <!-- Home page navigation -->
     <string name="title_activity_home">صفحه خانه</string>
