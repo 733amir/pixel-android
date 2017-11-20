@@ -16,6 +16,7 @@ public class HomeActivity extends AppCompatActivity {
     UploadFragment uploadFragment;
     NotificationFragment notificationFragment;
     ProfileFragment profileFragment;
+    FriendsListFragment friendsListFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,8 +30,8 @@ public class HomeActivity extends AppCompatActivity {
                     transaction.replace(R.id.home_container, exploreFragment);
                     status = true;
                     break;
-                case R.id.home_nav_search:
-                    transaction.replace(R.id.home_container, searchFragment);
+                case R.id.home_nav_friends_list:
+                    transaction.replace(R.id.home_container, friendsListFragment);
                     status = true;
                     break;
                 case R.id.home_nav_me:
@@ -54,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         uploadFragment = new UploadFragment();
         notificationFragment = new NotificationFragment();
         profileFragment = new ProfileFragment();
+        friendsListFragment = new FriendsListFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.home_container, exploreFragment).commit();

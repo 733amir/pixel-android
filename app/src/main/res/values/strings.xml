@@ -47,4 +47,6 @@
     <string name="home_nav_upload">Upload</string>
     <string name="home_nav_notification">Notification</string>
     <string name="home_nav_me">Me</string>
+    <string name="home_nav_friends_list">Friends</string>
+
 </resources>
