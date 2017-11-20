@@ -20,8 +20,7 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:parentActivityName=".FirstPage"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPage" />

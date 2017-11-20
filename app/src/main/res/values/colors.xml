@@ -13,4 +13,7 @@
 
     <color name="tab_background_selected">#FFFFFF</color>
     <color name="tab_background_unselected">@color/primary</color>
+    <color name="profile_header_background">@color/primary</color>
+    <color name="profile_image_background">@color/accent</color>
+    <color name="profile_page_image_border_color">@color/white</color>
 </resources>
