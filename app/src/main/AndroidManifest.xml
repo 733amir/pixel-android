@@ -12,18 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FirstPage"
+            android:name=".FirstPageActivity"
             android:screenOrientation="portrait">
 
         </activity>
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:parentActivityName=".FirstPage"
+            android:name=".ExploreActivity"
+            android:label="@string/title_activity_explore"
+            android:parentActivityName=".FirstPageActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rahnemacollege.pixel.FirstPage" />
+                android:value="com.rahnemacollege.pixel.FirstPageActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,11 +32,11 @@
         </activity>
         <activity
             android:name=".ResetPasswordActivity"
-            android:parentActivityName=".FirstPage"
+            android:parentActivityName=".FirstPageActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rahnemacollege.pixel.FirstPage" />
+                android:value="com.rahnemacollege.pixel.FirstPageActivity" />
         </activity>
     </application>
 

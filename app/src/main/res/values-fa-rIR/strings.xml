@@ -41,10 +41,12 @@
     <string name="forget_password_password_recovery">بازیابی رمزعبور</string>
 
     <!-- Home page navigation -->
-    <string name="title_activity_home">صفحه خانه</string>
-    <string name="home_nav_explore">کاوش</string>
-    <string name="home_nav_search">جست‌وجو</string>
-    <string name="home_nav_upload">ارسال</string>
-    <string name="home_nav_notification">اخبار</string>
-    <string name="home_nav_me">من</string>
+    <string name="title_activity_explore">صفحه گردش</string>
+    <string name="explore_nav_home">خانه</string>
+    <string name="explore_nav_search">جست‌وجو</string>
+    <string name="explore_nav_upload">ارسال</string>
+    <string name="explore_nav_notification">اخبار</string>
+    <string name="explore_nav_me">من</string>
+    <string name="explore_nav_friends_list">دوستان</string>
+
 </resources>

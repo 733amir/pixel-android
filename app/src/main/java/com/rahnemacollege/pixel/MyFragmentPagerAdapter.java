@@ -15,18 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FirstPageFragmentAdapter extends FragmentPagerAdapter {
+public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public FirstPageFragmentAdapter(Context context, FragmentManager fm) {
+    public MyFragmentPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
-
-        addFragment(new LoginFragment(), mContext.getString(R.string.firstpage_b_login));
-        addFragment(new SignUpFragment(), mContext.getString(R.string.firstpage_b_signup));
     }
 
     @Override

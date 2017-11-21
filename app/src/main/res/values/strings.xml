@@ -40,13 +40,13 @@
     <string name="forget_password_password_not_matched">Passwords don\'t match!</string>
     <string name="forget_password_password_recovery">Password Recovery</string>
 
-    <!-- Home page navigation -->
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="home_nav_explore">Explore</string>
-    <string name="home_nav_search">Search</string>
-    <string name="home_nav_upload">Upload</string>
-    <string name="home_nav_notification">Notification</string>
-    <string name="home_nav_me">Me</string>
-    <string name="home_nav_friends_list">Friends</string>
+    <!-- Explore page navigation -->
+    <string name="title_activity_explore">ExploreActivity</string>
+    <string name="explore_nav_home">Home</string>
+    <string name="explore_nav_search">Search</string>
+    <string name="explore_nav_upload">Upload</string>
+    <string name="explore_nav_notification">Notification</string>
+    <string name="explore_nav_me">Me</string>
+    <string name="explore_nav_friends_list">Friends</string>
 
 </resources>
