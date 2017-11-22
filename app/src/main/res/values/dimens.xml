@@ -31,4 +31,8 @@
     <dimen name="post_buttons_margin">8dp</dimen>
     <dimen name="post_border_size">1dp</dimen>
     <dimen name="post_border_radius_size">8dp</dimen>
+
+    <!-- Header sizes -->
+    <dimen name="header_height_size">45dp</dimen>
+    <dimen name="header_icon_horizontal_margin">5dp</dimen>
 </resources>

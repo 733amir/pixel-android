@@ -76,4 +76,5 @@ public class FirstPageActivity extends AppCompatActivity
         tabLayout.getTabAt(0).select();
         ((LoginFragment) firstPageFragmentAdapter.getItem(0)).fillUsernamePassword(username, password);
     }
+
 }

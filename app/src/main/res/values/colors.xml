@@ -31,4 +31,8 @@
     <color name="post_profile_image_background_color">@color/primaryLightColor</color>
     <color name="post_profile_image_border_color">@color/primaryDarkColor</color>
     <color name="post_border_color">@color/primary</color>
+
+    <!-- Header template colors -->
+    <color name="header_background_color">@color/primaryDarkColor</color>
+    <color name="header_foreground_color">@color/white</color>
 </resources>

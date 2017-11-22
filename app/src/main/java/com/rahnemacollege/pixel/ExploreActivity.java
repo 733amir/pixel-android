@@ -13,8 +13,9 @@ public class ExploreActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     FriendsListFragment friendsListFragment;
     ProfileFragment profileFragment;
+
     MyFragmentPagerAdapter explorePageFragmentAdapter;
-    ViewPager viewPager;
+    ViewPager contentViewPager;
     BottomNavigationView bottomNavigationView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -25,15 +26,15 @@ public class ExploreActivity extends AppCompatActivity {
             boolean status = false;
             switch (item.getItemId()) {
                 case R.id.home_nav_explore:
-                    viewPager.setCurrentItem(0);
+                    contentViewPager.setCurrentItem(0);
                     status = true;
                     break;
                 case R.id.home_nav_friends_list:
-                    viewPager.setCurrentItem(1);
+                    contentViewPager.setCurrentItem(1);
                     status = true;
                     break;
                 case R.id.home_nav_me:
-                    viewPager.setCurrentItem(2);
+                    contentViewPager.setCurrentItem(2);
                     status = true;
                     break;
             }
@@ -51,17 +52,17 @@ public class ExploreActivity extends AppCompatActivity {
         friendsListFragment = new FriendsListFragment();
         profileFragment = new ProfileFragment();
 
-        // Create and config explore fragmentPagerAdapter
+        // Create and config explore explorePageFragmentAdapter
         explorePageFragmentAdapter = new MyFragmentPagerAdapter(this, getSupportFragmentManager());
         explorePageFragmentAdapter.addFragment(homeFragment, getString(R.string.explore_nav_home));
         explorePageFragmentAdapter.addFragment(friendsListFragment, getString(R.string.explore_nav_friends_list));
         explorePageFragmentAdapter.addFragment(profileFragment, getString(R.string.explore_nav_me));
 
         // Config viewPager of explore activity
-        viewPager = findViewById(R.id.explore_container);
-        viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(explorePageFragmentAdapter);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        contentViewPager = findViewById(R.id.explore_container);
+        contentViewPager.setOffscreenPageLimit(2);
+        contentViewPager.setAdapter(explorePageFragmentAdapter);
+        contentViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
