@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- First Page -->
+    <dimen name="first_page_title_horizontal_margin">8dp</dimen>
     <dimen name="first_page_spacing">56dp</dimen>
     <dimen name="pages_left_margin">16dp</dimen>
     <dimen name="pages_right_margin">16dp</dimen>
@@ -34,5 +36,5 @@
 
     <!-- Header sizes -->
     <dimen name="header_height_size">45dp</dimen>
-    <dimen name="header_icon_horizontal_margin">5dp</dimen>
+    <dimen name="header_icon_horizontal_margin">8dp</dimen>
 </resources>

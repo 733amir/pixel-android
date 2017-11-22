@@ -1,38 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base Colors -->
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="light_0">#000</color>
+    <color name="light_1">#111</color>
+    <color name="light_2">#222</color>
+    <color name="light_3">#333</color>
+    <color name="light_4">#444</color>
+    <color name="light_5">#555</color>
+    <color name="light_6">#666</color>
+    <color name="light_7">#777</color>
+    <color name="light_8">#888</color>
+    <color name="light_9">#999</color>
+    <color name="light_a">#aaa</color>
+    <color name="light_b">#bbb</color>
+    <color name="light_c">#ccc</color>
+    <color name="light_d">#ddd</color>
+    <color name="light_e">#eee</color>
+    <color name="light_f">#fff</color>
+
+    <color name="red">#d50000</color>
+    <color name="ping">#c51162</color>
+    <color name="purple">#aa00ff</color>
+    <color name="deep_purple">#6200ea</color>
+    <color name="indigo">#304ffe</color>
+    <color name="blue">#2962ff</color>
+    <color name="light_blue">#0091ea</color>
+    <color name="cyan">#00b8d4</color>
+    <color name="teal">#00bfa5</color>
+    <color name="green">#00c853</color>
+    <color name="light_green">#64dd17</color>
+    <color name="lime">#aeea00</color>
+    <color name="yellow">#ffd600</color>
+    <color name="amber">#ffab00</color>
+    <color name="orange">#ff6d00</color>
+    <color name="deep_orange">#dd2c00</color>
+
+
+    <!-- Application Colors -->
+    <color name="primary_dark_color">#000a12</color>
+    <color name="primary_color">#202020</color>
+    <color name="primaryLightColor">#4f5b62</color>
+    <color name="primaryTextColor">#ffffff</color>
+
 
     <!-- Application Base Colors -->
-    <color name="primaryTextColor">@color/white</color>
-    <color name="primaryLightColor">#63a4ff</color>
-    <color name="primaryColor">#1976d2</color>
-    <color name="primaryDarkColor">#004ba0</color>
+    <color name="primary_dark">@color/light_2</color>
+    <color name="primary">@color/light_2</color>
+    <color name="primary_light">@color/light_4</color>
+    <color name="primary_text">@color/light_3</color>
+    <color name="secondary_text">@color/light_5</color>
+    <color name="accent">@color/green</color>
+
+    <!-- Login Page -->
+    <color name="first_page_button_background">@color/green</color>
+    <color name="first_page_button_foreground">@color/light_f</color>
+    <color name="first_page_textview_divider">@color/light_a</color>
+    <color name="first_page_tab_background_selected">@color/light_f</color>
+    <color name="first_page_tab_background_unselected">@color/primary_light</color>
 
     <!-- TODO User upper, new colors and structure color usage. -->
 
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
-    <color name="accent">#FF5252</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
+    <!--<color name="primary">#3F51B5</color>-->
+    <!--<color name="primary_dark">#303F9F</color>-->
+    <!--<color name="primary_light">#C5CAE9</color>-->
+    <!--<color name="accent">#FF5252</color>-->
+    <!--<color name="primary_text">#212121</color>-->
+
+    <color name="white">@color/light_f</color>
+
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
-    <color name="tab_background_selected">#FFFFFF</color>
-    <color name="tab_background_unselected">@color/primary</color>
     <color name="profile_header_background">@color/primary</color>
     <color name="profile_image_background">@color/primaryLightColor</color>
-    <color name="profile_page_image_border_color">@color/primaryDarkColor</color>
+    <color name="profile_page_image_border_color">@color/primary_dark</color>
 
     <!-- Post related colors -->
     <color name="post_profile_image_background_color">@color/primaryLightColor</color>
-    <color name="post_profile_image_border_color">@color/primaryDarkColor</color>
+    <color name="post_profile_image_border_color">@color/primary_dark</color>
     <color name="post_border_color">@color/primary</color>
 
     <!-- Header template colors -->
-    <color name="header_background_color">@color/primaryDarkColor</color>
-    <color name="header_foreground_color">@color/white</color>
+    <color name="header_background_color">@color/primary_dark</color>
+    <color name="header_foreground_color">@color/light_f</color>
+
+    <color name="profile_empty_image">#757575</color>
 </resources>

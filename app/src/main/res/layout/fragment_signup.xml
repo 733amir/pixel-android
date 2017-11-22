@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_buttons"
+            android:textColor="@color/first_page_button_foreground"
             android:text="@string/signup_tv_signup" />
 
         <Space
