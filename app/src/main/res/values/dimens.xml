@@ -21,4 +21,14 @@
     <dimen name="profile_page_image_dimeter">120dp</dimen>
     <dimen name="profile_page_image_shift_up">-60dp</dimen>
     <dimen name="profile_page_image_border_size">1dp</dimen>
+
+    <!-- Post related sizes -->
+    <dimen name="post_profile_image_size">40dp</dimen>
+    <dimen name="post_profile_image_border_size">1dp</dimen>
+    <dimen name="post_inner_padding">8dp</dimen>
+    <dimen name="post_outer_margin">8dp</dimen>
+    <dimen name="post_profile_image_margin">8dp</dimen>
+    <dimen name="post_buttons_margin">8dp</dimen>
+    <dimen name="post_border_size">1dp</dimen>
+    <dimen name="post_border_radius_size">8dp</dimen>
 </resources>

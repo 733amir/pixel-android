@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/profile_page_info_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="com.rahnemacollege.pixel.ProfileFragment">
 
@@ -43,7 +43,7 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -107,53 +107,13 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
+            <include layout="@layout/post_holder"/>
+            <include layout="@layout/post_holder"/>
+            <include layout="@layout/post_holder"/>
+            <include layout="@layout/post_holder"/>
+            <include layout="@layout/post_holder"/>
+            <include layout="@layout/post_holder"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:text="Post" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
