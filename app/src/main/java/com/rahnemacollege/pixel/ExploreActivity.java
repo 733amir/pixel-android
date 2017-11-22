@@ -46,18 +46,18 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-
+        // Create explore activity fragments
         homeFragment = new HomeFragment();
         friendsListFragment = new FriendsListFragment();
         profileFragment = new ProfileFragment();
 
-
+        // Create and config explore fragmentPagerAdapter
         explorePageFragmentAdapter = new MyFragmentPagerAdapter(this, getSupportFragmentManager());
         explorePageFragmentAdapter.addFragment(homeFragment, getString(R.string.explore_nav_home));
         explorePageFragmentAdapter.addFragment(friendsListFragment, getString(R.string.explore_nav_friends_list));
         explorePageFragmentAdapter.addFragment(profileFragment, getString(R.string.explore_nav_me));
 
-
+        // Config viewPager of explore activity
         viewPager = findViewById(R.id.explore_container);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(explorePageFragmentAdapter);
@@ -74,7 +74,7 @@ public class ExploreActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {}
         });
 
-
+        // Config bottomNavigationView
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.home_nav_me);
