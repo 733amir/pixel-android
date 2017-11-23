@@ -11,6 +11,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignUpFragment extends Fragment {
 
     public interface SignUpFragmentClickHandler {
@@ -56,8 +69,7 @@ public class SignUpFragment extends Fragment {
                     username.setError(getString(R.string.signup_short_username));
                 } else if (!unstr.matches("[A-Za-z0-9]*")) {
                     username.setError(getString(R.string.signup_username_alphanumeric));
-                } // TODO check username with server.
-                else {
+                } else {
                     unstat = true;
                 }
 
@@ -93,6 +105,32 @@ public class SignUpFragment extends Fragment {
                 if (unstat && fnstat && emstat && pwstat) {
                     // TODO show a loading animation
                     // TODO send registration to server and wait for response. if it was ok switch to login page.
+
+                    RequestQueue queue = Volley.newRequestQueue(getContext());
+                    Map<String, String> postParam = new HashMap<>();
+                    String url = "192.168.10.139/users/signup/";
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String, String> headers = new HashMap<String, String>();
+                            headers.put("Content-Type", "application/json; charset=utf-8");
+                            return headers;
+                        }
+                    };
+
+                    queue.add(jsonObjectRequest);
+
                     clickHandler.signUpClicked(fullname.getText().toString(),
                             username.getText().toString(), password_1.getText().toString(),
                             email.getText().toString());
