@@ -102,7 +102,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/first_page_spacing" />
+            android:layout_height="@dimen/pages_down_margin" />
 
     </LinearLayout>
 </ScrollView>
