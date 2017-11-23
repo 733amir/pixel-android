@@ -62,6 +62,12 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_image_black_150dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/post_text_margin"
+        android:text="some long long long long long long long long long long long long long long long long long long long long long long long long long text."/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

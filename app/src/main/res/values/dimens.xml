@@ -20,9 +20,13 @@
     <dimen name="edit_text_right_padding">16dp</dimen>
 
     <dimen name="profile_page_header_height">150dp</dimen>
-    <dimen name="profile_page_image_dimeter">120dp</dimen>
+    <dimen name="profile_page_image_diameter">120dp</dimen>
     <dimen name="profile_page_image_shift_up">-60dp</dimen>
     <dimen name="profile_page_image_border_size">1dp</dimen>
+    <dimen name="profile_page_items_vertical_margin">8dp</dimen>
+    <dimen name="profile_page_interests_inner_padding">8dp</dimen>
+    <dimen name="profile_page_interests_outer_margin">2dp</dimen>
+    <dimen name="profile_page_interests_radius">100dp</dimen>
 
     <!-- Post related sizes -->
     <dimen name="post_profile_image_size">40dp</dimen>
@@ -33,6 +37,7 @@
     <dimen name="post_buttons_margin">8dp</dimen>
     <dimen name="post_border_size">1dp</dimen>
     <dimen name="post_border_radius_size">8dp</dimen>
+    <dimen name="post_text_margin">8dp</dimen>
 
     <!-- Header sizes -->
     <dimen name="header_height_size">45dp</dimen>

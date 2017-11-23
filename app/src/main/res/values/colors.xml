@@ -51,12 +51,17 @@
     <color name="secondary_text">@color/light_5</color>
     <color name="accent">@color/green</color>
 
-    <!-- Login Page -->
+    <!-- First Page -->
     <color name="first_page_button_background">@color/green</color>
     <color name="first_page_button_foreground">@color/light_f</color>
-    <color name="first_page_textview_divider">@color/light_a</color>
+    <color name="first_page_textview_border">@color/light_a</color>
     <color name="first_page_tab_background_selected">@color/light_f</color>
     <color name="first_page_tab_background_unselected">@color/primary_light</color>
+
+    <!-- Profile Page -->
+    <color name="profile_header_background">@color/primary</color>
+    <color name="profile_image_background">@color/primary_light</color>
+    <color name="profile_page_image_border_color">@color/primary_dark</color>
 
     <!-- TODO User upper, new colors and structure color usage. -->
 
@@ -71,9 +76,7 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
-    <color name="profile_header_background">@color/primary</color>
-    <color name="profile_image_background">@color/primaryLightColor</color>
-    <color name="profile_page_image_border_color">@color/primary_dark</color>
+
 
     <!-- Post related colors -->
     <color name="post_profile_image_background_color">@color/primaryLightColor</color>
