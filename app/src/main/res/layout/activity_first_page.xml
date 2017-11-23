@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_f"
     tools:context="com.rahnemacollege.pixel.FirstPageActivity">
 
     <android.support.design.widget.TabLayout
@@ -11,19 +14,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="ltr"
-        app:layout_constraintTop_toTopOf="parent"
         app:tabMode="fixed"
         app:tabBackground="@drawable/tab_color_selector"
         app:tabIndicatorHeight="0dp"
         app:tabTextColor="@color/white"
         app:tabSelectedTextColor="@color/primary_text"/>
 
+    <ProgressBar
+        android:id="@+id/first_page_loading"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:background="@color/light_f"
+        android:visibility="invisible"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/first_page_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/first_page_tab" />
+        android:layout_height="match_parent"
+        android:background="@android:color/white" />
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

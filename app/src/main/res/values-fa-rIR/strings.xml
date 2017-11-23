@@ -22,7 +22,7 @@
     <string name="signup_tv_repeat_password">تکرار رمز عبور</string>
     <string name="signup_tv_signup">ثبت نام</string>
     <string name="signup_empty">خالی است!</string>
-    <string name="signup_short_username">۵ حرف یا بیشتر!</string>
+    <string name="signup_short_string">۵ حرف یا بیشتر!</string>
     <string name="signup_username_alphanumeric">تنها حروف و اعداد!</string>
     <string name="signup_email_notvalid">ایمیل معتبر نیست!</string>
     <string name="signup_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>

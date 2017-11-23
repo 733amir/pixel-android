@@ -1,7 +1,6 @@
 package com.rahnemacollege.pixel;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,10 +53,10 @@ public class LoginFragment extends Fragment {
                 if (unstr.isEmpty()) {
                     username.setError(getString(R.string.signup_empty));
                 } else if (unstr.length() < 5) {
-                    username.setError(getString(R.string.signup_short_username));
+                    username.setError(getString(R.string.signup_short_string));
                 } else if (!unstr.matches("[A-Za-z0-9]*")) {
                     username.setError(getString(R.string.signup_username_alphanumeric));
-                } // TODO check username with server.
+                }
                 else {
                     unstat = true;
                 }
