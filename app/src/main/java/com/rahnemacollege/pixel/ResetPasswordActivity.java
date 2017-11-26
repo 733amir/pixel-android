@@ -1,16 +1,35 @@
 package com.rahnemacollege.pixel;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResetPasswordActivity extends AppCompatActivity {
+
+    final String TAG = "ResetPasswordActivity";
 
     EditText email, code, password_1, password_2;
     Button send_change, reset;
     String valid_email;
+    RequestQueue netQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +45,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         password_2 = findViewById(R.id.forget_password_et_password_repeat);
         reset = findViewById(R.id.forget_password_b_reset);
         valid_email = "";
+        netQ = Volley.newRequestQueue(this);
 
         findViewById(R.id.forget_password_b_send).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,29 +58,53 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         email.setError(getString(R.string.forget_password_email_notvalid));
                         return;
                     } else {
-                        valid_email = email.getText().toString();
-                        // TODO loading animations.
-                        // TODO check with server if this email address exist. server should send email with a code.
+                        String url = getString(R.string.api_reset_password_request) + "?email=" + email.getText().toString();
+                        final StringRequest emailExsitsReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.i(TAG, "Email exists response is: " + response);
+
+                                try {
+                                    JSONObject res = new JSONObject(response);
+                                    if (res.has("status") && res.get("status").equals("ok")) {
+                                        valid_email = email.getText().toString();
+                                        email.setError(null);
+                                        email.setEnabled(false);
+                                        send_change.setText(R.string.forget_password_change_email);
+                                        findViewById(R.id.forget_password_container_inner).setVisibility(View.VISIBLE);
+                                        code.setText("");
+                                        code.setError(null);
+                                        password_1.setText("");
+                                        password_1.setError(null);
+                                        password_2.setText("");
+                                        password_2.setError(null);
+                                    } else if (res.has("desc")) {
+                                        email.setError(res.get("desc").toString());
+                                    } else {
+                                        Log.e(TAG, "Email exists JSON response wasn't complete.");
+                                    }
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Email exists response wasn't JSON.");
+                                } finally {
+                                    findViewById(R.id.reset_password_page_loading).setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "Email exists request error: " + error.toString());
+
+                                findViewById(R.id.reset_password_page_loading).setVisibility(View.INVISIBLE);
+                            }
+                        });
+
+                        findViewById(R.id.reset_password_page_loading).setVisibility(View.VISIBLE);
+                        netQ.add(emailExsitsReq);
                     }
-
-                    email.setEnabled(false);
-
-                    send_change.setText(R.string.forget_password_change_email);
-
-                    findViewById(R.id.forget_password_container_inner).setVisibility(View.VISIBLE);
-                    code.setText("");
-                    code.setError(null);
-                    password_1.setText("");
-                    password_1.setError(null);
-                    password_2.setText("");
-                    password_2.setError(null);
                 } else {
                     valid_email = "";
-
                     email.setEnabled(true);
-
                     send_change.setText(R.string.forget_password_send);
-
                     findViewById(R.id.forget_password_container_inner).setVisibility(View.GONE);
                 }
             }
@@ -91,9 +135,76 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
 
                 if (code_stat && pw_stat) {
-                    // TODO send data to server for password reset.
+                    findViewById(R.id.reset_password_page_loading).setVisibility(View.VISIBLE);
+                    String url = getString(R.string.api_reset_password);
+                    final StringRequest resetPassReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.i(TAG, "Reset password response is: " + response);
+
+                            try {
+                                JSONObject res = new JSONObject(response);
+                                if (res.has("status") && res.get("status").equals("ok")) {
+                                    email.setError(null);
+                                    email.setEnabled(true);
+                                    email.setText(null);
+                                    send_change.setText(R.string.forget_password_send);
+                                    findViewById(R.id.forget_password_container_inner).setVisibility(View.GONE);
+                                    code.setText("");
+                                    code.setError(null);
+                                    password_1.setText("");
+                                    password_1.setError(null);
+                                    password_2.setText("");
+                                    password_2.setError(null);
+
+                                    passwordResetSuccessfully();
+                                } else if (res.has("desc")) {
+                                    code.setError(res.get("desc").toString());
+                                } else {
+                                    Log.e(TAG, "Reset password JSON response wasn't complete.");
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Reset password response wasn't JSON.");
+                            } finally {
+                                findViewById(R.id.reset_password_page_loading).setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e(TAG, "Reset password request error: " + error.toString());
+
+                            findViewById(R.id.reset_password_page_loading).setVisibility(View.INVISIBLE);
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+
+                            params.put("email", valid_email);
+                            params.put("code", code.getText().toString());
+                            params.put("password", password_1.getText().toString());
+
+                            return params;
+                        }
+                    };
+
+                    findViewById(R.id.reset_password_page_loading).setVisibility(View.VISIBLE);
+                    netQ.add(resetPassReq);
                 }
             }
         });
+    }
+
+    public void passwordResetSuccessfully() {
+        Toast.makeText(this, getString(R.string.forget_password_successful_reset), Toast.LENGTH_LONG).show();
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                finish();
+//            }
+//        }, 3000);
+        finish();
     }
 }

@@ -38,8 +38,10 @@
     <string name="forget_password_change_email">Change Email</string>
     <string name="forget_password_empty">Is empty!</string>
     <string name="forget_password_email_notvalid">Email is not valid!</string>
+    <string name="forget_password_email_dont_exists">Email doesn\'t exists!</string>
     <string name="forget_password_password_not_matched">Passwords don\'t match!</string>
     <string name="forget_password_password_recovery">Password Recovery</string>
+    <string name="forget_password_successful_reset">Password reset successfully.</string>
 
     <!-- Explore page navigation -->
     <string name="title_activity_explore">ExploreActivity</string>

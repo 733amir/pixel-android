@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -29,7 +30,10 @@ public class SignUpFragment extends Fragment {
 
     public interface SignUpFragmentClickHandler {
         public void signUpClicked(String fullname, String username, String password, String email);
+        public RequestQueue getNetQ();
     }
+
+    final String TAG = "SignUpFragment";
 
     SignUpFragmentClickHandler clickHandler;
     View view;
@@ -71,34 +75,35 @@ public class SignUpFragment extends Fragment {
                 } else if (!un.matches("[A-Za-z0-9]*")) {
                     username.setError(getString(R.string.signup_username_alphanumeric));
                 } else {
-                    RequestQueue queue = Volley.newRequestQueue(getContext());
                     String url = getString(R.string.api_username_exists) + "?username=" + un;
-                    Log.i("SIGN UP URL", url);
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
+                    Log.i(TAG, "Username exists request url: " + url);
+                    StringRequest jsonObjectRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(String response) {
                             try {
-                                if (response.get("username-exists").equals("yes")) {
-                                    username.setError(getString(R.string.signup_username_exists));
-                                    unstat = false;
-                                } else {
+                                JSONObject res = new JSONObject(response);
+                                if (res.has("status") && res.get("status").equals("ok")) {
                                     username.setError(null);
                                     unstat = true;
+                                } else if (res.has("desc")) {
+                                    username.setError(res.get("desc").toString());
+                                    unstat = false;
+                                } else {
+                                    Log.e(TAG, "Username exists JSON response wasn't complete.");
                                 }
                             } catch (JSONException e) {
-                                Log.e("SignUp", "JSON response don't have 'username-exists'.");
+                                Log.e(TAG, "Username exists response wasn't JSON.");
                             }
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("SignUp", "Volley error happened.");
+                            Log.e(TAG, "Error en username exists request: " + error.toString());
                         }
                     });
 
-                    queue.add(jsonObjectRequest);
-
                     username.setError(null);
+                    clickHandler.getNetQ().add(jsonObjectRequest);
                 }
             }
         });
@@ -216,5 +221,18 @@ public class SignUpFragment extends Fragment {
 
     public static boolean isValidEmail(CharSequence target) {
         return target != null && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    public void resetAll() {
+        username.setText(null);
+        username.setError(null);
+        fullname.setText(null);
+        fullname.setError(null);
+        email.setText(null);
+        email.setError(null);
+        password_1.setText(null);
+        password_1.setError(null);
+        password_2.setText(null);
+        password_2.setError(null);
     }
 }

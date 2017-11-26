@@ -31,6 +31,8 @@ public class FirstPageActivity extends AppCompatActivity
         implements LoginFragment.LoginFragmentClickHandler,
         SignUpFragment.SignUpFragmentClickHandler {
 
+    final String TAG = "FirstPageActivity";
+
     TabLayout tabLayout;
     ViewPager viewPager;
     MyFragmentPagerAdapter firstPageFragmentAdapter;
@@ -82,47 +84,39 @@ public class FirstPageActivity extends AppCompatActivity
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.login_layout), false);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
         String url = getString(R.string.api_login) + "?username=" + username + "&password=" + password;
         StringRequest loginReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject res = null;
+                Log.i(TAG, "Response of Login request: " + response);
                 try {
-                    res = new JSONObject(response);
-                } catch (JSONException e) {
-                    Log.e("Login Request", "Response was not JSON.");
-                    return;
-                } finally {
-                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                    setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
-                }
-
-                try {
-                    if (res.get("status").equals("ok")) {
+                    JSONObject res = new JSONObject(response);
+                    if (res.has("status") && res.get("status").equals("ok")) {
                         loggedIn();
-                    } else {
+                    } else if (res.has("desc")) {
                         loggedIn(res.get("desc").toString());
+                    } else {
+                        Log.e(TAG, "JSON response wasn't complete.");
                     }
                 } catch (JSONException e) {
-                    Log.e("Response Parameter", e.toString());
+                    Log.e(TAG, "Login respond wasn't JSON.");
+                    return;
                 } finally {
                     findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
                     setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
                 }
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
+                Log.e(TAG, "Error on Login request: " + error.toString());
 
                 findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
                 setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
             }
         });
 
-        queue.add(loginReq);
+        netQ.add(loginReq);
     }
 
     public void loggedIn(String desc) {
@@ -130,6 +124,8 @@ public class FirstPageActivity extends AppCompatActivity
     }
 
     public void loggedIn() {
+        // TODO save username and password or token for next times.
+
         Intent intent = new Intent(this, ExploreActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
@@ -148,56 +144,44 @@ public class FirstPageActivity extends AppCompatActivity
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), false);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-
         String url = getString(R.string.api_register);
-
+        Log.i(TAG, "Sign up request url: " + url);
         StringRequest registerReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                // response
-                Log.d("Response", response);
-
-                JSONObject res = null;
-                try {
-                    res = new JSONObject(response);
-                } catch (JSONException e) {
-                    Log.e("Register Request", "Response was not JSON.");
-                    return;
-                } finally {
-                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                    setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
-                }
+                Log.d(TAG, "Response to Sign up request: " + response);
 
                 try {
-                    if (res.get("status").equals("ok")) {
+                    JSONObject res = new JSONObject(response);
+                    if (res.has("status") && res.get("status").equals("ok")) {
                         signedUp(username, password);
-                    } else {
+                    } else if (res.has("desc")) {
                         signedUp(res.get("desc").toString());
+                    } else {
+                        Log.e(TAG, "JSON response wasn't complete.");
                     }
                 } catch (JSONException e) {
-                    Log.e("Response Parameter", e.toString());
+                    Log.e(TAG, "Sign up response wasn't JSON.");
                 } finally {
                     findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
                     setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
                 }
 
             }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // error
+                Log.d(TAG, "Error on Sign up request: " + error.toString());
 
-                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                        setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
-                    }
-                }
+                findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+            }
+        }
         ) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
 
                 params.put("username", username);
                 params.put("password", password);
@@ -208,8 +192,7 @@ public class FirstPageActivity extends AppCompatActivity
             }
         };
 
-        Log.i("New_Request", "Added.");
-        queue.add(registerReq);
+        netQ.add(registerReq);
     }
 
     public void signedUp(String desc) {
@@ -217,6 +200,7 @@ public class FirstPageActivity extends AppCompatActivity
     }
 
     public void signedUp(String username, String password) {
+        ((SignUpFragment) firstPageFragmentAdapter.getItem(1)).resetAll();
         tabLayout.getTabAt(0).select();
         ((LoginFragment) firstPageFragmentAdapter.getItem(0)).fillUsernamePassword(username, password);
     }
@@ -229,5 +213,9 @@ public class FirstPageActivity extends AppCompatActivity
                 setEnabledAll((ViewGroup) child, enable);
             }
         }
+    }
+
+    public RequestQueue getNetQ() {
+        return netQ;
     }
 }
