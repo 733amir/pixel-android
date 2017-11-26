@@ -6,8 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,10 +17,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,14 +80,59 @@ public class FirstPageActivity extends AppCompatActivity
      */
     public void loginClicked(String username, String password) {
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
+        setEnabledAll((ViewGroup) findViewById(R.id.login_layout), false);
 
-        if (true) { // TODO Connect to server and check username and password.
-            findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = getString(R.string.api_login) + "?username=" + username + "&password=" + password;
+        StringRequest loginReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                } catch (JSONException e) {
+                    Log.e("Login Request", "Response was not JSON.");
+                    return;
+                } finally {
+                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                    setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
+                }
 
-            Intent intent = new Intent(this, ExploreActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
-        }
+                try {
+                    if (res.get("status").equals("ok")) {
+                        loggedIn();
+                    } else {
+                        loggedIn(res.get("desc").toString());
+                    }
+                } catch (JSONException e) {
+                    Log.e("Response Parameter", e.toString());
+                } finally {
+                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                    setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", error.toString());
+
+                findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
+            }
+        });
+
+        queue.add(loginReq);
+    }
+
+    public void loggedIn(String desc) {
+        Toast.makeText(this, desc, Toast.LENGTH_LONG).show();
+    }
+
+    public void loggedIn() {
+        Intent intent = new Intent(this, ExploreActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
     }
 
     /**
@@ -92,49 +142,91 @@ public class FirstPageActivity extends AppCompatActivity
      * @param fullname Fullname user inputed.
      * @param username Username user inputed.
      * @param password Password user inputed.
-     * @param email Email user inputed.
+     * @param email    Email user inputed.
      */
-    public void signUpClicked(String fullname, String username, String password, String email) {
+    public void signUpClicked(final String fullname, final String username, final String password, final String email) {
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), false);
-        /*
+
         RequestQueue queue = Volley.newRequestQueue(this);
-        Map<String, String> postParam = new HashMap<>();
-        String url = "192.168.10.139/users/signup/";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+        String url = getString(R.string.api_register);
+
+        StringRequest registerReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
+                // response
+                Log.d("Response", response);
+
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                } catch (JSONException e) {
+                    Log.e("Register Request", "Response was not JSON.");
+                    return;
+                } finally {
+                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                    setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+                }
+
+                try {
+                    if (res.get("status").equals("ok")) {
+                        signedUp(username, password);
+                    } else {
+                        signedUp(res.get("desc").toString());
+                    }
+                } catch (JSONException e) {
+                    Log.e("Response Parameter", e.toString());
+                } finally {
+                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                    setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+                }
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
 
-            }
-        }) {
+                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                        setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+                    }
+                }
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("username", username);
+                params.put("password", password);
+                params.put("fullname", fullname);
+                params.put("email", email);
+
+                return params;
             }
         };
 
-        queue.add(jsonObjectRequest);
-
-
-        tabLayout.getTabAt(0).select();
-        ((LoginFragment) firstPageFragmentAdapter.getItem(0)).fillUsernamePassword(username, password);
-        */
+        Log.i("New_Request", "Added.");
+        queue.add(registerReq);
     }
 
-    private void setEnabledAll(ViewGroup vg, boolean enable){
-        for (int i = 0; i < vg.getChildCount(); i++){
+    public void signedUp(String desc) {
+        Toast.makeText(this, desc, Toast.LENGTH_LONG).show();
+    }
+
+    public void signedUp(String username, String password) {
+        tabLayout.getTabAt(0).select();
+        ((LoginFragment) firstPageFragmentAdapter.getItem(0)).fillUsernamePassword(username, password);
+    }
+
+    private void setEnabledAll(ViewGroup vg, boolean enable) {
+        for (int i = 0; i < vg.getChildCount(); i++) {
             View child = vg.getChildAt(i);
             child.setEnabled(enable);
-            if (child instanceof ViewGroup){
-                setEnabledAll((ViewGroup)child, enable);
+            if (child instanceof ViewGroup) {
+                setEnabledAll((ViewGroup) child, enable);
             }
         }
     }

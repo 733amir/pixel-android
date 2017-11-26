@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="api_username_exists">http://172.24.50.102:5000/username_exists?username=</string>
+    <string name="api_username_exists">http://192.168.10.120:5000/username_exists</string>
+    <string name="api_register">http://192.168.10.120:5000/register</string>
+    <string name="api_login">http://192.168.10.120:5000/login</string>
 </resources>

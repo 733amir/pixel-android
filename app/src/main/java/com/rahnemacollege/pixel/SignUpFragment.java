@@ -72,7 +72,8 @@ public class SignUpFragment extends Fragment {
                     username.setError(getString(R.string.signup_username_alphanumeric));
                 } else {
                     RequestQueue queue = Volley.newRequestQueue(getContext());
-                    String url = getString(R.string.api_username_exists) + un;
+                    String url = getString(R.string.api_username_exists) + "?username=" + un;
+                    Log.i("SIGN UP URL", url);
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
