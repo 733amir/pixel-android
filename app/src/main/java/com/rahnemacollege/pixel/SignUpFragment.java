@@ -30,6 +30,7 @@ public class SignUpFragment extends Fragment {
 
     public interface SignUpFragmentClickHandler {
         public void signUpClicked(String fullname, String username, String password, String email);
+
         public RequestQueue getNetQ();
     }
 
@@ -61,10 +62,12 @@ public class SignUpFragment extends Fragment {
         username = view.findViewById(R.id.signup_et_username);
         username.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -75,19 +78,19 @@ public class SignUpFragment extends Fragment {
                 } else if (!un.matches("[A-Za-z0-9]*")) {
                     username.setError(getString(R.string.signup_username_alphanumeric));
                 } else {
-                    String url = getString(R.string.api_username_exists) + "?username=" + un;
+                    String url = getString(R.string.api_exists) + "?username=" + un;
                     Log.i(TAG, "Username exists request url: " + url);
-                    StringRequest jsonObjectRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                    StringRequest stringReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject res = new JSONObject(response);
                                 if (res.has("status") && res.get("status").equals("ok")) {
+                                    username.setError(getString(R.string.signup_username_exists));
+                                    unstat = false;
+                                } else if (res.has("desc")) {
                                     username.setError(null);
                                     unstat = true;
-                                } else if (res.has("desc")) {
-                                    username.setError(res.get("desc").toString());
-                                    unstat = false;
                                 } else {
                                     Log.e(TAG, "Username exists JSON response wasn't complete.");
                                 }
@@ -98,12 +101,12 @@ public class SignUpFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e(TAG, "Error en username exists request: " + error.toString());
+                            Log.e(TAG, "Error on username exists request: " + error.toString());
                         }
                     });
 
                     username.setError(null);
-                    clickHandler.getNetQ().add(jsonObjectRequest);
+                    clickHandler.getNetQ().add(stringReq);
                 }
             }
         });
@@ -111,10 +114,12 @@ public class SignUpFragment extends Fragment {
         password_1 = view.findViewById(R.id.signup_et_password);
         password_1.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -140,10 +145,12 @@ public class SignUpFragment extends Fragment {
         password_2 = view.findViewById(R.id.signup_et_repeat_password);
         password_2.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -160,10 +167,12 @@ public class SignUpFragment extends Fragment {
         email = view.findViewById(R.id.signup_et_email);
         email.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {

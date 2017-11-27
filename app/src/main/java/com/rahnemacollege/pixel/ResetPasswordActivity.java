@@ -1,6 +1,5 @@
 package com.rahnemacollege.pixel;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,7 +57,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         email.setError(getString(R.string.forget_password_email_notvalid));
                         return;
                     } else {
-                        String url = getString(R.string.api_reset_password_request) + "?email=" + email.getText().toString();
+                        String url = getString(R.string.api_reset_request) + "?email=" + email.getText().toString();
                         final StringRequest emailExsitsReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -136,7 +135,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                 if (code_stat && pw_stat) {
                     findViewById(R.id.reset_password_page_loading).setVisibility(View.VISIBLE);
-                    String url = getString(R.string.api_reset_password);
+                    String url = getString(R.string.api_reset);
                     final StringRequest resetPassReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
