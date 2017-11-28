@@ -19,7 +19,7 @@
             android:id="@+id/post_profile_image"
             android:layout_width="@dimen/post_profile_image_size"
             android:layout_height="@dimen/post_profile_image_size"
-            android:src="@color/post_profile_image_background_color"
+            android:src="@mipmap/default_profile_image"
             android:layout_margin="@dimen/post_profile_image_margin"
              />
 
