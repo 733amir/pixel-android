@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/post_outer_margin"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,9 +17,8 @@
             android:id="@+id/post_profile_image"
             android:layout_width="@dimen/post_profile_image_size"
             android:layout_height="@dimen/post_profile_image_size"
-            android:src="@mipmap/default_profile_image"
             android:layout_margin="@dimen/post_profile_image_margin"
-             />
+            android:src="@mipmap/default_profile_image" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -30,43 +27,53 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/post_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="bottom"
                 android:layout_weight="1"
-                android:text="Sahar"/>
+                android:gravity="bottom"
+                android:text="Sahar" />
 
             <TextView
+                android:id="@+id/post_time"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="20 minutes ago"/>
+                android:text="20 minutes ago" />
 
         </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_location_on_black_24dp" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Satar Khan"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+            <TextView
+                android:id="@+id/post_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Satar Khan" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/post_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_image_black_150dp"/>
+        android:layout_height="@dimen/post_image_height"
+        android:background="@color/light_d" />
 
     <TextView
+        android:id="@+id/post_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/post_text_margin"
-        android:text="some long long long long long long long long long long long long long long long long long long long long long long long long long text."/>
+        android:text="some long long long long long long long long long long long long long long long long long long long long long long long long long text." />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="200"/>
+                android:text="200" />
 
         </LinearLayout>
 
@@ -103,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="32"/>
+                android:text="32" />
 
         </LinearLayout>
 
