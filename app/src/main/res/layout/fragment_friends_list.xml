@@ -1,8 +1,9 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.rahnemacollege.pixel.FriendsListFragment">
 
     <LinearLayout
@@ -22,42 +23,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/header_icon_horizontal_margin"
                 android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
-                app:srcCompat="@drawable/ic_search_black_24dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/header_icon_horizontal_margin"
-                android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
-                app:srcCompat="@drawable/ic_search_black_24dp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="end">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/header_icon_horizontal_margin"
-                android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
-                app:srcCompat="@drawable/ic_search_black_24dp" />
+                app:srcCompat="@drawable/header_search_white_24dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-</FrameLayout>
+</LinearLayout>

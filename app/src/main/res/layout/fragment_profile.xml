@@ -18,6 +18,7 @@
             android:gravity="start">
 
             <ImageView
+                android:id="@+id/profile_search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
@@ -33,6 +34,7 @@
             android:gravity="end">
 
             <ImageView
+                android:id="@+id/profile_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
@@ -40,6 +42,7 @@
                 app:srcCompat="@drawable/header_profile_white_24dp" />
 
             <ImageView
+                android:id="@+id/profile_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
@@ -47,6 +50,7 @@
                 app:srcCompat="@drawable/header_notification_white_24dp" />
 
             <ImageView
+                android:id="@+id/profile_account"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
