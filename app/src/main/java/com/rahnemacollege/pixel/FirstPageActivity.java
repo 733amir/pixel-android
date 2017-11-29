@@ -1,6 +1,9 @@
 package com.rahnemacollege.pixel;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +41,7 @@ public class FirstPageActivity extends AppCompatActivity
     ViewPager viewPager;
     MyFragmentPagerAdapter firstPageFragmentAdapter;
     public RequestQueue netQ;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +63,37 @@ public class FirstPageActivity extends AppCompatActivity
         viewPager = findViewById(R.id.first_page_container);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(firstPageFragmentAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // Check if no view has focus:
+                hideKeyboard();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         // Config tabLayout of FirstPage
         tabLayout = findViewById(R.id.first_page_tab);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).select();
+
+        // Shared preferences to share username, token and login status.
+        sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        // TODO check for username, token and login status. If user is logged in start next activity and finish this one.
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.saved_username), "");
+        editor.putBoolean(getString(R.string.saved_login_status), false);
+        editor.putString(getString(R.string.saved_token), "");
+        editor.apply();
     }
 
     /**
@@ -80,7 +111,7 @@ public class FirstPageActivity extends AppCompatActivity
      * @param username Username that user wrote.
      * @param password Password that user wrote.
      */
-    public void loginClicked(String username, String password) {
+    public void loginClicked(final String username, String password) {
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.login_layout), false);
 
@@ -92,6 +123,12 @@ public class FirstPageActivity extends AppCompatActivity
                 try {
                     JSONObject res = new JSONObject(response);
                     if (res.has("status") && res.get("status").equals("ok")) {
+                        // Save username.
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString(getString(R.string.saved_username), username);
+                        editor.putBoolean(getString(R.string.saved_login_status), true);
+                        editor.apply();
+
                         loggedIn();
                     } else if (res.has("desc")) {
                         loggedIn(res.get("desc").toString());
@@ -100,7 +137,6 @@ public class FirstPageActivity extends AppCompatActivity
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "Login respond wasn't JSON.");
-                    return;
                 } finally {
                     findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
                     setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
@@ -124,8 +160,6 @@ public class FirstPageActivity extends AppCompatActivity
     }
 
     public void loggedIn() {
-        // TODO save username and password or token for next times.
-
         Intent intent = new Intent(this, ExploreActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
@@ -218,4 +252,17 @@ public class FirstPageActivity extends AppCompatActivity
     public RequestQueue getNetQ() {
         return netQ;
     }
+
+    public void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+//    @Override
+//    public void finish() {
+//        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+//    }
 }

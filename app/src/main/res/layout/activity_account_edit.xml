@@ -1,86 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingEnd="@dimen/pages_right_margin"
-    android:paddingLeft="@dimen/pages_left_margin"
-    android:paddingRight="@dimen/pages_right_margin"
-    android:paddingStart="@dimen/pages_left_margin"
-    android:orientation="vertical"
-    tools:context="com.rahnemacollege.pixel.AccountEditActivity">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/account_username"/>
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/pages_right_margin"
+        android:paddingStart="@dimen/pages_left_margin"
+        tools:context="com.rahnemacollege.pixel.AccountEditActivity"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="text"
-        android:layoutDirection="ltr"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/account_username" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/account_email"/>
+        <EditText
+            android:id="@+id/account_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:enabled="false"
+            android:inputType="text"
+            android:layoutDirection="ltr" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="text"
-        android:layoutDirection="ltr"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/account_email" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/account_password_change"
-        android:textSize="@dimen/account_header_size"
-        android:textStyle="bold" />
+        <EditText
+            android:id="@+id/account_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textEmailAddress"
+            android:layoutDirection="ltr" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/account_current_password"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/account_current_password" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="text"
-        android:layoutDirection="ltr"/>
+        <EditText
+            android:id="@+id/account_password_current"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:text="@string/account_new_password"/>
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/pages_top_to_top_margin"-->
+        <!--android:text="@string/account_password_change"-->
+        <!--android:textSize="@dimen/account_header_size"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="bold" />-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="text"
-        android:layoutDirection="ltr"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/account_new_password" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pages_top_to_top_margin"
-        android:background="@drawable/rounded_buttons"
-        android:textColor="@color/first_page_button_foreground"
-        android:text="@string/account_update"/>
+        <EditText
+            android:id="@+id/account_password_new"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/account_new_password_hint"
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
 
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_buttons_green"
+            android:onClick="update"
+            android:text="@string/account_update"
+            android:textColor="@color/first_page_button_foreground" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:padding="16dp"
+            android:onClick="logout"
+            android:gravity="center"
+            android:text="@string/account_logout"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+</ScrollView>

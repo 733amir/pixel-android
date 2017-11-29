@@ -30,7 +30,6 @@ public class SignUpFragment extends Fragment {
 
     public interface SignUpFragmentClickHandler {
         public void signUpClicked(String fullname, String username, String password, String email);
-
         public RequestQueue getNetQ();
     }
 
@@ -60,18 +59,12 @@ public class SignUpFragment extends Fragment {
         fullname = view.findViewById(R.id.signup_et_fullname);
 
         username = view.findViewById(R.id.signup_et_username);
-        username.addTextChangedListener(new TextWatcher() {
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String un = s.toString();
+                String un = username.getText().toString();
                 unstat = false;
                 if (un.length() < 5) {
                     username.setError(getString(R.string.signup_short_string));
@@ -112,18 +105,12 @@ public class SignUpFragment extends Fragment {
         });
 
         password_1 = view.findViewById(R.id.signup_et_password);
-        password_1.addTextChangedListener(new TextWatcher() {
+        password_1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String pw = s.toString();
+                String pw = password_1.getText().toString();
                 pwstat = false;
                 if (pw.length() < 5) {
                     password_1.setError(getString(R.string.signup_short_string));
@@ -143,19 +130,13 @@ public class SignUpFragment extends Fragment {
         });
 
         password_2 = view.findViewById(R.id.signup_et_repeat_password);
-        password_2.addTextChangedListener(new TextWatcher() {
+        password_2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
                 pwstat = false;
-                if (!password_1.getText().toString().equals(s.toString())) {
+                if (!password_1.getText().toString().equals(password_2.getText().toString())) {
                     password_2.setError(getString(R.string.signup_password_not_matched));
                 } else {
                     password_2.setError(null);
@@ -165,18 +146,12 @@ public class SignUpFragment extends Fragment {
         });
 
         email = view.findViewById(R.id.signup_et_email);
-        email.addTextChangedListener(new TextWatcher() {
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String em = s.toString();
+                String em = email.getText().toString();
                 emstat = false;
                 if (!isValidEmail(em)) {
                     email.setError(getString(R.string.signup_email_notvalid));
@@ -244,4 +219,6 @@ public class SignUpFragment extends Fragment {
         password_2.setText(null);
         password_2.setError(null);
     }
+
+    // TODO show hide a textview error below each edittext
 }

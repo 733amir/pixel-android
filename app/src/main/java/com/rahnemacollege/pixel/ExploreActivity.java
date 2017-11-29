@@ -1,14 +1,21 @@
 package com.rahnemacollege.pixel;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 public class ExploreActivity extends AppCompatActivity {
+
+    String TAG = "ExploreActivity";
 
     HomeFragment homeFragment;
     FriendsListFragment friendsListFragment;
@@ -17,6 +24,8 @@ public class ExploreActivity extends AppCompatActivity {
     MyFragmentPagerAdapter explorePageFragmentAdapter;
     ViewPager contentViewPager;
     BottomNavigationView bottomNavigationView;
+
+    SharedPreferences sharedPref;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -79,6 +88,9 @@ public class ExploreActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.home_nav_me);
+
+        // Shared Preferences
+        sharedPref = getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
     }
 
     @Override
@@ -90,5 +102,13 @@ public class ExploreActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (sharedPref.getString(getString(R.string.saved_username), "").isEmpty()) {
+            finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
