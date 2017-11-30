@@ -7,7 +7,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--<uses-permission android:name="android.permission.CAMERA" />-->
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
@@ -18,19 +26,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".FirstPageActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ExploreActivity"
             android:label="@string/title_activity_explore"
             android:parentActivityName=".FirstPageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPageActivity" />
@@ -43,7 +50,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPageActivity" />
         </activity>
-
         <activity
             android:name=".ProfileEditActivity"
             android:parentActivityName=".ExploreActivity"
@@ -52,16 +58,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
         </activity>
-        <activity android:name=".AccountEditActivity"
+        <activity
+            android:name=".AccountEditActivity"
             android:parentActivityName=".ExploreActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
         </activity>
-        <activity android:name=".UploadPost"
-            android:theme="@style/AppTheme.popup"
+        <activity
+            android:name=".UploadPost"
+            android:theme="@style/AppTheme.popup">
             >
+        </activity>
+        <activity android:name=".ChoosePhoto" />
+        <activity android:name=".testCamera">
         </activity>
     </application>
 

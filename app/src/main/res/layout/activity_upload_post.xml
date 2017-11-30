@@ -42,11 +42,12 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:text="location..."/>
+
         <ImageView
             android:id="@+id/post_location_insert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/add_photo"
+            app:srcCompat="@drawable/ic_location_on_black_24dp"
             android:layout_marginRight="30dp"
             />
 
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/add_photo"
+        android:background="@drawable/rounded_buttons_green"
         android:textColor="@color/white"
         android:text="Button" />
 
