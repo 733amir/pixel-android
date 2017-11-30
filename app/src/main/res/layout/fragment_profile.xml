@@ -61,7 +61,6 @@
 
     </LinearLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -75,14 +74,20 @@
 
             <!-- TODO use gradient background. -->
 
+            <Button
+                android:id="@+id/uploadPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="post" />
+
             <include layout="@layout/profile_info" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:divider="?android:dividerHorizontal"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:divider="?android:dividerHorizontal"
                 android:showDividers="middle">
 
                 <include layout="@layout/post_holder" />

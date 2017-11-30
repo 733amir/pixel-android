@@ -20,4 +20,10 @@
         <item name="android:textColorSecondary">@color/secondary_text</item>
     </style>
 
+    <style name="AppTheme.popup">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

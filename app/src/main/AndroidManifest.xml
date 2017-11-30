@@ -43,6 +43,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPageActivity" />
         </activity>
+
         <activity
             android:name=".ProfileEditActivity"
             android:parentActivityName=".ExploreActivity"
@@ -57,6 +58,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
+        </activity>
+        <activity android:name=".UploadPost"
+            android:theme="@style/AppTheme.popup"
+            >
         </activity>
     </application>
 

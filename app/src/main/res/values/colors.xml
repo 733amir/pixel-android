@@ -88,4 +88,6 @@
     <color name="header_foreground_color">@color/light_f</color>
 
     <color name="profile_empty_image">#757575</color>
+
+    <color name="add_photo">#dbd9d9</color>
 </resources>

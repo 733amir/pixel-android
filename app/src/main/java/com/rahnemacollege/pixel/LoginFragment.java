@@ -11,9 +11,9 @@ import android.widget.EditText;
 public class LoginFragment extends Fragment {
 
     public interface LoginFragmentClickHandler {
-        public void forgetPasswordClicked();
+        void forgetPasswordClicked();
 
-        public void loginClicked(String username, String password);
+        void loginClicked(String username, String password);
     }
 
     LoginFragmentClickHandler clickHandler;

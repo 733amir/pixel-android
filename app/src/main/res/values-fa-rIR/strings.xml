@@ -49,4 +49,6 @@
     <string name="explore_nav_me">من</string>
     <string name="explore_nav_friends_list">دوستان</string>
 
+    <!--uploadPost page-->
+<string name="upload_post_postcaption">درباره تصویر چیزی بنویس…</string>
 </resources>

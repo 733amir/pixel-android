@@ -222,3 +222,4 @@ public class SignUpFragment extends Fragment {
 
     // TODO show hide a textview error below each edittext
 }
+
