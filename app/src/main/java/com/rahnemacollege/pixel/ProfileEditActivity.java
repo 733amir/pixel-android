@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import co.lujun.androidtagview.TagContainerLayout;
+import co.lujun.androidtagview.TagView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileEditActivity extends AppCompatActivity {
@@ -68,7 +69,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Account information response: " + response.toString());
+                        Log.i(TAG, "Profile get information response: " + response.toString());
                         try {
                             if (response.get("status").equals("ok")) {
                                 JSONObject profile = new JSONObject(response.get("profile").toString());
@@ -97,16 +98,63 @@ public class ProfileEditActivity extends AppCompatActivity {
                         Log.e(TAG, error.toString());
                     }
                 });
+
+        tags.setOnTagClickListener(new TagView.OnTagClickListener() {
+            @Override
+            public void onTagClick(int position, String text) {
+                tags.removeTag(position);
+            }
+
+            @Override
+            public void onTagLongClick(int position, String text) {
+                newTag.setText(tags.getTagText(position));
+                tags.removeTag(position);
+            }
+
+            @Override
+            public void onTagCrossClick(int position) {
+                tags.removeTag(position);
+            }
+        });
     }
 
     public void addTag(View view) {
-        tags.addTag(newTag.getText().toString());
-        newTag.setText(null);
+        if (!newTag.getText().toString().isEmpty()) {
+            tags.addTag(newTag.getText().toString());
+            newTag.setText(null);
+        }
     }
 
     public void update(View view) {
-        // TODO send information to server.
-        finish();
+        // TODO upload new profile header and image.
+
+        JSONArray newTags = new JSONArray(tags.getTags());
+        AndroidNetworking.post(getString(R.string.api_profile))
+                .addQueryParameter("username", username)
+                .addBodyParameter("fullname", fullname.getText().toString())
+                .addBodyParameter("bio", bio.getText().toString())
+                .addBodyParameter("interests", newTags.toString())
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Profile push information response: " + response.toString());
+                        try {
+                            if (response.get("status").equals("ok")) {
+                                finish();
+                            } else if (response.has("desc")) {
+                                Log.e(TAG, response.get("desc").toString());
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        Log.e(TAG, error.toString());
+                    }
+                });
     }
 
     @Override
