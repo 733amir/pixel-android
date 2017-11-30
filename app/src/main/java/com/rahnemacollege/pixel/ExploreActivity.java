@@ -13,7 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class ExploreActivity extends AppCompatActivity {
+public class ExploreActivity extends AppCompatActivity
+        implements ProfileFragment.ProfileClickHandler {
 
     String TAG = "ExploreActivity";
 
@@ -110,5 +111,17 @@ public class ExploreActivity extends AppCompatActivity {
             finish();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void profileEditClicked() {
+        Intent intent = new Intent(this, ProfileEditActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    public void accountViewClicked() {
+        Intent intent = new Intent(this, AccountEditActivity.class);
+        startActivityForResult(intent, (short) R.integer.account_settings_request_code);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

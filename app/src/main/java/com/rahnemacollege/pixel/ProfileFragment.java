@@ -17,6 +17,12 @@ public class ProfileFragment extends Fragment {
 
     View view;
     ImageView profile_edit, notification, account_view;
+    ProfileClickHandler clickHandler;
+
+    public interface ProfileClickHandler {
+        public void profileEditClicked();
+        public void accountViewClicked();
+    }
 
     public ProfileFragment() {
     }
@@ -28,20 +34,19 @@ public class ProfileFragment extends Fragment {
          profile_edit = view.findViewById(R.id.profile_edit);
          notification = view.findViewById(R.id.profile_notification);
          account_view = view.findViewById(R.id.profile_account);
+         clickHandler = (ProfileClickHandler) getActivity();
 
          profile_edit.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 Intent intent = new Intent(getContext(), ProfileEditActivity.class);
-                 startActivity(intent);
+                 clickHandler.profileEditClicked();
              }
          });
 
          account_view.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 Intent intent = new Intent(getContext(), AccountEditActivity.class);
-                 startActivityForResult(intent, (short) R.integer.account_settings_request_code);
+                 clickHandler.accountViewClicked();
              }
          });
 

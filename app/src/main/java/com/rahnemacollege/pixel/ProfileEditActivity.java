@@ -95,11 +95,11 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
+        super.finish();
         if (Locale.getDefault().getDisplayLanguage().equals("English"))
             overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         else
             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-        super.finish();
     }
 
     @Override
