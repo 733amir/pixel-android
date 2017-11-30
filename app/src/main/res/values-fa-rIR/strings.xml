@@ -49,4 +49,7 @@
     <string name="explore_nav_me">من</string>
     <string name="explore_nav_friends_list">دوستان</string>
 
+    <!--Friends Fragment-->
+    <string name="friends_title">لیست دوستان</string>
+    <string name="friends_button_viewprofile">مشاهده پروفایل</string>
 </resources>

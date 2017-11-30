@@ -6,27 +6,35 @@
     android:orientation="vertical"
     tools:context="com.rahnemacollege.pixel.FriendsListFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height_size"
-        android:orientation="horizontal"
-        android:background="@color/header_background_color" >
+        android:background="@color/header_background_color">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="start">
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
+            android:layout_marginStart="@dimen/header_icon_horizontal_margin"
+            app:srcCompat="@drawable/header_search_white_24dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/header_icon_horizontal_margin"
-                android:layout_marginEnd="@dimen/header_icon_horizontal_margin"
-                app:srcCompat="@drawable/header_search_white_24dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/friends_title"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
 
-        </LinearLayout>
+    </RelativeLayout>
+    
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/friends_rv">
 
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

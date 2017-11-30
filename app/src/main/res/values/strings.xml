@@ -70,4 +70,8 @@
     <string name="account_wrong_password">Wrong Password!</string>
     <string name="account_email_not_valid">Email is not valid!</string>
     <string name="account_is_empty">Is empty!</string>
+
+    <!--Friends Fragment-->
+    <string name="friends_title">Friends List</string>
+    <string name="friends_button_viewprofile">View Profile</string>
 </resources>

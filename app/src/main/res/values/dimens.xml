@@ -50,4 +50,11 @@
     <!-- Header sizes -->
     <dimen name="header_height_size">45dp</dimen>
     <dimen name="header_icon_horizontal_margin">8dp</dimen>
+
+    <!--Friends Fragment-->
+    <dimen name="friends_left_and_right_padding">16dp</dimen>
+    <dimen name="friends_view_profile_button_padding">8dp</dimen>
+    <dimen name="friends_top_and_bottom_padding">16dp</dimen>
+    <dimen name="friends_profile_image_diameter">72dp</dimen>
+
 </resources>
