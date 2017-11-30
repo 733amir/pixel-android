@@ -13,7 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class ExploreActivity extends AppCompatActivity {
+public class ExploreActivity extends AppCompatActivity
+        implements ProfileFragment.ProfileClickHandler {
 
     String TAG = "ExploreActivity";
 
@@ -26,6 +27,8 @@ public class ExploreActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     SharedPreferences sharedPref;
+
+    String username;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,10 +59,19 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
+        // Shared Preferences
+        sharedPref = getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        username = sharedPref.getString(getString(R.string.saved_username), "");
+        if (username.isEmpty()) {
+            Log.e(TAG, "NO USERNAME PRESENTED!");
+            finish();
+        }
+
         // Create explore activity fragments
         homeFragment = new HomeFragment();
         friendsListFragment = new FriendsListFragment();
         profileFragment = new ProfileFragment();
+        profileFragment.setArgs(username);
 
         // Create and config explore explorePageFragmentAdapter
         explorePageFragmentAdapter = new MyFragmentPagerAdapter(this, getSupportFragmentManager());
@@ -88,9 +100,6 @@ public class ExploreActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.home_nav_me);
-
-        // Shared Preferences
-        sharedPref = getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
     }
 
     @Override
@@ -106,9 +115,21 @@ public class ExploreActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (sharedPref.getString(getString(R.string.saved_username), "").isEmpty()) {
             finish();
         }
-        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void profileEditClicked() {
+        Intent intent = new Intent(this, ProfileEditActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    public void accountViewClicked() {
+        Intent intent = new Intent(this, AccountEditActivity.class);
+        startActivityForResult(intent, (short) R.integer.account_settings_request_code);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }
