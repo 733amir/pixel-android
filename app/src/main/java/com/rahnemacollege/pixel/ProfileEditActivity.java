@@ -2,6 +2,7 @@ package com.rahnemacollege.pixel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.widget.ANImageView;
+import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,11 +33,12 @@ public class ProfileEditActivity extends AppCompatActivity {
     String TAG = "ProfileEditActivity";
 
     TagContainerLayout tags;
-    EditText newTag;
+    EditText newTag, bio, fullname;
     String username;
     SharedPreferences sharedPref;
-    ANImageView image;
-    ANImageView header;
+    CircleImageView image;
+    ImageView header;
+    AppCompatActivity current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +51,10 @@ public class ProfileEditActivity extends AppCompatActivity {
         newTag = findViewById(R.id.profile_edit_new_tag);
         header = findViewById(R.id.profile_header_container);
         image = findViewById(R.id.profile_image_container);
-        image.setDefaultImageResId(R.mipmap.default_profile_image);
         sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        current = this;
+        bio = findViewById(R.id.profile_bio);
+        fullname = findViewById(R.id.profile_name);
 
         username = sharedPref.getString(getString(R.string.saved_username), "");
         if (username.isEmpty()) {
@@ -66,8 +72,18 @@ public class ProfileEditActivity extends AppCompatActivity {
                         try {
                             if (response.get("status").equals("ok")) {
                                 JSONObject profile = new JSONObject(response.get("profile").toString());
-                                header.setImageUrl(profile.getString("header"));
 
+                                Glide.with(current).load(profile.getString("header")).into(header);
+                                Glide.with(current).load(profile.getString("image")).into(image);
+
+                                JSONArray interests = profile.getJSONArray("interest");
+                                for (int i = 0; i < interests.length(); i++) {
+                                    tags.addTag(interests.getString(i));
+                                }
+
+                                bio.setText(profile.getString("bio"));
+
+                                fullname.setText(response.getString("fullname"));
                             } else if (response.has("desc")) {
                                 Log.e(TAG, response.get("desc").toString());
                             }
