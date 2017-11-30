@@ -2,27 +2,22 @@ package com.rahnemacollege.pixel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.widget.ANImageView;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Locale;
 
 import co.lujun.androidtagview.TagContainerLayout;
@@ -55,7 +50,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
         current = this;
         bio = findViewById(R.id.profile_bio);
-        fullname = findViewById(R.id.profile_name);
+        fullname = findViewById(R.id.profile_fullname);
 
         username = sharedPref.getString(getString(R.string.saved_username), "");
         if (username.isEmpty()) {
