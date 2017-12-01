@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -8,11 +9,52 @@
     android:orientation="vertical"
     tools:context="com.rahnemacollege.pixel.ExploreActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/explore_container"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/explore_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/upload_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            fab:menu_labels_position="right"
+            android:layout_margin="16dp"
+            fab:menu_colorNormal="@color/accent"
+            fab:menu_colorPressed="@color/light_green"
+            fab:menu_colorRipple="#99FFFFFF">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/upload_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getPhotoFromCamera"
+                android:src="@drawable/ic_camera_white_24dp"
+                fab:fab_colorNormal="@color/accent"
+                fab:fab_colorPressed="@color/accent"
+                fab:fab_colorRipple="@color/accent"
+                app:fab_label="@string/upload_post_fab_camera"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/upload_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getPhotoFromGallery"
+                android:src="@drawable/ic_gallery_white_24dp"
+                fab:fab_colorNormal="@color/accent"
+                fab:fab_colorPressed="@color/accent"
+                fab:fab_colorRipple="@color/accent"
+                app:fab_label="@string/upload_post_fab_gallery"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -20,12 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
-        android:layoutDirection="ltr"
         android:background="@color/light_0"
-        app:itemTextColor="@drawable/explore_bottom_menu"
+        android:layoutDirection="ltr"
         app:itemIconTint="@drawable/explore_bottom_menu"
+        app:itemTextColor="@drawable/explore_bottom_menu"
         app:menu="@menu/home_page" />
-        <!--app:itemBackground="@color/light_0"-->
-        <!--android:background="?android:attr/windowBackground"-->
+    <!--app:itemBackground="@color/light_0"-->
+    <!--android:background="?android:attr/windowBackground"-->
 
 </LinearLayout>

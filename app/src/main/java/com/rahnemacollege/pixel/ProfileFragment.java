@@ -13,14 +13,13 @@ import android.widget.Button;
 
 
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment {
 
     String TAG = "ProfileFragment";
 
     View view;
     ImageView profile_edit, notification, account_view;
 
-    View mainView;
     public ProfileFragment() {
     }
 
@@ -48,20 +47,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-        Button postBtn=view.findViewById(R.id.uploadPost);
-        postBtn.setOnClickListener(this);
-
         return view;
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()){
-            case R.id.uploadPost:
-                startActivity(new Intent(getActivity(),UploadPost.class));
-                break;
-        }
     }
 }

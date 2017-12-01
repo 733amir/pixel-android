@@ -72,5 +72,9 @@
     <string name="account_is_empty">Is empty!</string>
 
     <!--Upload_post-->
-    <string name="upload_post_postcaption">write about the picture…</string>
+    <string name="upload_post_postcaption">Caption</string>
+    <string name="upload_post_fab_camera">Camera</string>
+    <string name="upload_post_fab_gallery">Gallery</string>
+    <string name="upload_button">Upload</string>
+    <string name="upload_default_location">Add Location</string>
 </resources>

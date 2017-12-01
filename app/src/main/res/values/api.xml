@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="api_exists">http://192.168.11.84:5000/exists</string>
-    <string name="api_username_exists">http://192.168.11.84:5000/username_exists</string>
-    <string name="api_register">http://192.168.11.84:5000/register</string>
-    <string name="api_login">http://192.168.11.84:5000/login</string>
-    <string name="api_reset_request">http://192.168.11.84:5000/reset_request</string>
-    <string name="api_reset">http://192.168.11.84:5000/reset</string>
-    <string name="api_account">http://192.168.11.84:5000/account</string>
-    <string name="api_profile">http://192.168.11.84:5000/profile</string>
+    <string name="api_exists">http://192.168.42.247:5000/exists</string>
+    <string name="api_username_exists">http://192.168.42.247:5000/username_exists</string>
+    <string name="api_register">http://192.168.42.247:5000/register</string>
+    <string name="api_login">http://192.168.42.247:5000/login</string>
+    <string name="api_reset_request">http://192.168.42.247:5000/reset_request</string>
+    <string name="api_reset">http://192.168.42.247:5000/reset</string>
+    <string name="api_account">http://192.168.42.247:5000/account</string>
+    <string name="api_profile">http://192.168.42.247:5000/profile</string>
 </resources>

@@ -74,12 +74,6 @@
 
             <!-- TODO use gradient background. -->
 
-            <Button
-                android:id="@+id/uploadPost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="post" />
-
             <include layout="@layout/profile_info" />
 
             <LinearLayout
