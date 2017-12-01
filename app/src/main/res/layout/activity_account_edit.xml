@@ -8,12 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:paddingEnd="@dimen/pages_right_margin"
         android:paddingStart="@dimen/pages_left_margin"
-        tools:context="com.rahnemacollege.pixel.AccountEditActivity"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        tools:context="com.rahnemacollege.pixel.AccountEditActivity">
 
         <TextView
             android:layout_width="match_parent"
@@ -61,15 +61,6 @@
             android:inputType="textPassword"
             android:layoutDirection="ltr" />
 
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="@dimen/pages_top_to_top_margin"-->
-        <!--android:text="@string/account_password_change"-->
-        <!--android:textSize="@dimen/account_header_size"-->
-        <!--android:gravity="center"-->
-        <!--android:textStyle="bold" />-->
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,9 +90,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
-            android:padding="16dp"
-            android:onClick="logout"
             android:gravity="center"
+            android:onClick="logout"
+            android:padding="16dp"
             android:text="@string/account_logout"
             android:textColor="@color/red" />
 

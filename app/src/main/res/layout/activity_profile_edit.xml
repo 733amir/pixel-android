@@ -9,25 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/profile_header_container"
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
             android:layout_height="@dimen/profile_page_header_height"
             android:background="@color/profile_header_background"
-            android:contentDescription="@string/app_name" />
-
-        <!--<com.androidnetworking.widget.ANImageView-->
-            <!--android:layout_gravity="center"-->
-            <!--android:id="@+id/profile_header_container"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/profile_page_header_height"-->
-            <!--android:background="@color/profile_header_background"-->
-            <!--android:contentDescription="@string/app_name"/>-->
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,14 +43,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/profile_page_image_shift_up"
             android:src="@mipmap/default_profile_image" />
-
-        <!--<com.androidnetworking.widget.ANImageView-->
-            <!--android:id="@+id/profile_image_container"-->
-            <!--android:layout_width="@dimen/profile_page_image_diameter"-->
-            <!--android:layout_height="@dimen/profile_page_image_diameter"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="@dimen/profile_page_image_shift_up"-->
-            <!--android:src="@mipmap/default_profile_image" />-->
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -107,12 +91,12 @@
                 app:container_background_color="#000000ff"
                 app:container_border_color="#000000ff"
                 app:container_enable_drag="false"
+                app:tag_background_color="@color/light_d"
+                app:tag_border_color="@color/light_d"
                 app:tag_clickable="true"
                 app:tag_enable_cross="true"
-                app:tag_theme="none"
                 app:tag_text_color="@color/light_0"
-                app:tag_border_color="@color/light_d"
-                app:tag_background_color="@color/light_d"/>
+                app:tag_theme="none" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,9 +125,9 @@
                 android:layout_marginBottom="@dimen/pages_top_to_top_margin"
                 android:layout_marginTop="@dimen/pages_top_to_top_margin"
                 android:background="@drawable/rounded_buttons_green"
+                android:onClick="update"
                 android:text="@string/profile_edit_update"
-                android:textColor="@color/first_page_button_foreground"
-                android:onClick="update"/>
+                android:textColor="@color/first_page_button_foreground" />
 
         </LinearLayout>
 

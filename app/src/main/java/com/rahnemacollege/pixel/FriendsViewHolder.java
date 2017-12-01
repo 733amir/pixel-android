@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by parsahejabi on 11/30/17.
- */
 
 public class FriendsViewHolder extends RecyclerView.ViewHolder {
 
@@ -25,7 +22,7 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
         friendProfilePicture = itemView.findViewById(R.id.friends_i_profileimage);
     }
 
-    public void bind(int listIndex){
+    public void bind(int listIndex) {
         //TODO handle view profile button
         //TODO set text of ViewText and pic of CircleImageView from server
         friendFullName.setText("Test FULL NAME");

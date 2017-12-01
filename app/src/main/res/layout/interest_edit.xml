@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_interest_edit"
-    android:layout_height="wrap_content"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/profile_page_interests_outer_margin"
     android:background="@drawable/tag_shape"
-    android:padding="@dimen/profile_page_interests_inner_padding"
-    android:layout_margin="@dimen/profile_page_interests_outer_margin">
+    android:padding="@dimen/profile_page_interests_inner_padding">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/light_0"
-        android:text="Interest" />
+        android:text="Interest"
+        android:textColor="@color/light_0" />
 
     <ImageView
         android:layout_width="wrap_content"

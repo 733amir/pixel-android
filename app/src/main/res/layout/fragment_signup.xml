@@ -8,13 +8,13 @@
         android:id="@+id/signup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingEnd="@dimen/pages_right_margin"
         android:paddingStart="@dimen/pages_left_margin"
-        android:paddingTop="@dimen/pages_top_to_top_margin"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:paddingTop="@dimen/pages_top_to_top_margin">
 
         <TextView
             android:layout_width="match_parent"
@@ -97,8 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_buttons_green"
-            android:textColor="@color/first_page_button_foreground"
-            android:text="@string/signup_tv_signup" />
+            android:text="@string/signup_tv_signup"
+            android:textColor="@color/first_page_button_foreground" />
 
         <Space
             android:layout_width="match_parent"

@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+
 public class LoginFragment extends Fragment {
 
     public interface LoginFragmentClickHandler {
-        public void forgetPasswordClicked();
+        void forgetPasswordClicked();
 
-        public void loginClicked(String username, String password);
+        void loginClicked(String username, String password);
     }
 
     LoginFragmentClickHandler clickHandler;
@@ -56,8 +57,7 @@ public class LoginFragment extends Fragment {
                     username.setError(getString(R.string.signup_short_string));
                 } else if (!unstr.matches("[A-Za-z0-9]*")) {
                     username.setError(getString(R.string.signup_username_alphanumeric));
-                }
-                else {
+                } else {
                     unstat = true;
                 }
 

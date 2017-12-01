@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_post_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border_accent"
+    android:padding="2dp">
+
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/post_info"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:background="@color/primary_dark"
+        app:cropFixAspectRatio="true" />
+
+    <RelativeLayout
+        android:id="@+id/post_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#000000ff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/post_caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/upload_post_postcaption"
+                android:maxLines="3"
+                android:minHeight="@dimen/edit_text_height"
+                android:textColor="@color/light_f"
+                android:textColorHint="@color/light_a" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="64dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:minHeight="64dp">
+
+                    <ImageView
+                        android:id="@+id/post_location_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/post_location_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:hint="@string/upload_default_location"
+                        android:textColor="@color/light_f"
+                        android:textColorHint="@color/light_a" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/post_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_buttons_green"
+                    android:text="@string/upload_button"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:onClick="imageRotate"
+        android:padding="16dp"
+        android:src="@drawable/ic_rotate_white_24dp" />
+
+</RelativeLayout>

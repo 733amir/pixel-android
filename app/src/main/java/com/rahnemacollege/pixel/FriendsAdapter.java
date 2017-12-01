@@ -6,12 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rahnemacollege.pixel.FriendsViewHolder;
-import com.rahnemacollege.pixel.R;
-
-/**
- * Created by parsahejabi on 11/30/17.
- */
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
 

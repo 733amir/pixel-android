@@ -1,9 +1,6 @@
 package com.rahnemacollege.pixel;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,6 +37,7 @@ public class ProfileFragment extends Fragment {
 
     public interface ProfileClickHandler {
         public void profileEditClicked();
+
         public void accountViewClicked();
     }
 
@@ -65,17 +63,17 @@ public class ProfileFragment extends Fragment {
         fullname = view.findViewById(R.id.profile_fullname);
 
         profile_edit.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             clickHandler.profileEditClicked();
-         }
+            @Override
+            public void onClick(View view) {
+                clickHandler.profileEditClicked();
+            }
         });
 
         account_view.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             clickHandler.accountViewClicked();
-         }
+            @Override
+            public void onClick(View view) {
+                clickHandler.accountViewClicked();
+            }
         });
 
         AndroidNetworking.get(getString(R.string.api_profile))
@@ -113,7 +111,6 @@ public class ProfileFragment extends Fragment {
                         Log.e(TAG, error.toString());
                     }
                 });
-
         return view;
     }
 }

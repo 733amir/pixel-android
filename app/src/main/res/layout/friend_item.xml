@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/friends_top_and_bottom_padding"
     android:paddingLeft="@dimen/friends_left_and_right_padding"
     android:paddingRight="@dimen/friends_left_and_right_padding"
-    android:paddingTop="@dimen/friends_top_and_bottom_padding"
-    android:gravity="center_vertical">
+    android:paddingTop="@dimen/friends_top_and_bottom_padding">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friends_i_profileimage"
@@ -19,10 +19,10 @@
         android:id="@+id/friends_tv_fullname"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:layout_marginLeft="@dimen/friends_left_and_right_padding"
         android:layout_marginRight="@dimen/friends_left_and_right_padding"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center_vertical" />
 
     <Button
         android:id="@+id/friends_b_viewprofile"

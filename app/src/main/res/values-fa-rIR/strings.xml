@@ -52,4 +52,8 @@
     <!--Friends Fragment-->
     <string name="friends_title">لیست دوستان</string>
     <string name="friends_button_viewprofile">مشاهده پروفایل</string>
+
+    <!--uploadPost page-->
+    <string name="upload_post_postcaption">درباره تصویر چیزی بنویس…</string>
+
 </resources>

@@ -74,4 +74,12 @@
     <!--Friends Fragment-->
     <string name="friends_title">Friends List</string>
     <string name="friends_button_viewprofile">View Profile</string>
+
+    <!--Upload_post-->
+    <string name="upload_post_postcaption">Caption</string>
+    <string name="upload_post_fab_camera">Camera</string>
+    <string name="upload_post_fab_gallery">Gallery</string>
+    <string name="upload_button">Upload</string>
+    <string name="upload_default_location">Add Location</string>
+
 </resources>

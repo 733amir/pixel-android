@@ -1,7 +1,6 @@
 package com.rahnemacollege.pixel;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,14 +10,13 @@ import android.widget.EditText;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Locale;
+
 
 public class AccountEditActivity extends AppCompatActivity {
 
@@ -61,8 +59,8 @@ public class AccountEditActivity extends AppCompatActivity {
                         try {
                             if (response.get("status").equals("ok")) {
                                 JSONObject info = new JSONObject(response.get("account").toString());
-                                username_field.setText((String)info.get("username"));
-                                email_field.setText((String)info.get("email"));
+                                username_field.setText((String) info.get("username"));
+                                email_field.setText((String) info.get("email"));
                             } else if (response.has("desc")) {
                                 Log.e(TAG, response.get("desc").toString());
                             }
@@ -70,6 +68,7 @@ public class AccountEditActivity extends AppCompatActivity {
                             Log.e(TAG, e.toString());
                         }
                     }
+
                     @Override
                     public void onError(ANError error) {
                         Log.e(TAG, error.toString());

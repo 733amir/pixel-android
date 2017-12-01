@@ -9,13 +9,13 @@
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingEnd="@dimen/pages_right_margin"
         android:paddingStart="@dimen/pages_left_margin"
-        tools:context="com.rahnemacollege.pixel.LoginActivity"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        tools:context="com.rahnemacollege.pixel.LoginActivity">
 
         <TextView
             android:layout_width="match_parent"
