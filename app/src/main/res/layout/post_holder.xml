@@ -62,7 +62,7 @@
 
     </LinearLayout>
 
-    <ImageView
+    <com.rahnemacollege.pixel.Utilities.SquareImageView
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/post_image_height"

@@ -16,6 +16,7 @@ import android.view.View;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;
+import java.util.Locale;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -88,6 +89,10 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
 
         // Floating Menu and Buttons
         uploadMenu = findViewById(R.id.upload_menu);
+        uploadMenu.setClosedOnTouchOutside(true);
+        if (!Locale.getDefault().getDisplayLanguage().equals("English")) {
+
+        }
 
         // Create and config explore explorePageFragmentAdapter
         explorePageFragmentAdapter = new MyFragmentPagerAdapter(this, getSupportFragmentManager());
@@ -145,13 +150,21 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
     public void profileEditClicked() {
         Intent intent = new Intent(this, ProfileEditActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        if (Locale.getDefault().getDisplayLanguage().equals("English")) {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        } else {
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        }
     }
 
     public void accountViewClicked() {
         Intent intent = new Intent(this, AccountEditActivity.class);
         startActivityForResult(intent, (short) R.integer.account_settings_request_code);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        if (Locale.getDefault().getDisplayLanguage().equals("English")) {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        } else {
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        }
     }
 
     @Override

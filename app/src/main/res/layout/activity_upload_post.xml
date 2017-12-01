@@ -67,9 +67,10 @@
 
                     <TextView
                         android:id="@+id/post_location_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:hint="@string/upload_default_location"
                         android:textColor="@color/light_f"
                         android:textColorHint="@color/light_a" />
