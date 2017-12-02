@@ -2,15 +2,19 @@ package com.rahnemacollege.pixel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +26,7 @@ public class AccountEditActivity extends AppCompatActivity {
 
     String TAG = "AccountEditActivity";
 
-    String username;
+    String access_token, username;
     EditText username_field, email_field, old_password, new_password;
     SharedPreferences sharedPref;
 
@@ -38,40 +42,54 @@ public class AccountEditActivity extends AppCompatActivity {
         old_password = findViewById(R.id.account_password_current);
         new_password = findViewById(R.id.account_password_new);
 
-        sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        sharedPref = this.getSharedPreferences(getString(R.string.user_info), Context.MODE_PRIVATE);
 
-        username = sharedPref.getString(getString(R.string.saved_username), "");
-        if (username.isEmpty()) {
-            Log.e(TAG, "NO USERNAME PRESENTED!");
+        access_token = sharedPref.getString(Constants.ACCESS_TOKEN, "");
+        username = sharedPref.getString(Constants.USERNAME, "");
+        if (access_token.isEmpty()) {
+            Log.e(TAG, "NO TOKEN PRESENTED!");
             finish();
         }
 
-        AndroidNetworking.initialize(this);
-
         // Get user account settings.
         AndroidNetworking.get(getString(R.string.api_account))
-                .addQueryParameter("username", username)
+                .addPathParameter(Constants.USERNAME, username)
+                .addHeaders(Constants.AUTHORIZATION, access_token)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Account information response: " + response.toString());
+                        Log.i(TAG, "Account settings response: " + response.toString());
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                JSONObject info = new JSONObject(response.get("account").toString());
-                                username_field.setText((String) info.get("username"));
-                                email_field.setText((String) info.get("email"));
-                            } else if (response.has("desc")) {
-                                Log.e(TAG, response.get("desc").toString());
-                            }
+                            status = response.getString(Constants.STATUS);
                         } catch (JSONException e) {
-                            Log.e(TAG, e.toString());
+                            Log.e(TAG, "Account settings response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Account settings response have no status parameter.");
+                        } else if (status.equals(Constants.NOT_FOUND)) {
+                            showMessage(getString(R.string.account_wrong_username));
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONObject object = response.getJSONObject(Constants.OBJECT);
+                                String username = object.getString(Constants.USERNAME);
+                                String email = object.getString(Constants.EMAIL);
+
+                                username_field.setText(username);
+                                email_field.setText(email);
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Account settings response no username or email parameters.");
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                     @Override
                     public void onError(ANError error) {
-                        Log.e(TAG, error.toString());
+                        Log.e(TAG, "Account settings response error: " + error.toString());
                     }
                 });
     }
@@ -84,6 +102,8 @@ public class AccountEditActivity extends AppCompatActivity {
         if (email_field.getText().toString().isEmpty()) {
             email_field.setError(getString(R.string.account_is_empty));
         } else if (SignUpFragment.isValidEmail(email_field.getText().toString())) {
+            // TODO change update.
+
             AndroidNetworking.post(getString(R.string.api_account))
                     .addBodyParameter("username", username_field.getText().toString())
                     .addBodyParameter("email", email_field.getText().toString())
@@ -117,12 +137,7 @@ public class AccountEditActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.saved_username), null);
-        editor.putString(getString(R.string.saved_token), null);
-        editor.putBoolean(getString(R.string.saved_login_status), false);
-        editor.apply();
-
+        sharedPref.edit().putString(Constants.ACCESS_TOKEN, "").apply();
         finish();
     }
 
@@ -138,5 +153,9 @@ public class AccountEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

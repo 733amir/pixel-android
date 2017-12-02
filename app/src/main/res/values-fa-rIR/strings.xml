@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">پیکسل</string>
+    <string name="error">خطایی رخ داده است!</string>
 
     <!-- First Page -->
     <string name="firstpage_b_login">ورود</string>
@@ -13,6 +14,7 @@
     <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
     <string name="login_b_login">ورود به برنامه</string>
     <string name="login_empty">خالی است!</string>
+    <string name="login_wrong_username_password">نام‌کاربری یا کلمه‌عبور اشتباه است!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">نام کاربری</string>
@@ -26,7 +28,8 @@
     <string name="signup_username_alphanumeric">تنها حروف و اعداد!</string>
     <string name="signup_email_notvalid">ایمیل معتبر نیست!</string>
     <string name="signup_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
-    <string name="signup_username_exists">نام کاربری وجود دارد!</string>
+    <string name="signup_username_exists">نام‌کاربری تکراری است!</string>
+    <string name="signup_email_exists">ایمیل تکراری است!</string>
 
     <!-- Forget Password Page -->
     <string name="forget_password_tv">آدرس ایمیل</string>
@@ -72,6 +75,7 @@
     <string name="account_wrong_password">پسورد اشتباه است!</string>
     <string name="account_email_not_valid">ایمیل معتبر نیست!</string>
     <string name="account_is_empty">خالی است!</string>
+    <string name="account_wrong_username">نام‌کاربری اشتباه است!</string>
 
     <!--Friends Fragment-->
     <string name="friends_title">لیست دوستان</string>

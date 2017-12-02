@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import java.util.List;
 import java.util.Locale;
@@ -74,7 +75,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         setContentView(R.layout.activity_explore);
 
         // Shared Preferences
-        sharedPref = getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences(getString(R.string.user_info), Context.MODE_PRIVATE);
         username = sharedPref.getString(getString(R.string.saved_username), "");
         if (username.isEmpty()) {
             Log.e(TAG, "NO USERNAME PRESENTED!");
@@ -139,7 +140,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         super.onActivityResult(requestCode, resultCode, data);
 
         // User is logged out.
-        if (sharedPref.getString(getString(R.string.saved_username), "").isEmpty()) {
+        if (sharedPref.getString(Constants.ACCESS_TOKEN, "").isEmpty()) {
             finish();
         }
     }

@@ -48,7 +48,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         newTag = findViewById(R.id.profile_edit_new_tag);
         header = findViewById(R.id.profile_header_container);
         image = findViewById(R.id.profile_image_container);
-        sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        sharedPref = this.getSharedPreferences(getString(R.string.user_info), Context.MODE_PRIVATE);
         current = this;
         bio = findViewById(R.id.profile_bio);
         fullname = findViewById(R.id.profile_fullname);

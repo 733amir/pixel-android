@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pixel</string>
+    <string name="error">Something Went Wrong!</string>
 
     <!-- First Page -->
     <string name="firstpage_b_login">Login</string>
@@ -13,6 +14,7 @@
     <string name="login_tv_forgetpassword">Did you forget your password?</string>
     <string name="login_b_login">Login</string>
     <string name="login_empty">Is empty!</string>
+    <string name="login_wrong_username_password">Username or Password is wrong!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">Username</string>
@@ -27,6 +29,7 @@
     <string name="signup_email_notvalid">Email is not valid!</string>
     <string name="signup_password_not_matched">Passwords don\'t match!</string>
     <string name="signup_username_exists">Username Exists!</string>
+    <string name="signup_email_exists">Email Exists!</string>
 
     <!-- Forget Password Page -->
     <string name="forget_password_tv">Email Address</string>
@@ -72,6 +75,7 @@
     <string name="account_wrong_password">Wrong Password!</string>
     <string name="account_email_not_valid">Email is not valid!</string>
     <string name="account_is_empty">Is empty!</string>
+    <string name="account_wrong_username">Wrong Username!</string>
 
     <!--Friends Fragment-->
     <string name="friends_title">Friends List</string>
