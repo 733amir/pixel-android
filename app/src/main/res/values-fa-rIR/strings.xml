@@ -56,6 +56,8 @@
     <string name="profile_edit_title">ویرایش پروفایل</string>
     <string name="profile_edit_update">بروزرسانی</string>
     <string name="profile_edit_add_tag">اضافه کردن تگ</string>
+    <string name="profile_edit_name_hint">نام</string>
+    <string name="profile_edit_bio_hint">زندگی‌نامه</string>
 
     <!-- Account Activity -->
     <string name="account_title">تنظیمات کاربری</string>

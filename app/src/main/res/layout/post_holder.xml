@@ -27,11 +27,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/post_name"
+                android:id="@+id/post_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="bottom"
+                android:gravity="center_vertical"
                 android:text="Sahar" />
 
             <TextView
@@ -39,25 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="20 minutes ago" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_location_on_blue_24dp" />
-
-            <TextView
-                android:id="@+id/post_location"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Satar Khan" />
         </LinearLayout>
 
     </LinearLayout>
@@ -66,54 +50,87 @@
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/post_image_height"
+        android:scaleType="centerCrop"
         android:background="@color/light_d" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="start|center">
+
+            <ImageView
+                android:id="@+id/post_location_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_location_on_blue_24dp"
+                android:layout_margin="@dimen/post_buttons_margin"/>
+
+            <TextView
+                android:id="@+id/post_location_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Satar Khan"
+                android:layout_margin="@dimen/post_buttons_margin"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end|center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/post_buttons_margin">
+
+                <ImageView
+                    android:id="@+id/post_like_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_favorite_red_24dp" />
+
+                <TextView
+                    android:id="@+id/post_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/post_buttons_margin">
+
+                <ImageView
+                    android:id="@+id/post_comment_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_comment_black_24dp" />
+
+                <TextView
+                    android:id="@+id/post_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="32" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/post_description"
+        android:id="@+id/post_caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/post_text_margin"
         android:text="some long long long long long long long long long long long long long long long long long long long long long long long long long text." />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end|center">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/post_buttons_margin">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_favorite_red_24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="200" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/post_buttons_margin">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_comment_black_24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="32" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </LinearLayout>

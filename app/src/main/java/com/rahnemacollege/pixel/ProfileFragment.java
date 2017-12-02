@@ -3,6 +3,8 @@ package com.rahnemacollege.pixel;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import co.lujun.androidtagview.TagContainerLayout;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -31,8 +32,16 @@ public class ProfileFragment extends Fragment {
     ImageView profile_edit, notification, account_view, header;
     CircleImageView image;
     ProfileClickHandler clickHandler;
-    String username;
-    TagContainerLayout tags;
+    String username, profileImageUrl;
+
+    RecyclerView tags;
+    LinearLayoutManager tagsContainer;
+    InterestsAdapter tagsAdapter;
+
+    RecyclerView posts;
+    LinearLayoutManager postsContainer;
+    PostAdapter postsAdapter;
+
     TextView bio, fullname;
 
     public interface ProfileClickHandler {
@@ -49,7 +58,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         profile_edit = view.findViewById(R.id.profile_edit);
@@ -58,7 +67,12 @@ public class ProfileFragment extends Fragment {
         clickHandler = (ProfileClickHandler) getActivity();
         header = view.findViewById(R.id.profile_header_container);
         image = view.findViewById(R.id.profile_image_container);
-        tags = view.findViewById(R.id.profile_tags);
+        tags = view.findViewById(R.id.profile_interests);
+        tagsContainer = new LinearLayoutManager(getActivity());
+        tagsAdapter = new InterestsAdapter(10);
+        posts = view.findViewById(R.id.profile_posts);
+        postsContainer = new LinearLayoutManager(getActivity());
+        postsAdapter = new PostAdapter(50);
         bio = view.findViewById(R.id.profile_bio);
         fullname = view.findViewById(R.id.profile_fullname);
 
@@ -76,6 +90,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        tagsContainer.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        tags.setHasFixedSize(true);
+        tags.setLayoutManager(tagsContainer);
+        tags.setAdapter(tagsAdapter);
+
+        posts.setHasFixedSize(true);
+        posts.setLayoutManager(postsContainer);
+        posts.setAdapter(postsAdapter);
+
         AndroidNetworking.get(getString(R.string.api_profile))
                 .addQueryParameter("username", username)
                 .build()
@@ -89,10 +113,11 @@ public class ProfileFragment extends Fragment {
 
                                 Glide.with(getActivity()).load(profile.getString("header")).into(header);
                                 Glide.with(getActivity()).load(profile.getString("image")).into(image);
+                                profileImageUrl = profile.getString("image");
 
                                 JSONArray interests = profile.getJSONArray("interest");
                                 for (int i = 0; i < interests.length(); i++) {
-                                    tags.addTag(interests.getString(i));
+                                    tagsAdapter.addTag(interests.getString(i));
                                 }
 
                                 bio.setText(profile.getString("bio"));
@@ -111,6 +136,47 @@ public class ProfileFragment extends Fragment {
                         Log.e(TAG, error.toString());
                     }
                 });
+
+        AndroidNetworking.get(getString(R.string.api_posts))
+                .addQueryParameter("username", username)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Posts get information response: " + response.toString());
+                        try {
+                            if (response.get("status").equals("ok")) {
+                                JSONArray posts = new JSONArray(response.getString("posts"));
+                                JSONObject post;
+//                                String fullname, postImageUrl, profileImageUrl, location, caption, time, like_count, comment_count;
+                                for (int i = 0; i < posts.length(); i++) {
+                                    post = posts.getJSONObject(i);
+                                    postsAdapter.addPost(
+                                            fullname.getText().toString(),
+                                            post.getString("time"),
+                                            post.getString("location"),
+                                            post.getString("like_count"),
+                                            post.getString("comment_count"),
+                                            post.getString("caption"),
+                                            post.getString("image"),
+                                            profileImageUrl
+                                    );
+                                    Log.i(TAG, "Posts size: " + posts.length());
+                                }
+                            } else if (response.has("desc")) {
+                                Log.e(TAG, response.get("desc").toString());
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        Log.e(TAG, error.toString());
+                    }
+                });
+
         return view;
     }
 }

@@ -90,9 +90,6 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         // Floating Menu and Buttons
         uploadMenu = findViewById(R.id.upload_menu);
         uploadMenu.setClosedOnTouchOutside(true);
-        if (!Locale.getDefault().getDisplayLanguage().equals("English")) {
-
-        }
 
         // Create and config explore explorePageFragmentAdapter
         explorePageFragmentAdapter = new MyFragmentPagerAdapter(this, getSupportFragmentManager());

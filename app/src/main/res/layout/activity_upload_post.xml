@@ -10,17 +10,17 @@
 
 
     <com.theartofdev.edmodo.cropper.CropImageView
-        android:id="@+id/post_image"
+        android:id="@+id/new_post_image"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/post_info"
+        android:layout_above="@id/new_post_info"
         android:layout_gravity="center_horizontal"
         android:layout_margin="8dp"
         android:background="@color/primary_dark"
         app:cropFixAspectRatio="true" />
 
     <RelativeLayout
-        android:id="@+id/post_info"
+        android:id="@+id/new_post_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/post_caption"
+                android:id="@+id/new_post_caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -59,17 +59,17 @@
                     android:minHeight="64dp">
 
                     <ImageView
-                        android:id="@+id/post_location_icon"
+                        android:id="@+id/new_post_location_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:padding="8dp"
                         app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
                     <TextView
-                        android:id="@+id/post_location_text"
+                        android:id="@+id/new_post_location_text"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:hint="@string/upload_default_location"
                         android:textColor="@color/light_f"
@@ -79,7 +79,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/post_upload"
+                    android:id="@+id/new_post_upload"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"

@@ -1,8 +1,5 @@
 package com.rahnemacollege.pixel;
 
-import android.graphics.Matrix;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,7 +11,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -30,7 +26,7 @@ public class UploadPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_post);
 
-        post_image = findViewById(R.id.post_image);
+        post_image = findViewById(R.id.new_post_image);
 
         String source = getIntent().getStringExtra("source");
         if (source.equals("camera")) {

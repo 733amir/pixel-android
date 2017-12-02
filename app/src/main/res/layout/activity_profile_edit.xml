@@ -67,11 +67,12 @@
             <EditText
                 android:id="@+id/profile_fullname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/edit_text_height"
+                android:background="@drawable/rounded_edittext"
                 android:layout_marginBottom="@dimen/profile_page_items_vertical_margin"
                 android:layout_marginTop="@dimen/profile_page_items_vertical_margin"
-                android:gravity="center_horizontal"
-                android:text="Name" />
+                android:gravity="center"
+                android:hint="@string/profile_edit_name_hint" />
 
             <EditText
                 android:id="@+id/profile_bio"
@@ -79,8 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/profile_page_items_vertical_margin"
                 android:layout_marginTop="@dimen/profile_page_items_vertical_margin"
-                android:gravity="center_horizontal"
-                android:text="Bio" />
+                android:gravity="center"
+                android:minHeight="@dimen/edit_text_height"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/profile_edit_bio_hint" />
 
             <co.lujun.androidtagview.TagContainerLayout
                 android:id="@+id/profile_edit_tags"
