@@ -9,4 +9,5 @@
     <string name="api_account">http://192.168.10.120:5000/account</string>
     <string name="api_profile">http://192.168.10.120:5000/profile</string>
     <string name="api_posts">http://192.168.10.120:5000/posts</string>
+    <string name="api_friends">http://192.168.10.120:5000/friends_list</string>
 </resources>

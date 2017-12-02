@@ -6,13 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rahnemacollege.pixel.Utilities.Friend;
+
+import java.util.ArrayList;
+
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
+    private ArrayList<Friend> friendsArrayList;
 
     private int numOfFriends;
 
     public FriendsAdapter(int numOfFriends) {
         this.numOfFriends = numOfFriends;
+        friendsArrayList = new ArrayList<>(numOfFriends);
     }
 
     @Override
@@ -29,12 +35,17 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
 
     @Override
     public void onBindViewHolder(FriendsViewHolder holder, int position) {
-        holder.bind(position);
+        holder.bind(friendsArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        //TODO get numOfFriends from server here!
-        return numOfFriends;
+        return friendsArrayList.size();
+    }
+
+    public void addFriendForAdapter(String fullname, String profileImageUrl){
+        Friend friend = new Friend(fullname, profileImageUrl);
+        friendsArrayList.add(friend);
+        notifyDataSetChanged();
     }
 }

@@ -5,6 +5,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.rahnemacollege.pixel.Utilities.Friend;
+import com.rahnemacollege.pixel.Utilities.Post;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -22,10 +26,10 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
         friendProfilePicture = itemView.findViewById(R.id.friends_i_profileimage);
     }
 
-    public void bind(int listIndex) {
+    public void bind(Friend friend) {
         //TODO handle view profile button
-        //TODO set text of ViewText and pic of CircleImageView from server
-        friendFullName.setText("Test FULL NAME");
-//        friendProfilePicture
+        //TODO handle friend request button
+        friendFullName.setText(friend.fullname);
+        Glide.with(friendProfilePicture).load(friend.profileImageUrl).into(friendProfilePicture);
     }
 }

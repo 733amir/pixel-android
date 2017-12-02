@@ -84,6 +84,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         // Create explore activity fragments
         homeFragment = new HomeFragment();
         friendsListFragment = new FriendsListFragment();
+        friendsListFragment.setArgs(username);
         profileFragment = new ProfileFragment();
         profileFragment.setArgs(username);
 
