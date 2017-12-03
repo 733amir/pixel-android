@@ -85,21 +85,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:hint="@string/profile_edit_bio_hint" />
 
-            <co.lujun.androidtagview.TagContainerLayout
-                android:id="@+id/profile_edit_tags"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:padding="10dp"
-                app:container_background_color="#000000ff"
-                app:container_border_color="#000000ff"
-                app:container_enable_drag="false"
-                app:tag_background_color="@color/light_d"
-                app:tag_border_color="@color/light_d"
-                app:tag_clickable="true"
-                app:tag_enable_cross="true"
-                app:tag_text_color="@color/light_0"
-                app:tag_theme="none" />
+            <include layout="@layout/profile_edit_tag_container" />
 
             <LinearLayout
                 android:layout_width="match_parent"
