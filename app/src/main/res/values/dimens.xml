@@ -57,4 +57,11 @@
     <dimen name="friends_top_and_bottom_padding">8dp</dimen>
     <dimen name="friends_profile_image_diameter">64dp</dimen>
 
+    <!--Notification Center-->
+    <dimen name="notifications_left_and_right_padding">16dp</dimen>
+    <dimen name="notifications_text_left_padding">8dp</dimen>
+    <dimen name="notifications_top_and_bottom_padding">8dp</dimen>
+    <dimen name="notifications_profile_image_diameter">52dp</dimen>
+    <dimen name="notifications_text_size">15sp</dimen>
+
 </resources>
