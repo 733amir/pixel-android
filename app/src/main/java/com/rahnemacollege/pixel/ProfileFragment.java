@@ -45,9 +45,11 @@ public class ProfileFragment extends Fragment {
     TextView bio, fullname;
 
     public interface ProfileClickHandler {
-        public void profileEditClicked();
+        void profileEditClicked();
 
-        public void accountViewClicked();
+        void accountViewClicked();
+
+        void notificationCenterClicked();
     }
 
     public ProfileFragment() {
@@ -87,6 +89,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 clickHandler.accountViewClicked();
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickHandler.notificationCenterClicked();
             }
         });
 

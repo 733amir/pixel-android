@@ -12,12 +12,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!--<uses-feature-->
-    <!--android:name="android.hardware.camera"-->
-    <!--android:required="true" />-->
-    <!--<uses-feature android:name="android.hardware.camera.autofocus" />-->
-
-
+    <!-- <uses-feature -->
+    <!-- android:name="android.hardware.camera" -->
+    <!-- android:required="true" /> -->
+    <!-- <uses-feature android:name="android.hardware.camera.autofocus" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
@@ -26,7 +24,6 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".FirstPageActivity"
             android:screenOrientation="portrait">
@@ -36,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ExploreActivity"
             android:label="@string/title_activity_explore"
@@ -47,7 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPageActivity" />
         </activity>
-
         <activity
             android:name=".ResetPasswordActivity"
             android:parentActivityName=".FirstPageActivity"
@@ -56,7 +51,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.FirstPageActivity" />
         </activity>
-
         <activity
             android:name=".ProfileEditActivity"
             android:parentActivityName=".ExploreActivity"
@@ -65,7 +59,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
         </activity>
-
         <activity
             android:name=".AccountEditActivity"
             android:parentActivityName=".ExploreActivity"
@@ -74,7 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
         </activity>
-
         <activity
             android:name=".UploadPost"
             android:parentActivityName=".ExploreActivity"
@@ -84,7 +76,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahnemacollege.pixel.ExploreActivity" />
         </activity>
-
+        <activity
+            android:name=".NotificationCenterActivity"
+            android:parentActivityName=".ExploreActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahnemacollege.pixel.ExploreActivity" />
+        </activity>
     </application>
 
 </manifest>

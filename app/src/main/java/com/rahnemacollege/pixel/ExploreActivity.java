@@ -165,6 +165,16 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         }
     }
 
+    public void notificationCenterClicked(){
+        Intent intent = new Intent(this, NotificationCenterActivity.class);
+        startActivity(intent);
+        if (Locale.getDefault().getDisplayLanguage().equals("English")) {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        } else {
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        }
+    }
+
     @Override
     public void onPause() {
         super.onPause();

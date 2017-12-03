@@ -84,4 +84,11 @@
     <string name="upload_button">Upload</string>
     <string name="upload_default_location">Add Location</string>
 
+    <!--Notification Center-->
+    <string name="notification_center_title">Notifications</string>
+    <string name="notification_friend_request_report">requested to add you as a friend.</string>
+    <string name="notification_friend_request_accept_report">accepted your friend request.</string>
+    <string name="notification_post_like_report">liked your post.</string>
+    <string name="notification_comment_like_report">liked your comment:</string>
+
 </resources>

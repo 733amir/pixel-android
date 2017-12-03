@@ -71,7 +71,6 @@
     <color name="divider">#BDBDBD</color>
 
 
-
     <!-- Post related colors -->
     <color name="post_profile_image_background_color">@color/primaryLightColor</color>
     <color name="post_profile_image_border_color">@color/primary_dark</color>

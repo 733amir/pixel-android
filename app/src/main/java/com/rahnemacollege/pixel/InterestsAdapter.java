@@ -17,6 +17,7 @@ public class InterestsAdapter extends RecyclerView.Adapter<com.rahnemacollege.pi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
+
         public ViewHolder(TextView v) {
             super(v);
             mTextView = v;

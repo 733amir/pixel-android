@@ -43,7 +43,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         return friendsArrayList.size();
     }
 
-    public void addFriendForAdapter(String fullname, String profileImageUrl){
+    public void addFriendForAdapter(String fullname, String profileImageUrl) {
         Friend friend = new Friend(fullname, profileImageUrl);
         friendsArrayList.add(friend);
         notifyDataSetChanged();

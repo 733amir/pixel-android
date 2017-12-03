@@ -84,4 +84,10 @@
     <string name="upload_button">ارسال</string>
     <string name="upload_default_location">اضافه کردن مختصات</string>
 
+    <!--Notification Center-->
+    <string name="notification_center_title">اطلاعیه‌ها</string>
+    <string name="notification_friend_request_report">درخواست دوستی داد.</string>
+    <string name="notification_friend_request_accept_report">درخواست شما رو تایید کرد.</string>
+    <string name="notification_post_like_report">پست شما رو لایک کرد.</string>
+    <string name="notification_comment_like_report">کامنت شما رو لایک کرد:</string>
 </resources>
