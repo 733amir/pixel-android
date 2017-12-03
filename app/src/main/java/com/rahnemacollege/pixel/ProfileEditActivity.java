@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import co.lujun.androidtagview.TagContainerLayout;
@@ -32,8 +33,10 @@ public class ProfileEditActivity extends AppCompatActivity {
     String TAG = "ProfileEditActivity";
 
     TagContainerLayout tags;
+    ArrayList<String> allTags;
+
     EditText newTag, bio, fullname;
-    String username, access_token;
+    String username, access_token, headerImage, profileImage;
     SharedPreferences sharedPref;
     CircleImageView image;
     ImageView header;
@@ -47,6 +50,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.profile_edit_title);
 
         tags = findViewById(R.id.profile_edit_tags);
+        allTags = new ArrayList<>(100);
         newTag = findViewById(R.id.profile_edit_new_tag);
         header = findViewById(R.id.profile_header_container);
         image = findViewById(R.id.profile_image_container);
@@ -86,15 +90,15 @@ public class ProfileEditActivity extends AppCompatActivity {
                                 fullname.setText(object.getString(Constants.FULLNAME));
                                 bio.setText(object.getString(Constants.BIO));
 
-                                // TODO get interests.
-//                                JSONArray interests = profile.getJSONArray("interest");
-//                                for (int i = 0; i < interests.length(); i++) {
-//                                    tags.addTag(interests.getString(i));
-//                                }
+                                headerImage = object.getString(Constants.COVER_PHOTO);
+                                Glide.with(header)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + headerImage, access_token))
+                                        .into(header);
 
-                                // TODO load images
-//                                Glide.with(current).load(profile.getString("header")).into(header);
-//                                Glide.with(current).load(profile.getString("image")).into(image);
+                                profileImage = object.getString(Constants.PROFILE_PHOTO);
+                                Glide.with(image)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + profileImage, access_token))
+                                        .into(image);
                             } catch (JSONException e) {
                                 Log.e(TAG, "Profile get response was incomplete.");
                                 e.printStackTrace();
@@ -108,6 +112,43 @@ public class ProfileEditActivity extends AppCompatActivity {
                         Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
+
+        AndroidNetworking.get(getString(R.string.api_interests))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Profile get all interests response: " + response.toString());
+
+                        String status = null;
+
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Profile get all interests response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONArray all = response.getJSONArray(Constants.INTERESTS);
+                                for (int i = 0; i < all.length(); i++) {
+                                    tags.addTag(all.getJSONObject(i).getString(Constants.INTEREST));
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get all interests response was incomplete.");
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    }
+                });
+
 
         tags.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
@@ -137,6 +178,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     public void update(View view) {
         // TODO upload new profile header and image.
+        // TODO integrate upload with server.
 
         JSONArray newTags = new JSONArray(tags.getTags());
         AndroidNetworking.post(getString(R.string.api_profile_update))
