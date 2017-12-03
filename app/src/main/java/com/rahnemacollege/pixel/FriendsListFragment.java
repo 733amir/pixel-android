@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 public class FriendsListFragment extends Fragment {
 
+    String username, access_token;
+
     private RecyclerView friendsRecyclerView;
     private FriendsAdapter friendsAdapter;
     //TODO change the quantity of items
@@ -18,6 +20,11 @@ public class FriendsListFragment extends Fragment {
 
     public FriendsListFragment() {
         // Required empty public constructor
+    }
+
+    public void setArgs(String access_token, String username) {
+        this.username = username;
+        this.access_token = access_token;
     }
 
     @Override

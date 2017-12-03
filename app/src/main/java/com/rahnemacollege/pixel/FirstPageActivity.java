@@ -172,6 +172,7 @@ public class FirstPageActivity extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         AndroidNetworking.post(getString(R.string.api_register))
                 .addJSONObjectBody(body)
                 .build()
