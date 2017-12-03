@@ -13,9 +13,9 @@
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/post_info"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_alignTop="@+id/imageView"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
         android:background="@color/primary_dark"
         app:cropFixAspectRatio="true" />
 
@@ -98,6 +98,7 @@
         android:layout_margin="8dp"
         android:onClick="imageRotate"
         android:padding="16dp"
-        android:src="@drawable/ic_rotate_white_24dp" />
+        android:src="@drawable/ic_rotate_white_24dp"
+        android:id="@+id/imageView" />
 
 </RelativeLayout>
