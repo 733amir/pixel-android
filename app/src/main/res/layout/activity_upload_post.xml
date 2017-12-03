@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_post_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border_accent"
+    android:orientation="vertical"
     android:padding="2dp">
 
-
-    <com.theartofdev.edmodo.cropper.CropImageView
-        android:id="@+id/new_post_image"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@id/new_post_info"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
-        android:background="@color/primary_dark"
-        app:cropFixAspectRatio="true" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.theartofdev.edmodo.cropper.CropImageView
+            android:id="@+id/new_post_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/primary_dark"
+            app:cropFixAspectRatio="true" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_gravity="right|bottom"
+            android:onClick="imageRotate"
+            android:padding="16dp"
+            android:src="@drawable/ic_rotate_white_24dp" />
+
+    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/new_post_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="#000000ff">
 
         <LinearLayout
@@ -91,13 +105,5 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="8dp"
-        android:onClick="imageRotate"
-        android:padding="16dp"
-        android:src="@drawable/ic_rotate_white_24dp" />
 
-</RelativeLayout>
+</LinearLayout>

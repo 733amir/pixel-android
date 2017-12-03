@@ -36,4 +36,6 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
     compile 'pub.devrel:easypermissions:1.0.1'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.5.1'
+    compile 'io.nlopez.smartlocation:library:3.3.3'
+
 }
