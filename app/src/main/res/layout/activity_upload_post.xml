@@ -23,16 +23,17 @@
             app:cropFixAspectRatio="true" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/new_post_rotatation_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_gravity="right|bottom"
+            android:layout_gravity="end|top"
             android:onClick="imageRotate"
             android:padding="16dp"
             android:src="@drawable/ic_rotate_white_24dp" />
 
     </FrameLayout>
+
 
     <RelativeLayout
         android:id="@+id/new_post_info"
@@ -104,6 +105,5 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
 
 </LinearLayout>

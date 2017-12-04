@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -38,6 +37,7 @@ import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.android.gms.location.DetectedActivity;
 
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 import io.nlopez.smartlocation.location.providers.LocationGooglePlayServicesProvider;
@@ -79,7 +80,6 @@ public class UploadPost extends AppCompatActivity {
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.8));
 
         post_image = findViewById(R.id.new_post_image);
-
         location_textView = findViewById(R.id.new_post_location_text);
         location_icon = findViewById(R.id.new_post_location_icon);
 
@@ -154,7 +154,7 @@ public class UploadPost extends AppCompatActivity {
     }
 
     public void getLocation() {
-        if(!isNetWorkEnabled){
+        if (!isNetWorkEnabled) {
             Intent intent = new Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
             startActivity(intent);
         }
@@ -185,7 +185,7 @@ public class UploadPost extends AppCompatActivity {
                 addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
                 String city = addresses.get(0).getLocality();
                 String knownName = addresses.get(0).getFeatureName();
-                location_textView.setText(city+","+knownName);
+                location_textView.setText(city + "," + knownName);
                 location_icon.setImageResource(R.drawable.ic_location_on_blue_24dp);
             } catch (IOException e) {
                 e.printStackTrace();
