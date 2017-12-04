@@ -116,6 +116,61 @@ public class ProfileFragment extends Fragment {
         posts.setLayoutManager(postsContainer);
         posts.setAdapter(postsAdapter);
 
+        loadProfile();
+
+        loadTags();
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        loadProfile();
+        loadTags();
+    }
+
+    public void loadTags() {
+        AndroidNetworking.get(getString(R.string.api_interests))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Profile get all interests response: " + response.toString());
+
+                        String status = null;
+
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Profile get all interests response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            tagsAdapter.removeAll();
+                            try {
+                                JSONArray all = response.getJSONArray(Constants.INTERESTS);
+                                for (int i = 0; i < all.length(); i++) {
+                                    tagsAdapter.addTag(all.getJSONObject(i).getString(Constants.INTEREST));
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get all interests response was incomplete.");
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    }
+                });
+    }
+
+    public void loadProfile() {
         // TODO add load more posts on scrolling.
         AndroidNetworking.get(getString(R.string.api_user))
                 .addHeaders(Constants.AUTHORIZATION, access_token)
@@ -166,46 +221,6 @@ public class ProfileFragment extends Fragment {
                         Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
-
-        AndroidNetworking.get(getString(R.string.api_interests))
-                .addHeaders(Constants.AUTHORIZATION, access_token)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Profile get all interests response: " + response.toString());
-
-                        String status = null;
-
-                        try {
-                            status = response.getString(Constants.STATUS);
-                        } catch (JSONException e) {
-                            Log.e(TAG, "Profile get all interests response JSONException: " + e.toString());
-                        }
-
-                        if (status == null) {
-                            Log.e(TAG, "Profile get info response have no status parameter.");
-                        } else if (status.equals(Constants.OK)) {
-                            try {
-                                JSONArray all = response.getJSONArray(Constants.INTERESTS);
-                                for (int i = 0; i < all.length(); i++) {
-                                    tagsAdapter.addTag(all.getJSONObject(i).getString(Constants.INTEREST));
-                                }
-                            } catch (JSONException e) {
-                                Log.e(TAG, "Profile get all interests response was incomplete.");
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
-                    }
-                });
-
-
-
-        return view;
     }
 
     public void loadPosts() {

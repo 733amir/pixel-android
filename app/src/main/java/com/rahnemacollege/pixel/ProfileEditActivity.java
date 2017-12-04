@@ -2,6 +2,7 @@ package com.rahnemacollege.pixel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,6 +59,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         fullname = findViewById(R.id.profile_fullname);
 
         access_token = sharedPref.getString(Constants.ACCESS_TOKEN, "");
+        username = sharedPref.getString(Constants.USERNAME, "");
         if (access_token.isEmpty()) {
             Log.e(TAG, "NO ACCESS_TOKEN PRESENTED!");
             finish();
@@ -179,9 +181,49 @@ public class ProfileEditActivity extends AppCompatActivity {
         // TODO integrate upload with server.
 
         JSONObject body = new JSONObject();
+        try {
+            body.put(Constants.BIO, bio.getText().toString());
+            body.put(Constants.NAME, fullname.getText().toString());
+            body.put("profilephoto", "0.jpg");
+            body.put("coverphoto", "1.jpg");
+        } catch (JSONException e) {
+            Log.e(TAG, "Parsing name and bio.");
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.put(getString(R.string.api_profile))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addPathParameter(Constants.USERNAME, username)
+                .addJSONObjectBody(body)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Profile update fullname, bio, cover and profile photo response: " + response.toString());
+
+                        String status = null;
+
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Profile update fullname, bio, cover and profile photo response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile update fullname, bio, cover and profile photo response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, username + " Profile update fullname, bio, cover and profile photo request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    }
+                });
+
+        body = new JSONObject();
         JSONArray new_tags = new JSONArray();
         JSONObject new_tag;
-
         try {
             for (int i = 0; i < tags.getTags().size(); i++) {
                 new_tag = new JSONObject();

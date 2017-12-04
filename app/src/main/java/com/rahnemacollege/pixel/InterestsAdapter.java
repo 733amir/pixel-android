@@ -59,4 +59,9 @@ public class InterestsAdapter extends RecyclerView.Adapter<com.rahnemacollege.pi
         mDataset.add(tag);
         notifyDataSetChanged();
     }
+
+    public void removeAll() {
+        mDataset.clear();
+        notifyDataSetChanged();
+    }
 }
