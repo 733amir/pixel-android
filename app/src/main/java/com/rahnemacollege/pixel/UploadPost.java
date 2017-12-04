@@ -35,13 +35,26 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
 import com.google.android.gms.location.DetectedActivity;
 
+import com.rahnemacollege.pixel.Utilities.Constants;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +68,9 @@ public class UploadPost extends AppCompatActivity {
 
     String TAG = "UploadPost";
 
+    Location location;
+    boolean location_status = false;
+
     CropImageView post_image;
     private static final int CAMERA_REQUEST = 1888, GALLERY_REQUEST = 1889;
     private static final int LOCATION_PERMISSION_REQUEST = 1900;
@@ -64,8 +80,11 @@ public class UploadPost extends AppCompatActivity {
     private boolean isGPSenabled;
     TextView location_textView;
     ImageView location_icon;
+    LinearLayout location_container;
     View view;
     private boolean isNetWorkEnabled;
+
+    String access_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +105,24 @@ public class UploadPost extends AppCompatActivity {
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetWorkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        location_icon.setOnClickListener(new View.OnClickListener() {
+        location_container = findViewById(R.id.new_post_location_holder);
+        location_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UploadPost.this.view = view;
-                Log.e("location_icon", "clicked");
-                checkPermission_Location();
+                location_status = !location_status;
+
+                if (location_status) {
+                    if (location != null) {
+                        showLocation(location);
+                    }
+
+                    UploadPost.this.view = view;
+                    Log.e("location_icon", "clicked");
+                    checkPermission_Location();
+                } else {
+                    location_textView.setText("");
+                    location_icon.setImageResource(R.drawable.ic_location_on_black_24dp);
+                }
             }
         });
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -104,6 +135,8 @@ public class UploadPost extends AppCompatActivity {
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, GALLERY_REQUEST);
         }
+
+        access_token = getIntent().getStringExtra(Constants.ACCESS_TOKEN);
     }
 
     @Override
@@ -175,6 +208,7 @@ public class UploadPost extends AppCompatActivity {
     public void showLocation(Location location) {
         Log.e("showLocation", "inside");
         if (location != null) {
+            this.location = location;
 
             // We are going to get the address for the current position
             Geocoder geocoder;
@@ -185,13 +219,70 @@ public class UploadPost extends AppCompatActivity {
                 addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
                 String city = addresses.get(0).getLocality();
                 String knownName = addresses.get(0).getFeatureName();
-                location_textView.setText(city + "," + knownName);
+                location_textView.setText(city + ", " + knownName);
                 location_icon.setImageResource(R.drawable.ic_location_on_blue_24dp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             location_textView.setText("Null location");
+        }
+    }
+
+    public void upload_post(View view) {
+        Bitmap image = post_image.getCroppedImage();
+        String caption = ((EditText) findViewById(R.id.new_post_caption)).getText().toString();
+
+        try {
+            File outputDir = getCacheDir(); // context being the Activity pointer
+            File outputFile = File.createTempFile("temp", ".png", outputDir);
+            FileOutputStream fOut = new FileOutputStream(outputFile);
+            image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+
+            AndroidNetworking.upload(getString(R.string.api_post_upload))
+                    .addHeaders(Constants.AUTHORIZATION, access_token)
+                    .addMultipartFile(Constants.PHOTO, outputFile)
+                    .addMultipartParameter(Constants.TEXT, caption)
+                    .addMultipartParameter(Constants.LAT, String.valueOf(location_status? location.getLatitude(): 0))
+                    .addMultipartParameter(Constants.LON, String.valueOf(location_status? location.getLongitude(): 0))
+                    .build()
+                    .setUploadProgressListener(new UploadProgressListener() {
+                        @Override
+                        public void onProgress(long bytesUploaded, long totalBytes) {
+                            // TODO add a uploader progress bar.
+                        }
+                    })
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        public void onResponse(JSONObject response) {
+                            Log.i(TAG, "Upload post response: " + response.toString());
+
+                            String status = null;
+
+                            try {
+                                status = response.getString(Constants.STATUS);
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Upload post response JSONException: " + e.toString());
+                            }
+
+                            if (status == null) {
+                                Log.e(TAG, "Upload post response have no status parameter.");
+                            } else if (status.equals(Constants.OK)) {
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError e) {
+                            Log.e(TAG, "Upload post request error: " + e.toString() + " code: " + e.getErrorCode());
+                            e.printStackTrace();
+                        }
+                    });
+
+        } catch (IOException e) {
+            Log.e(TAG, "Error on saving bitmap of cropped image.");
+            e.printStackTrace();
         }
     }
 }

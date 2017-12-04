@@ -164,8 +164,9 @@ public class ProfileFragment extends Fragment {
                     }
 
                     @Override
-                    public void onError(ANError anError) {
-                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    public void onError(ANError e) {
+                        Log.e(TAG, "Profile get info request error: " + e.toString() + " code: " + e.getErrorCode());
+                        e.printStackTrace();
                     }
                 });
     }

@@ -214,6 +214,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         if (EasyPermissions.hasPermissions(this, cameraPermissions)) {
             Intent intent = new Intent(this, UploadPost.class);
             intent.putExtra("source", "camera");
+            intent.putExtra(Constants.ACCESS_TOKEN, access_token);
             startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, "Access for Camera",
@@ -225,6 +226,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
             Intent intent = new Intent(this, UploadPost.class);
             intent.putExtra("source", "gallery");
+            intent.putExtra(Constants.ACCESS_TOKEN, access_token);
             startActivity(intent);
         } else {
             EasyPermissions.requestPermissions(this, "Access for Gallery",
