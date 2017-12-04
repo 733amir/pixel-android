@@ -3,6 +3,7 @@ package com.rahnemacollege.pixel;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -12,20 +13,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class FirstPageActivity extends AppCompatActivity
@@ -37,7 +36,6 @@ public class FirstPageActivity extends AppCompatActivity
     TabLayout tabLayout;
     ViewPager viewPager;
     MyFragmentPagerAdapter firstPageFragmentAdapter;
-    public RequestQueue netQ;
     SharedPreferences sharedPref;
 
     @Override
@@ -45,7 +43,7 @@ public class FirstPageActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
-        netQ = Volley.newRequestQueue(this);
+        AndroidNetworking.initialize(getApplicationContext());
 
         // Customize actionBar layout
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -63,18 +61,15 @@ public class FirstPageActivity extends AppCompatActivity
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                // Check if no view has focus:
                 hideKeyboard();
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -83,151 +78,139 @@ public class FirstPageActivity extends AppCompatActivity
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).select();
 
-        // Shared preferences to share username, token and login status.
-        sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
-        // TODO check for username, token and login status. If user is logged in start next activity and finish this one.
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.saved_username), "");
-        editor.putBoolean(getString(R.string.saved_login_status), false);
-        editor.putString(getString(R.string.saved_token), "");
-        editor.apply();
+        // Shared preferences to share access_token, token and login status.
+        sharedPref = this.getSharedPreferences(getString(R.string.user_info), Context.MODE_PRIVATE);
+        if (!sharedPref.getString(Constants.ACCESS_TOKEN, "").isEmpty()) {
+            gotoExploreActivity();
+            finish();
+        }
     }
 
-    /**
-     * When ForgetPassword TextView on LoginFragment is selected this method is called.
-     */
     public void forgetPasswordClicked() {
         Intent intent = new Intent(this, ResetPasswordActivity.class);
         startActivity(intent);
+        // TODO add animate here and in ResetPasswordActivity finish function.
     }
 
-    /**
-     * When Login button is selected this method connect to server and verify the information and
-     * then switch to user explore activity.
-     *
-     * @param username Username that user wrote.
-     * @param password Password that user wrote.
-     */
     public void loginClicked(final String username, String password) {
+        hideKeyboard();
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.login_layout), false);
 
-        String url = getString(R.string.api_login) + "?username=" + username + "&password=" + password;
-        StringRequest loginReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG, "Response of Login request: " + response);
-                try {
-                    JSONObject res = new JSONObject(response);
-                    if (res.has("status") && res.get("status").equals("ok")) {
-                        // Save username.
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(getString(R.string.saved_username), username);
-                        editor.putBoolean(getString(R.string.saved_login_status), true);
-                        editor.apply();
+        AndroidNetworking.post(getString(R.string.api_login))
+                .addHeaders("Content-Type", "application/x-www-form-urlencoded")
+                .addBodyParameter("client_id", "trusted-app")
+                .addBodyParameter("client_secret", "secret")
+                .addBodyParameter("grant_type", "password")
+                .addBodyParameter("username", username)
+                .addBodyParameter("password", password)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Login response: " + response.toString());
 
-                        loggedIn();
-                    } else if (res.has("desc")) {
-                        loggedIn(res.get("desc").toString());
-                    } else {
-                        Log.e(TAG, "JSON response wasn't complete.");
+                        String access_token = null;
+
+                        try {
+                            access_token = response.getString(Constants.ACCESS_TOKEN);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Login response JSONException: " + e.toString());
+                        }
+
+                        if (access_token == null) {
+                            Log.e(TAG, "Login response have no access_token parameter.");
+                        } else {
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(Constants.ACCESS_TOKEN, "Bearer " + access_token);
+                            editor.putString(Constants.USERNAME, username);
+                            editor.apply();
+
+                            finish();
+                            gotoExploreActivity();
+                        }
+
+                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                        setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "Login respond wasn't JSON.");
-                } finally {
-                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                    setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error on Login request: " + error.toString());
 
-                findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
-            }
-        });
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Login request error: " + anError.toString());
 
-        netQ.add(loginReq);
+                        if (anError.getErrorCode() == 400) {
+                            showMessage(getString(R.string.login_wrong_username_password));
+                        }
+
+                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                        setEnabledAll((ViewGroup) findViewById(R.id.login_layout), true);
+                    }
+                });
     }
 
-    public void loggedIn(String desc) {
+    public void showMessage(String desc) {
         Toast.makeText(this, desc, Toast.LENGTH_LONG).show();
     }
 
-    public void loggedIn() {
+    public void gotoExploreActivity() {
         Intent intent = new Intent(this, ExploreActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
     }
 
-    /**
-     * When SignUp button in SignUpFragment is clicked this method gets called and register user on
-     * the server.
-     *
-     * @param fullname Fullname user inputed.
-     * @param username Username user inputed.
-     * @param password Password user inputed.
-     * @param email    Email user inputed.
-     */
     public void signUpClicked(final String fullname, final String username, final String password, final String email) {
+        hideKeyboard();
         findViewById(R.id.first_page_loading).setVisibility(View.VISIBLE);
         setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), false);
 
-        String url = getString(R.string.api_register);
-        Log.i(TAG, "Sign up request url: " + url);
-        StringRequest registerReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Response to Sign up request: " + response);
-
-                try {
-                    JSONObject res = new JSONObject(response);
-                    if (res.has("status") && res.get("status").equals("ok")) {
-                        signedUp(username, password);
-                    } else if (res.has("desc")) {
-                        signedUp(res.get("desc").toString());
-                    } else {
-                        Log.e(TAG, "JSON response wasn't complete.");
-                    }
-                } catch (JSONException e) {
-                    Log.e(TAG, "Sign up response wasn't JSON.");
-                } finally {
-                    findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                    setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error
-                Log.d(TAG, "Error on Sign up request: " + error.toString());
-
-                findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
-                setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
-            }
+        JSONObject body = new JSONObject();
+        try {
+            body.put("name", fullname);
+            body.put("username", username);
+            body.put("password", password);
+            body.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
 
-                params.put("username", username);
-                params.put("password", password);
-                params.put("fullname", fullname);
-                params.put("email", email);
+        AndroidNetworking.post(getString(R.string.api_register))
+                .addJSONObjectBody(body)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Signup response: " + response.toString());
 
-                return params;
-            }
-        };
+                        String status = null;
 
-        netQ.add(registerReq);
-    }
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Signup response JSONException: " + e.toString());
+                        }
 
-    public void signedUp(String desc) {
-        Toast.makeText(this, desc, Toast.LENGTH_LONG).show();
+                        if (status == null) {
+                            Log.e(TAG, "Signup response have no status parameter.");
+                        } else if (status.equals(Constants.USERNAME_EXISTS)) {
+                            ((EditText) findViewById(R.id.signup_et_username)).setError(getString(R.string.signup_username_exists));
+                        } else if (status.equals((Constants.EMAIL_EXISTS))) {
+                            ((EditText) findViewById(R.id.signup_et_email)).setError(getString(R.string.signup_email_exists));
+                        } else if (status.equals(Constants.OK)) {
+                            signedUp(username, password);
+                        }
+
+                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                        setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Login request error: " + anError.toString());
+
+                        findViewById(R.id.first_page_loading).setVisibility(View.INVISIBLE);
+                        setEnabledAll((ViewGroup) findViewById(R.id.signup_layout), true);
+                    }
+                });
     }
 
     public void signedUp(String username, String password) {
@@ -246,10 +229,6 @@ public class FirstPageActivity extends AppCompatActivity
         }
     }
 
-    public RequestQueue getNetQ() {
-        return netQ;
-    }
-
     public void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
@@ -257,9 +236,4 @@ public class FirstPageActivity extends AppCompatActivity
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-//    @Override
-//    public void finish() {
-//        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-//    }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -13,11 +14,13 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import co.lujun.androidtagview.TagContainerLayout;
@@ -30,8 +33,10 @@ public class ProfileEditActivity extends AppCompatActivity {
     String TAG = "ProfileEditActivity";
 
     TagContainerLayout tags;
+    ArrayList<String> allTags;
+
     EditText newTag, bio, fullname;
-    String username;
+    String username, access_token, headerImage, profileImage;
     SharedPreferences sharedPref;
     CircleImageView image;
     ImageView header;
@@ -45,55 +50,105 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.profile_edit_title);
 
         tags = findViewById(R.id.profile_edit_tags);
+        allTags = new ArrayList<>(100);
         newTag = findViewById(R.id.profile_edit_new_tag);
         header = findViewById(R.id.profile_header_container);
         image = findViewById(R.id.profile_image_container);
-        sharedPref = this.getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
+        sharedPref = this.getSharedPreferences(getString(R.string.user_info), Context.MODE_PRIVATE);
         current = this;
         bio = findViewById(R.id.profile_bio);
         fullname = findViewById(R.id.profile_fullname);
 
-        username = sharedPref.getString(getString(R.string.saved_username), "");
-        if (username.isEmpty()) {
-            Log.e(TAG, "NO USERNAME PRESENTED!");
+        access_token = sharedPref.getString(Constants.ACCESS_TOKEN, "");
+        if (access_token.isEmpty()) {
+            Log.e(TAG, "NO ACCESS_TOKEN PRESENTED!");
             finish();
         }
 
-        AndroidNetworking.get(getString(R.string.api_profile))
-                .addQueryParameter("username", username)
+        AndroidNetworking.get(getString(R.string.api_user))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addPathParameter(Constants.USERNAME, username)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Profile get information response: " + response.toString());
+                        Log.i(TAG, "Profile get info response: " + response.toString());
+
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                JSONObject profile = new JSONObject(response.get("profile").toString());
-
-                                Glide.with(current).load(profile.getString("header")).into(header);
-                                Glide.with(current).load(profile.getString("image")).into(image);
-
-                                JSONArray interests = profile.getJSONArray("interest");
-                                for (int i = 0; i < interests.length(); i++) {
-                                    tags.addTag(interests.getString(i));
-                                }
-
-                                bio.setText(profile.getString("bio"));
-
-                                fullname.setText(response.getString("fullname"));
-                            } else if (response.has("desc")) {
-                                Log.e(TAG, response.get("desc").toString());
-                            }
+                            status = response.getString(Constants.STATUS);
                         } catch (JSONException e) {
-                            Log.e(TAG, e.toString());
+                            Log.e(TAG, "Profile get info response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONObject object = response.getJSONObject(Constants.OBJECT);
+
+                                fullname.setText(object.getString(Constants.FULLNAME));
+                                bio.setText(object.getString(Constants.BIO));
+
+                                headerImage = object.getString(Constants.COVER_PHOTO);
+                                Glide.with(header)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + headerImage, access_token))
+                                        .into(header);
+
+                                profileImage = object.getString(Constants.PROFILE_PHOTO);
+                                Glide.with(image)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + profileImage, access_token))
+                                        .into(image);
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get response was incomplete.");
+                                e.printStackTrace();
+                            }
+
                         }
                     }
 
                     @Override
-                    public void onError(ANError error) {
-                        Log.e(TAG, error.toString());
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
+
+        AndroidNetworking.get(getString(R.string.api_interests))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Profile get all interests response: " + response.toString());
+
+                        String status = null;
+
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Profile get all interests response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONArray all = response.getJSONArray(Constants.INTERESTS);
+                                for (int i = 0; i < all.length(); i++) {
+                                    tags.addTag(all.getJSONObject(i).getString(Constants.INTEREST));
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get all interests response was incomplete.");
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    }
+                });
+
 
         tags.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
@@ -123,13 +178,12 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     public void update(View view) {
         // TODO upload new profile header and image.
+        // TODO integrate upload with server.
 
         JSONArray newTags = new JSONArray(tags.getTags());
-        AndroidNetworking.post(getString(R.string.api_profile))
-                .addQueryParameter("username", username)
-                .addBodyParameter("fullname", fullname.getText().toString())
-                .addBodyParameter("bio", bio.getText().toString())
-                .addBodyParameter("interests", newTags.toString())
+        AndroidNetworking.post(getString(R.string.api_profile_update))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addPathParameter(Constants.USERNAME, username)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override

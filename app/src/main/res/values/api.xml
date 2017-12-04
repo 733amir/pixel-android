@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="api_exists">http://172.24.50.5:5000/exists</string>
-    <string name="api_username_exists">http://172.24.50.5:5000/username_exists</string>
-    <string name="api_register">http://172.24.50.5:5000/register</string>
-    <string name="api_login">http://172.24.50.5:5000/login</string>
-    <string name="api_reset_request">http://172.24.50.5:5000/reset_request</string>
-    <string name="api_reset">http://172.24.50.5:5000/reset</string>
-    <string name="api_account">http://172.24.50.5:5000/account</string>
-    <string name="api_profile">http://172.24.50.5:5000/profile</string>
-    <string name="api_posts">http://172.24.50.5:5000/posts</string>
+    <string name="api_register">http://10.0.2.2:8080/api/users/signup</string>
+    <string name="api_login">http://10.0.2.2:8080/oauth/token</string>
+    <string name="api_account">http://10.0.2.2:8080/api/users/account/{username}</string>
+    <string name="api_account_update">http://10.0.2.2:8080/api/update/users/account/{username}</string>
+    <string name="api_profile">http://10.0.2.2:8080/api/users/profile/{username}</string>
+    <string name="api_profile_update">http://10.0.2.2:8080/api/users/update/profile/{username}</string>
+    <string name="api_user">http://10.0.2.2:8080/api/users/{username}</string>
+    <string name="api_interests">http://10.0.2.2:8080/api/interests</string>
+    <string name="api_posts">http://10.0.2.2:8080/api/post</string>
+    <string name="api_post_photo">http://10.0.2.2:8080/api/post/photo/</string>
+    <string name="api_profile_photo">http://10.0.2.2:8080/api/photos/</string>
+
+    <string name="api_exists">http://192.168.10.120:5000/exists</string>
+    <string name="api_username_exists">http://192.168.10.120:5000/username_exists</string>
+    <string name="api_reset_request">http://192.168.10.120:5000/reset_request</string>
+    <string name="api_reset">http://192.168.10.120:5000/reset</string>
     <string name="api_friends">http://172.24.50.5:5000/friends_list</string>
 </resources>

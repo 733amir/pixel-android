@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,7 +36,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
 
     SharedPreferences sharedPref;
 
-    String username;
+    String username, access_token;
 
     FloatingActionMenu uploadMenu;
 
@@ -74,19 +75,21 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         setContentView(R.layout.activity_explore);
 
         // Shared Preferences
-        sharedPref = getSharedPreferences(getString(R.string.saved_user_related), Context.MODE_PRIVATE);
-        username = sharedPref.getString(getString(R.string.saved_username), "");
-        if (username.isEmpty()) {
-            Log.e(TAG, "NO USERNAME PRESENTED!");
+        sharedPref = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        access_token = sharedPref.getString(Constants.ACCESS_TOKEN, "");
+        username = sharedPref.getString(Constants.USERNAME, "");
+        if (access_token.isEmpty()) {
+            Log.e(TAG, "NO ACCESS_TOKEN PRESENTED!");
             finish();
         }
 
         // Create explore activity fragments
         homeFragment = new HomeFragment();
+        homeFragment.setArgs(access_token, username);
         friendsListFragment = new FriendsListFragment();
-        friendsListFragment.setArgs(username);
+        friendsListFragment.setArgs(access_token, username);
         profileFragment = new ProfileFragment();
-        profileFragment.setArgs(username);
+        profileFragment.setArgs(access_token, username);
 
         // Floating Menu and Buttons
         uploadMenu = findViewById(R.id.upload_menu);
@@ -140,7 +143,7 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
         super.onActivityResult(requestCode, resultCode, data);
 
         // User is logged out.
-        if (sharedPref.getString(getString(R.string.saved_username), "").isEmpty()) {
+        if (sharedPref.getString(Constants.ACCESS_TOKEN, "").isEmpty()) {
             finish();
         }
     }

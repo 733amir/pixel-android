@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.rahnemacollege.pixel.Utilities.Constants;
 import com.rahnemacollege.pixel.Utilities.Post;
 import com.rahnemacollege.pixel.Utilities.SquareImageView;
 
@@ -16,12 +17,9 @@ import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<Post> mDataset;
+    private String access_token;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public View root;
 
         public ViewHolder(View root) {
@@ -30,21 +28,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
+    public void setArgs(String access_token) {
+        this.access_token = access_token;
+    }
+
     public PostAdapter(int initialCapacity) {
         mDataset = new ArrayList<>(initialCapacity);
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_holder, parent, false);
 
         ViewHolder vh = new ViewHolder(root);
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         TextView fullname = holder.root.findViewById(R.id.post_fullname);
@@ -64,11 +63,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         like_count.setText(post.like_count);
         comment_count.setText(post.comment_count);
         caption.setText(post.caption);
-        Glide.with(holder.root).load(post.postImageUrl).into(post_image);
-        Glide.with(holder.root).load(post.profileImageUrl).into(profile_image);
+        Glide.with(holder.root).load(Constants.addAuthorization(post.postImageUrl, access_token)).into(post_image);
+        Glide.with(holder.root).load(Constants.addAuthorization(post.profileImageUrl, access_token)).into(profile_image);  // TODO uncomment this.
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();

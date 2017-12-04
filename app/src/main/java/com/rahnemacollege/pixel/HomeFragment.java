@@ -10,7 +10,14 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends Fragment {
 
+    String username, access_token;
+
     public HomeFragment() {
+    }
+
+    public void setArgs(String access_token, String username) {
+        this.username = username;
+        this.access_token = access_token;
     }
 
     @Override

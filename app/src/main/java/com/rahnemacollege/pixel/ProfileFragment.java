@@ -1,6 +1,8 @@
 package com.rahnemacollege.pixel;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +30,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
     String TAG = "ProfileFragment";
+    Context current;
 
     View view;
     ImageView profile_edit, notification, account_view, header;
     CircleImageView image;
     ProfileClickHandler clickHandler;
-    String username, profileImageUrl;
+    String username, access_token, profileImage, headerImage;
 
     RecyclerView tags;
     LinearLayoutManager tagsContainer;
@@ -53,9 +57,11 @@ public class ProfileFragment extends Fragment {
     }
 
     public ProfileFragment() {
+        current = this.getActivity();
     }
 
-    public void setArgs(String username) {
+    public void setArgs(String access_token, String username) {
+        this.access_token = access_token;
         this.username = username;
     }
 
@@ -75,6 +81,7 @@ public class ProfileFragment extends Fragment {
         posts = view.findViewById(R.id.profile_posts);
         postsContainer = new LinearLayoutManager(getActivity());
         postsAdapter = new PostAdapter(50);
+        postsAdapter.setArgs(access_token);
         bio = view.findViewById(R.id.profile_bio);
         fullname = view.findViewById(R.id.profile_fullname);
 
@@ -109,83 +116,146 @@ public class ProfileFragment extends Fragment {
         posts.setLayoutManager(postsContainer);
         posts.setAdapter(postsAdapter);
 
-        AndroidNetworking.get(getString(R.string.api_profile))
-                .addQueryParameter("username", username)
+        // TODO add load more posts on scrolling.
+        AndroidNetworking.get(getString(R.string.api_user))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addPathParameter(Constants.USERNAME, username)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Profile get information response: " + response.toString());
+                        Log.i(TAG, "Profile get info response: " + response.toString());
+
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                JSONObject profile = new JSONObject(response.get("profile").toString());
-
-                                Glide.with(getActivity()).load(profile.getString("header")).into(header);
-                                Glide.with(getActivity()).load(profile.getString("image")).into(image);
-                                profileImageUrl = profile.getString("image");
-
-                                JSONArray interests = profile.getJSONArray("interest");
-                                for (int i = 0; i < interests.length(); i++) {
-                                    tagsAdapter.addTag(interests.getString(i));
-                                }
-
-                                bio.setText(profile.getString("bio"));
-
-                                fullname.setText(response.getString("fullname"));
-                            } else if (response.has("desc")) {
-                                Log.e(TAG, response.get("desc").toString());
-                            }
+                            status = response.getString(Constants.STATUS);
                         } catch (JSONException e) {
-                            Log.e(TAG, e.toString());
+                            Log.e(TAG, "Profile get info response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONObject object = response.getJSONObject(Constants.OBJECT);
+
+                                fullname.setText(object.getString(Constants.FULLNAME));
+                                bio.setText(object.getString(Constants.BIO));
+
+                                headerImage = object.getString(Constants.COVER_PHOTO);
+                                Glide.with(header)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + headerImage, access_token))
+                                        .into(header);
+
+                                profileImage = object.getString(Constants.PROFILE_PHOTO);
+                                Glide.with(image)
+                                        .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + profileImage, access_token))
+                                        .into(image);
+
+                                loadPosts();
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get info response was incomplete.");
+                                e.printStackTrace();
+                            }
+
                         }
                     }
 
                     @Override
-                    public void onError(ANError error) {
-                        Log.e(TAG, error.toString());
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
 
-        AndroidNetworking.get(getString(R.string.api_posts))
-                .addQueryParameter("username", username)
+        AndroidNetworking.get(getString(R.string.api_interests))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Posts get information response: " + response.toString());
+                        Log.i(TAG, "Profile get all interests response: " + response.toString());
+
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                JSONArray posts = new JSONArray(response.getString("posts"));
-                                JSONObject post;
-//                                String fullname, postImageUrl, profileImageUrl, location, caption, time, like_count, comment_count;
-                                for (int i = 0; i < posts.length(); i++) {
-                                    post = posts.getJSONObject(i);
-                                    postsAdapter.addPost(
-                                            fullname.getText().toString(),
-                                            post.getString("time"),
-                                            post.getString("location"),
-                                            post.getString("like_count"),
-                                            post.getString("comment_count"),
-                                            post.getString("caption"),
-                                            post.getString("image"),
-                                            profileImageUrl
-                                    );
-                                    Log.i(TAG, "Posts size: " + posts.length());
-                                }
-                            } else if (response.has("desc")) {
-                                Log.e(TAG, response.get("desc").toString());
-                            }
+                            status = response.getString(Constants.STATUS);
                         } catch (JSONException e) {
-                            Log.e(TAG, e.toString());
+                            Log.e(TAG, "Profile get all interests response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile get info response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONArray all = response.getJSONArray(Constants.INTERESTS);
+                                for (int i = 0; i < all.length(); i++) {
+                                    tagsAdapter.addTag(all.getJSONObject(i).getString(Constants.INTEREST));
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Profile get all interests response was incomplete.");
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                     @Override
-                    public void onError(ANError error) {
-                        Log.e(TAG, error.toString());
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
+
+
 
         return view;
+    }
+
+    public void loadPosts() {
+        AndroidNetworking.get(getString(R.string.api_posts))
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addQueryParameter(Constants.USERNAME, username)
+                .addQueryParameter(Constants.PAGE, "1")
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "Posts get information response: " + response.toString());
+
+                        String status = null;
+
+                        try {
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Posts get information response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Posts get information response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONArray posts = response.getJSONArray(Constants.POSTS);
+                                for (int i = 0; i < posts.length(); i++) {
+                                    JSONObject post = posts.getJSONObject(i);
+
+                                    postsAdapter.addPost(
+                                            fullname.getText().toString(),
+                                            post.getString(Constants.CREATED_DATE),  // TODO convert to difference of now and then.
+                                            "some where",  // TODO get location.
+                                            post.getString(Constants.LIKE_COUNT),
+                                            post.getString(Constants.COMMENT_COUNT),
+                                            post.getString(Constants.TEXT),
+                                            getString(R.string.api_post_photo) + post.getString(Constants.PHOTO),
+                                            getString(R.string.api_profile_photo) + profileImage
+                                    );
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Posts get information response was incomplete.");
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile get info request error: " + anError.toString() + " code: " + anError.getErrorCode());
+                    }
+                });
     }
 }

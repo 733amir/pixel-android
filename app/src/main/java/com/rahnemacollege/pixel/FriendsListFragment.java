@@ -21,19 +21,20 @@ import org.json.JSONObject;
 public class FriendsListFragment extends Fragment {
     String TAG = "Friends Fragment";
 
+    String username, access_token;
+
     private RecyclerView friendsRecyclerView;
     private FriendsAdapter friendsAdapter;
     //TODO change the quantity of items
     private static final int NUM_FRIENDS_ITEM = 10;
 
-    public String username;
-
     public FriendsListFragment() {
         // Required empty public constructor
     }
 
-    public void setArgs(String username) {
+    public void setArgs(String access_token, String username) {
         this.username = username;
+        this.access_token = access_token;
     }
 
     @Override
