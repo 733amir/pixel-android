@@ -33,7 +33,6 @@ public class ProfileEditActivity extends AppCompatActivity {
     String TAG = "ProfileEditActivity";
 
     TagContainerLayout tags;
-    ArrayList<String> allTags;
 
     EditText newTag, bio, fullname;
     String username, access_token, headerImage, profileImage;
@@ -50,7 +49,6 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.profile_edit_title);
 
         tags = findViewById(R.id.profile_edit_tags);
-        allTags = new ArrayList<>(100);
         newTag = findViewById(R.id.profile_edit_new_tag);
         header = findViewById(R.id.profile_header_container);
         image = findViewById(R.id.profile_image_container);
@@ -180,29 +178,47 @@ public class ProfileEditActivity extends AppCompatActivity {
         // TODO upload new profile header and image.
         // TODO integrate upload with server.
 
-        JSONArray newTags = new JSONArray(tags.getTags());
-        AndroidNetworking.post(getString(R.string.api_profile_update))
+        JSONObject body = new JSONObject();
+        JSONArray new_tags = new JSONArray();
+        JSONObject new_tag;
+
+        try {
+            for (int i = 0; i < tags.getTags().size(); i++) {
+                new_tag = new JSONObject();
+                new_tag.put(Constants.INTEREST, tags.getTagText(i));
+                new_tags.put(new_tag);
+            }
+            body.put(Constants.INTERESTS, new_tags);
+        } catch (JSONException e) {
+            Log.e(TAG, "Parsing tags problem.");
+            e.printStackTrace();
+        }
+        AndroidNetworking.put(getString(R.string.api_interests))
                 .addHeaders(Constants.AUTHORIZATION, access_token)
-                .addPathParameter(Constants.USERNAME, username)
+                .addJSONObjectBody(body)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Profile push information response: " + response.toString());
+                        Log.i(TAG, "Profile update interests response: " + response.toString());
+
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                finish();
-                            } else if (response.has("desc")) {
-                                Log.e(TAG, response.get("desc").toString());
-                            }
+                            status = response.getString(Constants.STATUS);
                         } catch (JSONException e) {
-                            Log.e(TAG, e.toString());
+                            Log.e(TAG, "Profile update interests response JSONException: " + e.toString());
+                        }
+
+                        if (status == null) {
+                            Log.e(TAG, "Profile update interests response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            finish();
                         }
                     }
 
                     @Override
-                    public void onError(ANError error) {
-                        Log.e(TAG, error.toString());
+                    public void onError(ANError anError) {
+                        Log.e(TAG, "Profile update interests request error: " + anError.toString() + " code: " + anError.getErrorCode());
                     }
                 });
     }
