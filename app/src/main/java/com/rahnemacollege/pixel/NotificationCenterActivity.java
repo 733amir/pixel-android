@@ -38,10 +38,10 @@ public class NotificationCenterActivity extends AppCompatActivity {
 
         //TODO get notifications from server here
         //mock notifications to test:
-//        notificationsAdapter.addNotificationForAdapter("Parsa", "",getString(R.string.notification_friend_request_accept_report));
-//        notificationsAdapter.addNotificationForAdapter("Amir Khazaii", "",getString(R.string.notification_friend_request_report));
-//        notificationsAdapter.addNotificationForAdapter("Hey", "",getString(R.string.notification_friend_request_accept_report));
-//        notificationsAdapter.addNotificationForAdapter("Yeah", "",getString(R.string.notification_post_like_report));
+        notificationsAdapter.addNotificationForAdapter("Parsa", "",getString(R.string.notification_friend_request_accept_report));
+        notificationsAdapter.addNotificationForAdapter("Amir Khazaii", "",getString(R.string.notification_friend_request_report));
+        notificationsAdapter.addNotificationForAdapter("Hey", "",getString(R.string.notification_friend_request_accept_report));
+        notificationsAdapter.addNotificationForAdapter("Yeah", "",getString(R.string.notification_post_like_report));
     }
 
     @Override

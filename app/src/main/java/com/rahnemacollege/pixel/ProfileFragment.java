@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -115,6 +116,10 @@ public class ProfileFragment extends Fragment {
         posts.setHasFixedSize(true);
         posts.setLayoutManager(postsContainer);
         posts.setAdapter(postsAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(posts.getContext(),
+                postsContainer.getOrientation());
+        posts.addItemDecoration(dividerItemDecoration);
 
         loadProfile();
 
