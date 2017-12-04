@@ -6,6 +6,7 @@ import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -268,10 +269,12 @@ public class ProfileEditActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        if (Locale.getDefault().getDisplayLanguage().equals("English"))
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        else
-            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        overridePendingTransition(R.anim.slide_from_up, R.anim.slide_to_down);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -38,19 +38,16 @@ public class NotificationCenterActivity extends AppCompatActivity {
 
         //TODO get notifications from server here
         //mock notifications to test:
-//        notificationsAdapter.addNotificationForAdapter("Parsa", "",getString(R.string.notification_friend_request_accept_report));
-//        notificationsAdapter.addNotificationForAdapter("Amir Khazaii", "",getString(R.string.notification_friend_request_report));
-//        notificationsAdapter.addNotificationForAdapter("Hey", "",getString(R.string.notification_friend_request_accept_report));
-//        notificationsAdapter.addNotificationForAdapter("Yeah", "",getString(R.string.notification_post_like_report));
+        notificationsAdapter.addNotificationForAdapter("Parsa", "",getString(R.string.notification_friend_request_accept_report));
+        notificationsAdapter.addNotificationForAdapter("Amir Khazaii", "",getString(R.string.notification_friend_request_report));
+        notificationsAdapter.addNotificationForAdapter("Hey", "",getString(R.string.notification_friend_request_accept_report));
+        notificationsAdapter.addNotificationForAdapter("Yeah", "",getString(R.string.notification_post_like_report));
     }
 
     @Override
     public void finish() {
         super.finish();
-        if (Locale.getDefault().getDisplayLanguage().equals("English"))
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        else
-            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        overridePendingTransition(R.anim.slide_from_up, R.anim.slide_to_down);
     }
 
     @Override

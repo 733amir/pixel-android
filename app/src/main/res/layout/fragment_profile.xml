@@ -61,7 +61,7 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -76,35 +76,14 @@
 
             <include layout="@layout/profile_info" />
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:divider="?android:dividerHorizontal"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:orientation="vertical"-->
-                <!--android:showDividers="middle">-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-                <!--<include layout="@layout/post_holder" />-->
-
-            <!--</LinearLayout>-->
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/profile_posts"
                 android:scrollbars="vertical"
                 android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
