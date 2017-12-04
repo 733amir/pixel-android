@@ -91,6 +91,8 @@ public class UploadPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_post);
 
+        location = null;
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -237,7 +239,7 @@ public class UploadPost extends AppCompatActivity {
             File outputDir = getCacheDir(); // context being the Activity pointer
             File outputFile = File.createTempFile("temp", ".png", outputDir);
             FileOutputStream fOut = new FileOutputStream(outputFile);
-            image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            image.compress(Bitmap.CompressFormat.PNG, 95, fOut);
             fOut.flush();
             fOut.close();
 

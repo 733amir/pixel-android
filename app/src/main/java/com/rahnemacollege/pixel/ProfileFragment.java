@@ -245,6 +245,7 @@ public class ProfileFragment extends Fragment {
                         if (status == null) {
                             Log.e(TAG, "Posts get information response have no status parameter.");
                         } else if (status.equals(Constants.OK)) {
+                            postsAdapter.removeAll();
                             try {
                                 JSONArray posts = response.getJSONArray(Constants.POSTS);
                                 for (int i = 0; i < posts.length(); i++) {

@@ -64,7 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         comment_count.setText(post.comment_count);
         caption.setText(post.caption);
         Glide.with(holder.root).load(Constants.addAuthorization(post.postImageUrl, access_token)).into(post_image);
-        Glide.with(holder.root).load(Constants.addAuthorization(post.profileImageUrl, access_token)).into(profile_image);  // TODO uncomment this.
+        Glide.with(holder.root).load(Constants.addAuthorization(post.profileImageUrl, access_token)).into(profile_image);
     }
 
     @Override
@@ -76,6 +76,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         String comment_count, String caption, String postImageUrl, String profileImageUrl) {
         Post post = new Post(fullname, time, location, like_count, comment_count, caption, postImageUrl, profileImageUrl);
         mDataset.add(post);
+        notifyDataSetChanged();
+    }
+
+    public void removeAll() {
+        mDataset.clear();
         notifyDataSetChanged();
     }
 }
