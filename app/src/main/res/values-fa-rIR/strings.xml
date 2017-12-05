@@ -67,8 +67,9 @@
     <string name="account_username">نام‌کاربری</string>
     <string name="account_email">ایمیل</string>
     <string name="account_password_change">تغییر پسورد</string>
-    <string name="account_current_password">پسورد کنونی</string>
-    <string name="account_new_password">پسورد جدید</string>
+    <string name="account_current_password">رمزعبور کنونی</string>
+    <string name="account_new_password">رمزعبور جدید</string>
+    <string name="account_new_password_repeat">تکرار رمزعبور جدید</string>
     <string name="account_new_password_hint">اختیاری</string>
     <string name="account_update">بروزرسانی</string>
     <string name="account_logout">خروج</string>

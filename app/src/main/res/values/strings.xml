@@ -69,6 +69,7 @@
     <string name="account_password_change">Change Password</string>
     <string name="account_current_password">Current Password</string>
     <string name="account_new_password">New Password</string>
+    <string name="account_new_password_repeat">New Password (Repeat)</string>
     <string name="account_new_password_hint">Optional</string>
     <string name="account_update">Update</string>
     <string name="account_logout">Logout</string>

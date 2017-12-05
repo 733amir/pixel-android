@@ -73,6 +73,24 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/pages_top_to_top_margin"
             android:background="@drawable/rounded_edittext"
+            android:gravity="center"
+            android:hint="@string/account_new_password_hint"
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/account_new_password_repeat" />
+
+        <EditText
+            android:id="@+id/account_password_new_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center"
             android:hint="@string/account_new_password_hint"
             android:inputType="textPassword"
             android:layoutDirection="ltr" />
