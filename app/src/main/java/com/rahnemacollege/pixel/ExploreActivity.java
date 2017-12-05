@@ -22,7 +22,7 @@ import java.util.Locale;
 import pub.devrel.easypermissions.EasyPermissions;
 
 
-public class ExploreActivity extends AppCompatActivity implements ProfileFragment.ProfileClickHandler, EasyPermissions.PermissionCallbacks {
+public class ExploreActivity extends AppCompatActivity implements ProfileFragment.ProfileClickHandler, EasyPermissions.PermissionCallbacks, FriendsListFragment.FriendsClickHandler {
 
     String TAG = "ExploreActivity";
 
@@ -162,6 +162,12 @@ public class ExploreActivity extends AppCompatActivity implements ProfileFragmen
 
     public void notificationCenterClicked() {
         Intent intent = new Intent(this, NotificationCenterActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
+    }
+
+    public void searchClicked() {
+        Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_up);
     }

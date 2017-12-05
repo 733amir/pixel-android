@@ -14,6 +14,8 @@
     <string name="api_photo_upload">http://192.168.10.193/api/photos</string>
     <string name="api_like">http://192.168.10.193/api/like</string>
     <string name="api_friends">http://10.0.2.2:8080/api/friends/{username}</string>
+    <string name="api_search">http://192.168.10.193/api/users/search</string>
+    <string name="api_friend_request">http://192.168.10.193/api/friends/{user1}/{user2}</string>
 
     <string name="api_exists">http://192.168.10.120:5000/exists</string>
     <string name="api_username_exists">http://192.168.10.120:5000/username_exists</string>
