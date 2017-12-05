@@ -95,4 +95,9 @@
     <string name="notification_friend_request_accept_report">درخواست شما رو تایید کرد.</string>
     <string name="notification_post_like_report">پست شما رو لایک کرد.</string>
     <string name="notification_comment_like_report">کامنت شما رو لایک کرد:</string>
+
+    <!-- Image Source Picker -->
+    <string name="image_source_camera">با استفاده از دوربین</string>
+    <string name="image_source_gallery">انتخاب از گالری</string>
+
 </resources>

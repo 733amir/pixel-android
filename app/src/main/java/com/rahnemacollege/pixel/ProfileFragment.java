@@ -129,6 +129,13 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        loadPosts();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 

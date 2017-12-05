@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.graphics.Rect;
@@ -35,6 +36,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -83,8 +85,12 @@ public class UploadPost extends AppCompatActivity {
     LinearLayout location_container;
     View view;
     private boolean isNetWorkEnabled;
+    EditText new_post_caption;
+    Button new_post_upload;
 
     String access_token;
+
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +109,13 @@ public class UploadPost extends AppCompatActivity {
         post_image = findViewById(R.id.new_post_image);
         location_textView = findViewById(R.id.new_post_location_text);
         location_icon = findViewById(R.id.new_post_location_icon);
-
+        new_post_caption = findViewById(R.id.new_post_caption);
+        new_post_upload = findViewById(R.id.new_post_upload);
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetWorkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         location_container = findViewById(R.id.new_post_location_holder);
+        sharedPref = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
         location_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +144,15 @@ public class UploadPost extends AppCompatActivity {
         } else if (source.equals("gallery")) {
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, GALLERY_REQUEST);
+        }
+
+        Boolean justPhoto = getIntent().getBooleanExtra(Constants.JUST_PHOTO, false);
+        if (justPhoto) {
+            new_post_caption.setVisibility(View.GONE);
+            location_container.setVisibility(View.GONE);
+
+            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            new_post_upload.setLayoutParams(p);
         }
 
         access_token = getIntent().getStringExtra(Constants.ACCESS_TOKEN);
@@ -221,7 +238,7 @@ public class UploadPost extends AppCompatActivity {
                 addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
                 String city = addresses.get(0).getLocality();
                 String knownName = addresses.get(0).getFeatureName();
-                location_textView.setText(city + ", " + knownName);
+                location_textView.setText(city + " - " + knownName);
                 location_icon.setImageResource(R.drawable.ic_location_on_blue_24dp);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -243,44 +260,82 @@ public class UploadPost extends AppCompatActivity {
             fOut.flush();
             fOut.close();
 
-            AndroidNetworking.upload(getString(R.string.api_post_upload))
-                    .addHeaders(Constants.AUTHORIZATION, access_token)
-                    .addMultipartFile(Constants.PHOTO, outputFile)
-                    .addMultipartParameter(Constants.TEXT, caption)
-                    .addMultipartParameter(Constants.LAT, String.valueOf(location_status? location.getLatitude(): 0))
-                    .addMultipartParameter(Constants.LON, String.valueOf(location_status? location.getLongitude(): 0))
-                    .build()
-                    .setUploadProgressListener(new UploadProgressListener() {
-                        @Override
-                        public void onProgress(long bytesUploaded, long totalBytes) {
-                            // TODO add a uploader progress bar.
-                        }
-                    })
-                    .getAsJSONObject(new JSONObjectRequestListener() {
-                        public void onResponse(JSONObject response) {
-                            Log.i(TAG, "Upload post response: " + response.toString());
+            if (getIntent().getBooleanExtra(Constants.JUST_PHOTO, false)) {
+                AndroidNetworking.upload(getString(R.string.api_photo_upload))
+                        .addHeaders(Constants.AUTHORIZATION, access_token)
+                        .addMultipartFile(Constants.PHOTO, outputFile)
+                        .build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            public void onResponse(JSONObject response) {
+                                Log.i(TAG, "Upload response: " + response.toString());
 
-                            String status = null;
+                                String status = null, path = "";
 
-                            try {
-                                status = response.getString(Constants.STATUS);
-                            } catch (JSONException e) {
-                                Log.e(TAG, "Upload post response JSONException: " + e.toString());
+                                try {
+                                    status = response.getString(Constants.STATUS);
+                                    path = response.getString(Constants.OBJECT);
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Upload response JSONException: " + e.toString());
+                                }
+
+                                if (status == null) {
+                                    Log.e(TAG, "Upload response have no status parameter.");
+                                } else if (status.equals(Constants.OK)) {
+                                    if (getIntent().getStringExtra(Constants.FOR).equals(Constants.PROFILE_HEADER))
+                                        sharedPref.edit().putString(Constants.UPLOAD_RESULT_FOR_HEADER, path).apply();
+                                    else if (getIntent().getStringExtra(Constants.FOR).equals(Constants.PROFILE_IMAGE))
+                                        sharedPref.edit().putString(Constants.UPLOADED_RESULT_FOR_PROFILE, path).apply();
+                                    finish();
+                                }
                             }
 
-                            if (status == null) {
-                                Log.e(TAG, "Upload post response have no status parameter.");
-                            } else if (status.equals(Constants.OK)) {
-                                finish();
+                            @Override
+                            public void onError(ANError e) {
+                                Log.e(TAG, "Upload request error: " + e.toString() + " code: " + e.getErrorCode());
+                                e.printStackTrace();
                             }
-                        }
+                        });
 
-                        @Override
-                        public void onError(ANError e) {
-                            Log.e(TAG, "Upload post request error: " + e.toString() + " code: " + e.getErrorCode());
-                            e.printStackTrace();
-                        }
-                    });
+            } else {
+                AndroidNetworking.upload(getString(R.string.api_post_upload))
+                        .addHeaders(Constants.AUTHORIZATION, access_token)
+                        .addMultipartFile(Constants.PHOTO, outputFile)
+                        .addMultipartParameter(Constants.TEXT, caption)
+                        .addMultipartParameter(Constants.LAT, String.valueOf(location_status ? location.getLatitude() : 0))
+                        .addMultipartParameter(Constants.LON, String.valueOf(location_status ? location.getLongitude() : 0))
+                        .build()
+                        .setUploadProgressListener(new UploadProgressListener() {
+                            @Override
+                            public void onProgress(long bytesUploaded, long totalBytes) {
+                                // TODO add a uploader progress bar.
+                            }
+                        })
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            public void onResponse(JSONObject response) {
+                                Log.i(TAG, "Upload response: " + response.toString());
+
+                                String status = null, path = "";
+
+                                try {
+                                    status = response.getString(Constants.STATUS);
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Upload response JSONException: " + e.toString());
+                                }
+
+                                if (status == null) {
+                                    Log.e(TAG, "Upload response have no status parameter.");
+                                } else if (status.equals(Constants.OK)) {
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onError(ANError e) {
+                                Log.e(TAG, "Upload request error: " + e.toString() + " code: " + e.getErrorCode());
+                                e.printStackTrace();
+                            }
+                        });
+            }
 
         } catch (IOException e) {
             Log.e(TAG, "Error on saving bitmap of cropped image.");

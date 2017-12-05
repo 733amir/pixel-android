@@ -95,5 +95,9 @@
     <string name="notification_friend_request_accept_report">accepted your friend request.</string>
     <string name="notification_post_like_report">liked your post.</string>
     <string name="notification_comment_like_report">liked your comment:</string>
+    
+    <!-- Image Source Picker -->
+    <string name="image_source_camera">From Camera</string>
+    <string name="image_source_gallery">From Gallery</string>
 
 </resources>

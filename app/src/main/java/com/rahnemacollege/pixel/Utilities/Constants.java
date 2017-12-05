@@ -22,6 +22,11 @@ public class Constants {
     // Status codes
     public static final String OK = "1", USERNAME_EXISTS = "2", EMAIL_EXISTS = "3", NOT_FOUND = "4", WRONG_PASSWORD = "6";
 
+    // Passed parameters with Intent.
+    public static final String JUST_PHOTO = "justPhoto", FOR = "for", PROFILE_IMAGE = "profileImage",
+            PROFILE_HEADER = "profileHeader", UPLOADED_RESULT_FOR_PROFILE = "uploadResultForProfile",
+            UPLOAD_RESULT_FOR_HEADER = "uploadResultForHeader";
+
     // TODO move all apis here.
 
     public static GlideUrl addAuthorization(String url, String access_token){

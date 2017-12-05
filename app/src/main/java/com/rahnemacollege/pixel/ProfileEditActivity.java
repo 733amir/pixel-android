@@ -1,8 +1,11 @@
 package com.rahnemacollege.pixel;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -168,6 +172,31 @@ public class ProfileEditActivity extends AppCompatActivity {
                 tags.removeTag(position);
             }
         });
+
+        sharedPref.edit().putString(Constants.UPLOAD_RESULT_FOR_HEADER, "").apply();
+        sharedPref.edit().putString(Constants.UPLOADED_RESULT_FOR_PROFILE, "").apply();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!sharedPref.getString(Constants.UPLOAD_RESULT_FOR_HEADER, "").equals("")) {
+            headerImage = sharedPref.getString(Constants.UPLOAD_RESULT_FOR_HEADER, "");
+            Glide.with(header)
+                    .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + headerImage, access_token))
+                    .into(header);
+            Log.i(TAG, headerImage);
+        }
+
+        if (!sharedPref.getString(Constants.UPLOADED_RESULT_FOR_PROFILE, "").equals("")) {
+            profileImage = sharedPref.getString(Constants.UPLOADED_RESULT_FOR_PROFILE, "");
+            Glide.with(image)
+                    .load(Constants.addAuthorization(getString(R.string.api_profile_photo) + profileImage, access_token))
+                    .into(image);
+            Log.i(TAG, profileImage);
+        }
     }
 
     public void addTag(View view) {
@@ -185,8 +214,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         try {
             body.put(Constants.BIO, bio.getText().toString());
             body.put(Constants.NAME, fullname.getText().toString());
-            body.put("profilephoto", "0.jpg");
-            body.put("coverphoto", "1.jpg");
+            body.put(Constants.COVER_PHOTO, headerImage);
+            body.put(Constants.PROFILE_PHOTO, profileImage);
         } catch (JSONException e) {
             Log.e(TAG, "Parsing name and bio.");
             e.printStackTrace();
@@ -280,5 +309,47 @@ public class ProfileEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public void onProfileImageClicked(View view) {
+        CharSequence colors[] = new CharSequence[] {getString(R.string.image_source_camera), getString(R.string.image_source_gallery)};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(current, UploadPost.class);
+                if (which == 0)
+                    intent.putExtra("source", "camera");
+                else if (which == 1)
+                    intent.putExtra("source", "gallery");
+                intent.putExtra(Constants.ACCESS_TOKEN, access_token);
+                intent.putExtra(Constants.JUST_PHOTO, true);
+                intent.putExtra(Constants.FOR, Constants.PROFILE_IMAGE);
+                startActivity(intent);
+            }
+        });
+        builder.show();
+    }
+
+    public void onProfileHeaderClicked(View view) {
+        CharSequence colors[] = new CharSequence[] {getString(R.string.image_source_camera), getString(R.string.image_source_gallery)};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(current, UploadPost.class);
+                if (which == 0)
+                    intent.putExtra("source", "camera");
+                else if (which == 1)
+                    intent.putExtra("source", "gallery");
+                intent.putExtra(Constants.ACCESS_TOKEN, access_token);
+                intent.putExtra(Constants.JUST_PHOTO, true);
+                intent.putExtra(Constants.FOR, Constants.PROFILE_HEADER);
+                startActivity(intent);
+            }
+        });
+        builder.show();
     }
 }
