@@ -11,10 +11,10 @@
     <string name="api_post_photo">http://10.0.2.2:8080/api/post/photo/</string>
     <string name="api_profile_photo">http://10.0.2.2:8080/api/photos/</string>
     <string name="api_post_upload">http://10.0.2.2:8080/api/post</string>
+    <string name="api_friends">http://10.0.2.2:8080/api/friends/{username}</string>
 
     <string name="api_exists">http://192.168.10.120:5000/exists</string>
     <string name="api_username_exists">http://192.168.10.120:5000/username_exists</string>
     <string name="api_reset_request">http://192.168.10.120:5000/reset_request</string>
     <string name="api_reset">http://192.168.10.120:5000/reset</string>
-    <string name="api_friends">http://172.24.50.5:5000/friends_list</string>
 </resources>

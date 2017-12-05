@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,33 +51,57 @@ public class FriendsListFragment extends Fragment {
         friendsRecyclerView.setAdapter(friendsAdapter);
 
         AndroidNetworking.get(getString(R.string.api_friends))
-                .addQueryParameter("username", username)
+                .addHeaders(Constants.AUTHORIZATION, access_token)
+                .addPathParameter(Constants.USERNAME, username)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, "Friends get information response: " + response.toString());
 
+                        String status = null;
+
                         try {
-                            if (response.get("status").equals("ok")) {
-                                JSONArray friends = new JSONArray(response.getString("friends"));
-                                for (int i = 0; i < friends.length(); i++) {
-                                    String friend = friends.getString(i);
+                            status = response.getString(Constants.STATUS);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Friends get information response JSONException: " + e.toString());
+                        }
+                        if (status == null) {
+                            Log.e(TAG, "Friends get information response have no status parameter.");
+                        } else if (status.equals(Constants.OK)) {
+                            try {
+                                JSONArray array = response.getJSONArray(Constants.OBJECT);
+                                for (int i = 0; i < array.length(); i++) {
+                                    String username2 = array.getString(i);
+                                    Log.e(TAG, username2);
                                     AndroidNetworking.get(getString(R.string.api_profile))
-                                            .addQueryParameter("username", friend)
+                                            .addPathParameter(Constants.USERNAME, username2)
                                             .build()
                                             .getAsJSONObject(new JSONObjectRequestListener() {
                                                 @Override
                                                 public void onResponse(JSONObject response) {
-                                                    Log.i(TAG, "Friends profiles get information response: " + response.toString());
+                                                    Log.i(TAG, "Friend profile get info response: " + response.toString());
+
+                                                    String status = null;
+
                                                     try {
-                                                        if (response.get("status").equals("ok")) {
-                                                            JSONObject friendProfile = new JSONObject(response.get("profile").toString());
-                                                            friendsAdapter.addFriendForAdapter(response.getString("fullname"), friendProfile.getString("image"));
-                                                        }
+                                                        status = response.getString(Constants.STATUS);
                                                     } catch (JSONException e) {
-                                                        e.printStackTrace();
+                                                        Log.e(TAG, "Friend profile get info response JSONException: " + e.toString());
                                                     }
+
+                                                    if (status == null) {
+                                                        Log.e(TAG, "Friend profile get info response have no status parameter.");
+                                                    } else if (status.equals(Constants.OK)) {
+                                                        try {
+                                                            JSONObject object = response.getJSONObject(Constants.OBJECT);
+                                                            friendsAdapter.addFriendForAdapter(object.getString(Constants.FULLNAME), object.getString(Constants.PROFILE_PHOTO));
+                                                        } catch (JSONException e) {
+                                                            Log.e(TAG, "Friend profile get info response was incomplete.");
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+
                                                 }
 
                                                 @Override
@@ -85,9 +110,10 @@ public class FriendsListFragment extends Fragment {
                                                 }
                                             });
                                 }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Friends get info response was incomplete.");
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
                     }
 
