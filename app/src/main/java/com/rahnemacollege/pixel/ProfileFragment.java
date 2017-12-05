@@ -19,6 +19,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.rahnemacollege.pixel.Utilities.ClickListener;
 import com.rahnemacollege.pixel.Utilities.Constants;
 
 import org.json.JSONArray;
@@ -82,7 +83,41 @@ public class ProfileFragment extends Fragment {
         posts = view.findViewById(R.id.profile_posts);
         postsContainer = new LinearLayoutManager(getActivity());
         postsAdapter = new PostAdapter(50);
-        postsAdapter.setArgs(access_token);
+        postsAdapter.setArgs(access_token, getActivity(), new ClickListener() {
+            @Override
+            public void onClickListener(final int position) {
+                String id = postsAdapter.mDataset.get(position).id;
+
+                JSONObject body = new JSONObject();
+                try {
+                    body.put(Constants.POST_ID, id);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error on submitting post like.");
+                    e.printStackTrace();
+                }
+
+                Log.i(TAG, "Like id: " + id);
+
+                AndroidNetworking.post(getString(R.string.api_like))
+                        .addHeaders(Constants.AUTHORIZATION, access_token)
+                        .addJSONObjectBody(body)
+                        .build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            public void onResponse(JSONObject response) {
+                                Log.i(TAG, "Like response: " + response.toString());
+                                int like_count = Integer.parseInt(postsAdapter.mDataset.get(position).like_count);
+                                postsAdapter.mDataset.get(position).like_count = String.valueOf(like_count + 1);
+                                postsAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onError(ANError e) {
+                                Log.e(TAG, "Like response error: " + e.toString() + " code: " + e.getErrorCode());
+                                e.printStackTrace();
+                            }
+                        });
+            }
+        }, username);
         bio = view.findViewById(R.id.profile_bio);
         fullname = view.findViewById(R.id.profile_fullname);
 
@@ -264,15 +299,19 @@ public class ProfileFragment extends Fragment {
                                     JSONObject post = posts.getJSONObject(i);
 
                                     postsAdapter.addPost(
+                                            post.getString(Constants.ID),
                                             fullname.getText().toString(),
                                             post.getString(Constants.CREATED_DATE),  // TODO convert to difference of now and then.
-                                            "some where",  // TODO get location.
+                                            post.getDouble(Constants.LAT),
+                                            post.getDouble(Constants.LON),
                                             post.getString(Constants.LIKE_COUNT),
                                             post.getString(Constants.COMMENT_COUNT),
                                             post.getString(Constants.TEXT),
                                             getString(R.string.api_post_photo) + post.getString(Constants.PHOTO),
                                             getString(R.string.api_profile_photo) + profileImage
                                     );
+
+
                                 }
                             } catch (JSONException e) {
                                 Log.e(TAG, "Posts get information response was incomplete.");

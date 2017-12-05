@@ -10,13 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rahnemacollege.pixel.Utilities.ClickListener;
+
 
 public class HomeFragment extends Fragment {
     String TAG = "Home Fragment";
     String username, access_token;
 
     private RecyclerView postsRecyclerView;
-    private HomeAdapter homeAdapter;
+    private PostAdapter homeAdapter;
     //TODO change the quantity of items
     private static final int NUM_POSTS_ITEM = 10;
 
@@ -37,15 +39,21 @@ public class HomeFragment extends Fragment {
         postsRecyclerView.setLayoutManager(layoutManager);
         postsRecyclerView.setHasFixedSize(true);
 
-        homeAdapter = new HomeAdapter(NUM_POSTS_ITEM);
+        homeAdapter = new PostAdapter(NUM_POSTS_ITEM);
+        homeAdapter.setArgs(access_token, getActivity(), new ClickListener() {
+            @Override
+            public void onClickListener(int position) {
+
+            }
+        }, username);
         postsRecyclerView.setAdapter(homeAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(postsRecyclerView.getContext(),
                 layoutManager.getOrientation());
         postsRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        homeAdapter.addPostForAdapter("parsa", "2016", "haminja", "20", "30", "salam chetori", "0.jpg", "0.jpg");
-        homeAdapter.addPostForAdapter("parsa", "2016", "haminja", "20", "30", "salam chetori", "0.jpg", "0.jpg");
+        homeAdapter.addPost("0","parsa", "2016", 35.6892, 51.3890, "20", "30", "salam chetori", "0.jpg", "0.jpg");
+        homeAdapter.addPost("0","parsa", "2016", 35.6892, 51.3890, "20", "30", "salam chetori", "0.jpg", "0.jpg");
 
         return view;
     }

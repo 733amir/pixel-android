@@ -12,6 +12,7 @@
     <string name="api_profile_photo">http://192.168.10.193/api/photos/</string>
     <string name="api_post_upload">http://192.168.10.193/api/post</string>
     <string name="api_photo_upload">http://192.168.10.193/api/photos</string>
+    <string name="api_like">http://192.168.10.193/api/like</string>
 
     <string name="api_exists">http://192.168.10.120:5000/exists</string>
     <string name="api_username_exists">http://192.168.10.120:5000/username_exists</string>

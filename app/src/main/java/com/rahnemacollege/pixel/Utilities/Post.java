@@ -2,13 +2,16 @@ package com.rahnemacollege.pixel.Utilities;
 
 
 public class Post {
-    public String fullname, postImageUrl, profileImageUrl, location, caption, time, like_count, comment_count;
+    public String id, fullname, postImageUrl, profileImageUrl, caption, time, like_count, comment_count;
+    public double lat, lon;
 
-    public Post(String fullname, String time, String location, String like_count,
+    public Post(String id, String fullname, String time, double lat, double lon, String like_count,
                 String comment_count, String caption, String postImageUrl, String profileImageUrl) {
+        this.id = id;
         this.fullname = fullname;
         this.time = time;
-        this.location = location;
+        this.lat = lat;
+        this.lon = lon;
         this.like_count = like_count;
         this.comment_count = comment_count;
         this.caption = caption;

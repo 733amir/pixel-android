@@ -17,7 +17,7 @@ public class Constants {
             INTEREST = "interest", PAGE = "page", POSTS = "posts", PHOTO = "photo", CREATED_DATE = "createdDate",
             LIKE_COUNT = "likeCount", COMMENT_COUNT = "commentCount", TEXT = "text", COVER_PHOTO = "coverPhoto",
             PROFILE_PHOTO = "profilePhoto", NAME = "name", LAT = "latitude", LON = "longitude",
-            OLD_PASSWORD = "oldPassword", NEW_PASSWORD = "newPassword";
+            OLD_PASSWORD = "oldPassword", NEW_PASSWORD = "newPassword", POST_ID = "postId", ID = "id";
 
     // Status codes
     public static final String OK = "1", USERNAME_EXISTS = "2", EMAIL_EXISTS = "3", NOT_FOUND = "4", WRONG_PASSWORD = "6";

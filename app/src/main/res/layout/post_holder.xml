@@ -80,7 +80,7 @@
                 android:id="@+id/post_location_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_location_on_blue_24dp" />
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
             <TextView
                 android:id="@+id/post_location_text"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:paddingEnd="@dimen/post_item_left_and_right_padding"
                     android:paddingStart="@dimen/post_item_left_and_right_padding"
-                    app:srcCompat="@drawable/ic_favorite_red_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
 
                 <TextView
                     android:id="@+id/post_like_count"
