@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -23,10 +24,17 @@ public class FriendsListFragment extends Fragment {
 
     String username, access_token;
 
+    ImageView search;
+    FriendsClickHandler clickHandler;
+
     private RecyclerView friendsRecyclerView;
     private FriendsAdapter friendsAdapter;
     //TODO change the quantity of items
     private static final int NUM_FRIENDS_ITEM = 10;
+
+    public interface FriendsClickHandler {
+        void searchClicked();
+    }
 
     public FriendsListFragment() {
         // Required empty public constructor
@@ -41,6 +49,8 @@ public class FriendsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friends_list, container, false);
+        search = view.findViewById(R.id.friends_search);
+        clickHandler = (FriendsListFragment.FriendsClickHandler) getActivity();
         friendsRecyclerView = view.findViewById(R.id.friends_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         friendsRecyclerView.setLayoutManager(layoutManager);
@@ -48,6 +58,13 @@ public class FriendsListFragment extends Fragment {
 
         friendsAdapter = new FriendsAdapter(NUM_FRIENDS_ITEM);
         friendsRecyclerView.setAdapter(friendsAdapter);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickHandler.searchClicked();
+            }
+        });
 
         AndroidNetworking.get(getString(R.string.api_friends))
                 .addQueryParameter("username", username)

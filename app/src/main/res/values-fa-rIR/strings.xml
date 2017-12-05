@@ -100,4 +100,7 @@
     <string name="image_source_camera">با استفاده از دوربین</string>
     <string name="image_source_gallery">انتخاب از گالری</string>
 
+    <!--Search Activity-->
+    <string name="search_title">جست و جو</string>
+
 </resources>

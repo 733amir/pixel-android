@@ -48,4 +48,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         friendsArrayList.add(friend);
         notifyDataSetChanged();
     }
+
+    public void removeFriendsArrayList(){
+        friendsArrayList.clear();
+    }
 }
