@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="slide_animation_duration">400</integer>
+
+    <integer name="account_settings_request_code">9</integer>
+    <integer name="result_logged_out">10</integer>
+    <integer name="result_didnt_logged_out">11</integer>
+</resources>

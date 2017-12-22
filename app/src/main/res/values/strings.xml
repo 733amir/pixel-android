@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pixel</string>
+    <string name="error">Something Went Wrong!</string>
 
     <!-- First Page -->
     <string name="firstpage_b_login">Login</string>
     <string name="firstpage_b_signup">Sign Up</string>
+    <string name="firstpage_b_forget_password">Forget Password</string>
 
     <!-- Login Page -->
     <string name="login_tv_username">Username</string>
     <string name="login_tv_password">Password</string>
-    <string name="login_tv_forgetpassword">Did you forgot your password?</string>
+    <string name="login_tv_forgetpassword">Did you forget your password?</string>
     <string name="login_b_login">Login</string>
+    <string name="login_empty">Is empty!</string>
+    <string name="login_wrong_username_password">Username or Password is wrong!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">Username</string>
@@ -19,4 +23,84 @@
     <string name="signup_tv_password">Password</string>
     <string name="signup_tv_repeat_password">Repeat Password</string>
     <string name="signup_tv_signup">Sign Up</string>
+    <string name="signup_empty">Is empty!</string>
+    <string name="signup_short_string">5 characters or more!</string>
+    <string name="signup_username_alphanumeric">Only alphabet or numbers!</string>
+    <string name="signup_email_notvalid">Email is not valid!</string>
+    <string name="signup_password_not_matched">Passwords don\'t match!</string>
+    <string name="signup_username_exists">Username Exists!</string>
+    <string name="signup_email_exists">Email Exists!</string>
+
+    <!-- Forget Password Page -->
+    <string name="forget_password_tv">Email Address</string>
+    <string name="forget_password_send">Send</string>
+    <string name="forget_password_code">Enter Code</string>
+    <string name="forget_password_password">New Password</string>
+    <string name="forget_password_password_repeat">Repeat Password</string>
+    <string name="forget_password_reset">Reset</string>
+    <string name="forget_password_change_email">Change Email</string>
+    <string name="forget_password_empty">Is empty!</string>
+    <string name="forget_password_email_notvalid">Email is not valid!</string>
+    <string name="forget_password_email_dont_exists">Email doesn\'t exists!</string>
+    <string name="forget_password_password_not_matched">Passwords don\'t match!</string>
+    <string name="forget_password_password_recovery">Password Recovery</string>
+    <string name="forget_password_successful_reset">Password reset successfully.</string>
+
+    <!-- Explore page navigation -->
+    <string name="title_activity_explore">ExploreActivity</string>
+    <string name="explore_nav_home">Home</string>
+    <string name="explore_nav_search">Search</string>
+    <string name="explore_nav_upload">Upload</string>
+    <string name="explore_nav_notification">Notification</string>
+    <string name="explore_nav_me">Me</string>
+    <string name="explore_nav_friends_list">Friends</string>
+
+    <!-- Profile Edit page -->
+    <string name="profile_edit_title">Edit Profile Info</string>
+    <string name="profile_edit_update">Update</string>
+    <string name="profile_edit_add_tag">Add Tag</string>
+    <string name="profile_edit_name_hint">Name</string>
+    <string name="profile_edit_bio_hint">Biography</string>
+
+    <!-- Account Activity -->
+    <string name="account_title">Account Settings</string>
+    <string name="account_username">Username</string>
+    <string name="account_email">Email</string>
+    <string name="account_password_change">Change Password</string>
+    <string name="account_current_password">Current Password</string>
+    <string name="account_new_password">New Password</string>
+    <string name="account_new_password_repeat">New Password (Repeat)</string>
+    <string name="account_new_password_hint">Optional</string>
+    <string name="account_update">Update</string>
+    <string name="account_logout">Logout</string>
+    <string name="account_wrong_password">Wrong Password!</string>
+    <string name="account_email_not_valid">Email is not valid!</string>
+    <string name="account_is_empty">Is empty!</string>
+    <string name="account_wrong_username">Wrong Username!</string>
+
+    <!--Friends Fragment-->
+    <string name="friends_title">Friends List</string>
+    <string name="friends_button_viewprofile">View Profile</string>
+
+    <!--Upload_post-->
+    <string name="upload_post_postcaption">Caption</string>
+    <string name="upload_post_fab_camera">Camera</string>
+    <string name="upload_post_fab_gallery">Gallery</string>
+    <string name="upload_button">Upload</string>
+    <string name="upload_default_location">Add Location</string>
+
+    <!--Notification Center-->
+    <string name="notification_center_title">Notifications</string>
+    <string name="notification_friend_request_report">requested to add you as a friend.</string>
+    <string name="notification_friend_request_accept_report">accepted your friend request.</string>
+    <string name="notification_post_like_report">liked your post.</string>
+    <string name="notification_comment_like_report">liked your comment:</string>
+
+    <!-- Image Source Picker -->
+    <string name="image_source_camera">From Camera</string>
+    <string name="image_source_gallery">From Gallery</string>
+
+    <!--Search Activity-->
+    <string name="search_title">Search friends</string>
+
 </resources>

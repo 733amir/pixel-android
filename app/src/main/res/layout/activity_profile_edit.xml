@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rahnemacollege.pixel.ProfileEditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/profile_header_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_page_header_height"
+            android:background="@color/profile_header_background"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:id="@+id/profile_header_edit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_page_header_height"
+            android:layout_marginTop="@dimen/profile_page_header_edit_shift_up"
+            android:orientation="vertical"
+            android:onClick="onProfileHeaderClicked">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/profile_page_header_edit_margin">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:src="@color/light_0" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_change_a_photo_white_24dp" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_container"
+            android:layout_width="@dimen/profile_page_image_diameter"
+            android:layout_height="@dimen/profile_page_image_diameter"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/profile_page_image_shift_up"
+            android:src="@mipmap/default_profile_image" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_page_image_diameter"
+            android:layout_marginTop="@dimen/profile_page_image_edit_shift_up">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:src="@color/light_f" />
+
+            <ImageView
+                android:id="@+id/profile_image_edit"
+                android:padding="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_change_a_photo_black_24dp"
+                android:onClick="onProfileImageClicked"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/profile_page_horizontal_margin"
+            android:layout_marginStart="@dimen/profile_page_horizontal_margin"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/profile_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginBottom="@dimen/profile_page_items_vertical_margin"
+                android:layout_marginTop="@dimen/profile_page_items_vertical_margin"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="@string/profile_edit_name_hint" />
+
+            <EditText
+                android:id="@+id/profile_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/profile_page_items_vertical_margin"
+                android:layout_marginTop="@dimen/profile_page_items_vertical_margin"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="@string/profile_edit_bio_hint"
+                android:minHeight="@dimen/edit_text_height" />
+
+            <include layout="@layout/profile_edit_tag_container" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/profile_edit_new_tag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000ff"
+                    android:onClick="addTag"
+                    android:text="@string/profile_edit_add_tag"
+                    android:textColor="@color/accent" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pages_top_to_top_margin"
+                android:layout_marginTop="@dimen/pages_top_to_top_margin"
+                android:background="@drawable/rounded_buttons_green"
+                android:onClick="update"
+                android:text="@string/profile_edit_update"
+                android:textColor="@color/first_page_button_foreground" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

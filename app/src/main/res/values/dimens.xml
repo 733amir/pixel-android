@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- First Page -->
+    <dimen name="first_page_title_horizontal_margin">8dp</dimen>
+    <dimen name="first_page_spacing">56dp</dimen>
+    <dimen name="pages_left_margin">16dp</dimen>
+    <dimen name="pages_right_margin">16dp</dimen>
+    <dimen name="pages_top_margin">16dp</dimen>
+    <dimen name="pages_down_margin">16dp</dimen>
+
+    <dimen name="pages_top_to_top_margin">8dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="rounded_corners_radius">8dp</dimen>
+    <dimen name="edit_text_height">48dp</dimen>
+
+    <dimen name="edit_text_left_padding">16dp</dimen>
+    <dimen name="edit_text_right_padding">16dp</dimen>
+
+    <dimen name="profile_page_header_height">150dp</dimen>
+    <dimen name="profile_page_header_edit_shift_up">-150dp</dimen>
+    <dimen name="profile_page_header_edit_margin">20dp</dimen>
+    <dimen name="profile_page_image_diameter">120dp</dimen>
+    <dimen name="profile_page_image_shift_up">-60dp</dimen>
+    <dimen name="profile_page_image_edit_shift_up">-120dp</dimen>
+    <dimen name="profile_page_image_shift_down">60dp</dimen>
+    <dimen name="profile_page_image_border_size">1dp</dimen>
+    <dimen name="profile_page_items_vertical_margin">8dp</dimen>
+    <dimen name="profile_page_interests_inner_padding">8dp</dimen>
+    <dimen name="profile_page_interests_outer_margin">2dp</dimen>
+    <dimen name="profile_page_interests_radius">100dp</dimen>
+    <dimen name="profile_page_horizontal_margin">16dp</dimen>
+
+    <dimen name="account_header_size">16sp</dimen>
+
+    <!-- Post related sizes -->
+    <dimen name="post_profile_image_size">52dp</dimen>
+    <dimen name="post_profile_image_border_size">1dp</dimen>
+    <dimen name="post_inner_padding">8dp</dimen>
+    <dimen name="post_outer_margin">8dp</dimen>
+    <dimen name="post_profile_image_margin">8dp</dimen>
+    <dimen name="post_buttons_margin">8dp</dimen>
+    <dimen name="post_border_size">1dp</dimen>
+    <dimen name="post_border_radius_size">8dp</dimen>
+    <dimen name="post_text_margin">8dp</dimen>
+    <dimen name="post_image_height">200dp</dimen>
+    <dimen name="post_left_and_right_padding">16dp</dimen>
+    <dimen name="post_item_left_and_right_padding">8dp</dimen>
+    <dimen name="post_top_and_bottom_padding">8dp</dimen>
+    <dimen name="post_text_size">15sp</dimen>
+    <dimen name="post_location_text_size">13sp</dimen>
+    <dimen name="post_caption_text_size">17sp</dimen>
+
+    <!-- Header sizes -->
+    <dimen name="header_height_size">45dp</dimen>
+    <dimen name="header_icon_horizontal_margin">8dp</dimen>
+
+    <!--Friends Fragment-->
+    <dimen name="friends_left_and_right_padding">16dp</dimen>
+    <dimen name="friends_view_profile_button_padding">8dp</dimen>
+    <dimen name="friends_top_and_bottom_padding">8dp</dimen>
+    <dimen name="friends_profile_image_diameter">64dp</dimen>
+
+    <!--Notification Center-->
+    <dimen name="notifications_left_and_right_padding">16dp</dimen>
+    <dimen name="notifications_text_left_padding">8dp</dimen>
+    <dimen name="notifications_top_and_bottom_padding">8dp</dimen>
+    <dimen name="notifications_profile_image_diameter">52dp</dimen>
+    <dimen name="notifications_text_size">15sp</dimen>
+
+</resources>

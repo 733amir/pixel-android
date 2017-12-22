@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rahnemacollege.pixel.ExploreActivity">
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/upload_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        app:menu_colorNormal="@color/accent"
+        app:menu_colorPressed="@color/light_green"
+        app:menu_colorRipple="#99FFFFFF"
+        app:menu_labels_position="right">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/upload_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="getPhotoFromCamera"
+            android:src="@drawable/ic_camera_white_24dp"
+            app:fab_colorNormal="@color/accent"
+            app:fab_colorPressed="@color/accent"
+            app:fab_colorRipple="@color/accent"
+            app:fab_label="@string/upload_post_fab_camera" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/upload_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="getPhotoFromGallery"
+            android:src="@drawable/ic_gallery_white_24dp"
+            app:fab_colorNormal="@color/accent"
+            app:fab_colorPressed="@color/accent"
+            app:fab_colorRipple="@color/accent"
+            app:fab_label="@string/upload_post_fab_gallery" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</FrameLayout>

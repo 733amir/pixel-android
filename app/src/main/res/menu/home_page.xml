@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_nav_explore"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/explore_nav_home" />
+
+    <item
+        android:id="@+id/home_nav_friends_list"
+        android:icon="@drawable/ic_friends_black_24dp"
+        android:title="@string/explore_nav_friends_list" />
+
+    <item
+        android:id="@+id/home_nav_me"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/explore_nav_me" />
+
+</menu>

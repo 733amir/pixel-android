@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">پیکسل</string>
+    <string name="error">خطایی رخ داده است!</string>
 
     <!-- First Page -->
     <string name="firstpage_b_login">ورود</string>
     <string name="firstpage_b_signup">ثبت نام</string>
+    <string name="firstpage_b_forget_password">بازیابی رمز عبور</string>
 
     <!-- Login Page -->
     <string name="login_tv_username">نام کاربری</string>
     <string name="login_tv_password">رمز عبور</string>
     <string name="login_tv_forgetpassword">رمز عبور خود را فراموش کرده‌اید؟</string>
-    <string name="login_b_login">ورود</string>
+    <string name="login_b_login">ورود به برنامه</string>
+    <string name="login_empty">خالی است!</string>
+    <string name="login_wrong_username_password">نام‌کاربری یا کلمه‌عبور اشتباه است!</string>
 
     <!-- Sign up Page -->
     <string name="signup_tv_username">نام کاربری</string>
@@ -19,4 +23,84 @@
     <string name="signup_tv_password">رمز عبور</string>
     <string name="signup_tv_repeat_password">تکرار رمز عبور</string>
     <string name="signup_tv_signup">ثبت نام</string>
+    <string name="signup_empty">خالی است!</string>
+    <string name="signup_short_string">۵ حرف یا بیشتر!</string>
+    <string name="signup_username_alphanumeric">تنها حروف و اعداد!</string>
+    <string name="signup_email_notvalid">ایمیل معتبر نیست!</string>
+    <string name="signup_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
+    <string name="signup_username_exists">نام‌کاربری تکراری است!</string>
+    <string name="signup_email_exists">ایمیل تکراری است!</string>
+
+    <!-- Forget Password Page -->
+    <string name="forget_password_tv">آدرس ایمیل</string>
+    <string name="forget_password_send">ارسال لینک تغییر رمز عبور</string>
+    <string name="forget_password_code">کد دریافتی</string>
+    <string name="forget_password_password">رمزعبور جدید</string>
+    <string name="forget_password_password_repeat">تکرار رمزعبور</string>
+    <string name="forget_password_reset">تغییر رمزعبور</string>
+    <string name="forget_password_change_email">تغییر ایمیل</string>
+    <string name="forget_password_empty">خالی است!</string>
+    <string name="forget_password_email_notvalid">ایمیل معبتر نیست!</string>
+    <string name="forget_password_email_dont_exists">Email doesn\'t exists!</string>
+    <string name="forget_password_password_not_matched">رمزعبور هم‌خوانی ندارد!</string>
+    <string name="forget_password_password_recovery">بازیابی رمزعبور</string>
+    <string name="forget_password_successful_reset">Password reset successfully.</string>
+
+    <!-- Explore page navigation -->
+    <string name="title_activity_explore">صفحه گردش</string>
+    <string name="explore_nav_home">خانه</string>
+    <string name="explore_nav_search">جست‌وجو</string>
+    <string name="explore_nav_upload">ارسال</string>
+    <string name="explore_nav_notification">اخبار</string>
+    <string name="explore_nav_me">من</string>
+    <string name="explore_nav_friends_list">دوستان</string>
+
+    <!-- Profile Edit page -->
+    <string name="profile_edit_title">ویرایش پروفایل</string>
+    <string name="profile_edit_update">بروزرسانی</string>
+    <string name="profile_edit_add_tag">اضافه کردن تگ</string>
+    <string name="profile_edit_name_hint">نام</string>
+    <string name="profile_edit_bio_hint">زندگی‌نامه</string>
+
+    <!-- Account Activity -->
+    <string name="account_title">تنظیمات کاربری</string>
+    <string name="account_username">نام‌کاربری</string>
+    <string name="account_email">ایمیل</string>
+    <string name="account_password_change">تغییر پسورد</string>
+    <string name="account_current_password">رمزعبور کنونی</string>
+    <string name="account_new_password">رمزعبور جدید</string>
+    <string name="account_new_password_repeat">تکرار رمزعبور جدید</string>
+    <string name="account_new_password_hint">اختیاری</string>
+    <string name="account_update">بروزرسانی</string>
+    <string name="account_logout">خروج</string>
+    <string name="account_wrong_password">پسورد اشتباه است!</string>
+    <string name="account_email_not_valid">ایمیل معتبر نیست!</string>
+    <string name="account_is_empty">خالی است!</string>
+    <string name="account_wrong_username">نام‌کاربری اشتباه است!</string>
+
+    <!--Friends Fragment-->
+    <string name="friends_title">لیست دوستان</string>
+    <string name="friends_button_viewprofile">مشاهده پروفایل</string>
+
+    <!--Upload_post-->
+    <string name="upload_post_postcaption">توضیحات</string>
+    <string name="upload_post_fab_camera">دوربین</string>
+    <string name="upload_post_fab_gallery">گالری</string>
+    <string name="upload_button">ارسال</string>
+    <string name="upload_default_location">اضافه کردن مختصات</string>
+
+    <!--Notification Center-->
+    <string name="notification_center_title">اطلاعیه‌ها</string>
+    <string name="notification_friend_request_report">درخواست دوستی داد.</string>
+    <string name="notification_friend_request_accept_report">درخواست شما رو تایید کرد.</string>
+    <string name="notification_post_like_report">پست شما رو لایک کرد.</string>
+    <string name="notification_comment_like_report">کامنت شما رو لایک کرد:</string>
+
+    <!-- Image Source Picker -->
+    <string name="image_source_camera">با استفاده از دوربین</string>
+    <string name="image_source_gallery">انتخاب از گالری</string>
+
+    <!--Search Activity-->
+    <string name="search_title">جست و جو</string>
+
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/notifications_top_and_bottom_padding"
+    android:paddingLeft="@dimen/notifications_left_and_right_padding"
+    android:paddingRight="@dimen/notifications_left_and_right_padding"
+    android:paddingTop="@dimen/notifications_top_and_bottom_padding">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/notifications_i_profileimage"
+        android:layout_width="@dimen/notifications_profile_image_diameter"
+        android:layout_height="@dimen/notifications_profile_image_diameter"
+        android:src="@mipmap/default_profile_image" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/notifications_left_and_right_padding"
+        android:paddingRight="@dimen/notifications_left_and_right_padding">
+
+        <TextView
+            android:id="@+id/notifications_tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/notifications_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/notifications_tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/notifications_text_size" />
+
+    </LinearLayout>
+
+</LinearLayout>

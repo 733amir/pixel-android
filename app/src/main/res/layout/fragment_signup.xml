@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:id="@+id/signup_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/pages_right_margin"
+        android:paddingStart="@dimen/pages_left_margin"
+        android:paddingTop="@dimen/pages_top_to_top_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_username" />
+
+        <EditText
+            android:id="@+id/signup_et_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPersonName"
+            android:layoutDirection="ltr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_fullname" />
+
+        <EditText
+            android:id="@+id/signup_et_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPersonName"
+            android:layoutDirection="ltr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_email" />
+
+        <EditText
+            android:id="@+id/signup_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textEmailAddress"
+            android:layoutDirection="ltr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_password" />
+
+        <EditText
+            android:id="@+id/signup_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:text="@string/signup_tv_repeat_password" />
+
+        <EditText
+            android:id="@+id/signup_et_repeat_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:layoutDirection="ltr" />
+
+        <Button
+            android:id="@+id/signup_b_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pages_top_to_top_margin"
+            android:background="@drawable/rounded_buttons_green"
+            android:text="@string/signup_tv_signup"
+            android:textColor="@color/first_page_button_foreground" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pages_down_margin" />
+
+    </LinearLayout>
+</ScrollView>

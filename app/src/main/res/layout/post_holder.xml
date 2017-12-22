@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/post_left_and_right_padding"
+        android:paddingBottom="@dimen/post_top_and_bottom_padding"
+        android:paddingRight="@dimen/post_left_and_right_padding"
+        android:paddingTop="@dimen/post_top_and_bottom_padding">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_profile_image"
+            android:layout_width="@dimen/post_profile_image_size"
+            android:layout_height="@dimen/post_profile_image_size"
+            android:src="@mipmap/default_profile_image" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/post_left_and_right_padding"
+            android:paddingRight="@dimen/post_left_and_right_padding">
+
+            <TextView
+                android:id="@+id/post_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/post_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/post_text_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.rahnemacollege.pixel.Utilities.SquareImageView
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/post_image_height"
+        android:background="@color/light_d"
+        android:scaleType="fitCenter" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/post_left_and_right_padding"
+        android:paddingBottom="@dimen/post_top_and_bottom_padding"
+        android:paddingRight="@dimen/post_left_and_right_padding"
+        android:paddingTop="@dimen/post_top_and_bottom_padding">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/post_left_and_right_padding">
+
+            <ImageView
+                android:id="@+id/post_location_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+            <TextView
+                android:id="@+id/post_location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/post_item_left_and_right_padding"
+                android:textSize="@dimen/post_location_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/post_buttons_margin"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/post_like_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/post_item_left_and_right_padding"
+                    android:paddingStart="@dimen/post_item_left_and_right_padding"
+                    app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
+
+                <TextView
+                    android:id="@+id/post_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/post_buttons_margin"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/post_comment_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/post_item_left_and_right_padding"
+                    android:paddingStart="@dimen/post_item_left_and_right_padding"
+                    app:srcCompat="@drawable/ic_comment_black_24dp" />
+
+                <TextView
+                    android:id="@+id/post_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/post_caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/post_caption_text_size"
+        android:paddingLeft="@dimen/post_left_and_right_padding"
+        android:paddingBottom="@dimen/post_top_and_bottom_padding"
+        android:paddingRight="@dimen/post_left_and_right_padding"
+        android:paddingTop="@dimen/post_top_and_bottom_padding"/>
+
+
+</LinearLayout>
